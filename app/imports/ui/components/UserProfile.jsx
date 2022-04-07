@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -7,12 +7,17 @@ import { withRouter } from 'react-router-dom';
 class UserProfile extends React.Component {
   render() {
     return (
-      <Grid>
+      <Grid style={{ margin: '20px' }}>
         <Grid.Column width={4}>
-          <p style={{ backgroundColor: 'grey' }}>Hello</p>
+          <div style={{ height: '750px', backgroundColor: 'grey' }}>
+            <Icon name='user' size='massive'/>
+            <p>Hello, World!</p>
+          </div>
         </Grid.Column>
         <Grid.Column width={12}>
-          <p style={{ backgroundColor: 'green' }}>Hello</p>
+          <div style={{ height: '750px', backgroundColor: 'green' }}>
+            <p>Hello, World!</p>
+          </div>
         </Grid.Column>
       </Grid>
     );
