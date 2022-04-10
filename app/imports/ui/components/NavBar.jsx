@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter, NavLink, Redirect } from 'react-router-dom';
+import { withRouter, NavLink, Redirect, Link } from 'react-router-dom';
 import { Menu, Dropdown, Header, Button, Icon, Form, Message } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
@@ -97,6 +97,9 @@ class NavBar extends React.Component {
                         content={this.state.error}
                       />
                     )}
+                    <Message>
+                      <Link to="/signup">Click here to Register</Link>
+                    </Message>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
