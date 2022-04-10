@@ -109,7 +109,7 @@ class NavBar extends React.Component {
               { /* Icon null to remove dropdown caret. Console error for null icon should be intentional */ }
               <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon="null">
                 <Dropdown.Menu>
-                  <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to="/EditStuff"/>
+                  <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to="/profile"/>
                   <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                 </Dropdown.Menu>
               </Dropdown>
