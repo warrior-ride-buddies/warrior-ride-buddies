@@ -2,14 +2,49 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Header, Button, Icon } from 'semantic-ui-react';
+import { withRouter, NavLink, Redirect } from 'react-router-dom';
+import { Menu, Dropdown, Header, Button, Icon, Form, Message } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { email: '', password: '', error: '', redirectToReferer: false };
+  }
+
+  handleChange = (e, { name, value }) => {
+    this.setState({ [name]: value });
+  }
+
+  _handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.submit();
+    } else if (e.key === 'Tab') {
+      e.stopPropagation();
+    }
+  }
+
+  submit = () => {
+    const { email, password } = this.state;
+    Meteor.loginWithPassword(email, password, (err) => {
+      if (err) {
+        this.setState({ error: err.reason });
+      } else {
+        this.setState({ error: '', redirectToReferer: true });
+      }
+    });
+  }
+
   render() {
     const menuStyle = { marginBottom: '10px', backgroundColor: '#024731' };
+
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    // if correct authentication, redirect to page instead of login screen
+    if (this.state.redirectToReferer) {
+      return <Redirect to={ from }/>;
+    }
+
     return (
       <Menu style={menuStyle} attached="top" borderless inverted>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
@@ -19,18 +54,56 @@ class NavBar extends React.Component {
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/#" key='home'>Home</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/info-page" key='info'>Project Info</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="messages" key="messages">Messages</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="profile" key="messages">User Profile</Menu.Item>]
+            <Menu.Item as={NavLink} activeClassName="active" exact to="profile" key="profile">User Profile</Menu.Item>]
         ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
           <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
         ) : ''}
         <Menu.Item position="right">
           {this.props.currentUser === '' ? (
-            <Button icon={'add user'} id='login-dropdown-sign-in' as={NavLink} exact to={'/signin'}>
-              Log In
+            <Button>
+              <Dropdown id="login-dropdown" text="Login" pointing="top right">
+                <Dropdown.Menu onClick={e => e.stopPropagation()}>
+                  <Dropdown.Item>
+                    <Form onSubmit={this.submit} onKeyDown={this._handleKeyDown}>
+                      <Form.Input
+                        label="Email"
+                        id="signin-form-email"
+                        icon="user"
+                        iconPosition="left"
+                        name="email"
+                        type="email"
+                        placeholder="E-mail address"
+                        onChange={this.handleChange}
+                      />
+                      <Form.Input
+                        label="Password"
+                        id="signin-form-password"
+                        icon="lock"
+                        iconPosition="left"
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                        onChange={this.handleChange}
+                      />
+                      <a id="signin-form-submit" content="submit" className="ui button" onClick={this.submit}>Submit</a>
+                    </Form>
+                    {this.state.error === '' ? (
+                      ''
+                    ) : (
+                      <Message
+                        error
+                        header="Login was not successful"
+                        content={this.state.error}
+                      />
+                    )}
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </Button>
           ) : (
             <Menu.Item>
+              { /* Icon null to remove dropdown caret. Console error for null icon should be intentional */ }
               <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon="null">
                 <Dropdown.Menu>
                   <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to="/EditStuff"/>
@@ -38,7 +111,7 @@ class NavBar extends React.Component {
                 </Dropdown.Menu>
               </Dropdown>
               <Icon.Group size='large'>
-                <Icon size='big' name='circle outline' />
+                <Icon size='big' name='circle outline'/>
                 <Icon size="small" name='user'/>
               </Icon.Group>
             </Menu.Item>
@@ -63,6 +136,7 @@ class NavBar extends React.Component {
 // Declare the types of all properties.
 NavBar.propTypes = {
   currentUser: PropTypes.string,
+  location: PropTypes.object,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
