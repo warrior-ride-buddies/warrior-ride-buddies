@@ -19,25 +19,25 @@ class NavBar extends React.Component {
           <Header inverted as='h1'>Warrior Ride Buddies</Header>
         </Menu.Item>
         {this.props.currentUser ? (
-          [<Menu.Item as={NavLink} activeClassName="active" exact to="/#" key='home'>Home</Menu.Item>,
+          [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home'>Home</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/info-page" key='info'>Project Info</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="messages" key="messages">Messages</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="profile" key="messages">User Profile</Menu.Item>]
+            <Menu.Item as={NavLink} activeClassName="active" exact to="profile" key="profile">User Profile</Menu.Item>]
         ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
           <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
         ) : ''}
         <Menu.Item position="right">
           {this.props.currentUser === '' ? (
-            <Button icon={'add user'} id='login-dropdown-sign-in' as={NavLink} exact to={'/signin'}>
+            <Button id='login-dropdown-sign-in' as={NavLink} exact to={'/signin'}>
               Log In
             </Button>
           ) : (
             <Menu.Item>
-              <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon="null">
+              <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right">
                 <Dropdown.Menu>
-                  <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to="/EditStuff"/>
-                  <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
+                  <Dropdown.Item id="navbar-sign-out" icon={'pencil alternate'} text="Edit Profile" as={NavLink} exact to="/EditStuff"/>
+                  <Dropdown.Item id="navbar-sign-out" icon={'sign out'} text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                 </Dropdown.Menu>
               </Dropdown>
               <Icon.Group size='large'>
@@ -50,7 +50,7 @@ class NavBar extends React.Component {
         <Menu.Item>
           {this.props.currentUser === '' ? (
             <Menu.Item>
-              <Button icon={'add user'} id='login-dropdown-sign-up' as={NavLink} exact to={'/signup'}>
+              <Button id='login-dropdown-sign-up' as={NavLink} exact to={'/signup'}>
                 Sign up
               </Button>
             </Menu.Item>
