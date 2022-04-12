@@ -29,9 +29,6 @@ class ListStuffAdmin extends React.Component {
               <Table.HeaderCell>Owner</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>
-            {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
-          </Table.Body>
         </Table>
       </Container>
     );
