@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import ApiKeys from '../../../../config/ApiKeys.json';
+import { mapsApiKey } from '../../../ApiKeys.json';
 
 const containerStyle = {
   width: '100%',
@@ -16,7 +16,7 @@ class Map extends React.Component {
   render() {
     return (
       <LoadScript
-        googleMapsApiKey={ApiKeys.mapsApiKey}
+        googleMapsApiKey={mapsApiKey}
       >
         <GoogleMap
           mapContainerStyle={containerStyle}

@@ -8,7 +8,7 @@ import { Stuffs } from '../../api/stuff/Stuff';
 import StuffItemAdmin from '../components/StuffItemAdmin';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class ListStuffAdmin extends React.Component {
+class ListReports extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
@@ -19,16 +19,24 @@ class ListStuffAdmin extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center">List Stuff (Admin)</Header>
+        <Header as="h2" textAlign="center">Review Reports</Header>
         <Table celled>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Quantity</Table.HeaderCell>
-              <Table.HeaderCell>Condition</Table.HeaderCell>
-              <Table.HeaderCell>Owner</Table.HeaderCell>
+              <Table.HeaderCell>reported by</Table.HeaderCell>
+              <Table.HeaderCell>issue</Table.HeaderCell>
+              <Table.HeaderCell>date</Table.HeaderCell>
+              <Table.HeaderCell>reported message</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Johnny Appleseed</Table.HeaderCell>
+            <Table.HeaderCell>Jane Deer</Table.HeaderCell>
+            <Table.HeaderCell>Broke TOS</Table.HeaderCell>
+            <Table.HeaderCell>Mar 13, 2022</Table.HeaderCell>
+            <Table.HeaderCell>message link</Table.HeaderCell>
+          </Table.Row>
           <Table.Body>
             {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
           </Table.Body>
@@ -39,7 +47,7 @@ class ListStuffAdmin extends React.Component {
 }
 
 // Require an array of Stuff documents in the props.
-ListStuffAdmin.propTypes = {
+ListReports.propTypes = {
   stuffs: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -56,4 +64,4 @@ export default withTracker(() => {
     stuffs,
     ready,
   };
-})(ListStuffAdmin);
+})(ListReports);

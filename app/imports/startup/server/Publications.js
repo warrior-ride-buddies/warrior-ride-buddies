@@ -40,6 +40,14 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Stuffs.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Stuffs.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
 Meteor.publish(Messages.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Messages.collection.find();
