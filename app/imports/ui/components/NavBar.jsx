@@ -47,7 +47,7 @@ class NavBar extends React.Component {
 
     return (
       <Menu style={menuStyle} attached="top" borderless inverted>
-        <Menu.Item>
+        <Menu.Item as={NavLink} activeClassName="" exact to="/">
           <Image src='/images/LogoTransparent.png' className='tiny'/>
         </Menu.Item>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
