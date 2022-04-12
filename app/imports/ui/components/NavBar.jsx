@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Header, Button, Icon } from 'semantic-ui-react';
+import { NavLink, withRouter } from 'react-router-dom';
+import { Button, Dropdown, Header, Icon, Menu } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
@@ -18,8 +18,8 @@ class NavBar extends React.Component {
         {this.props.currentUser ? (
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home'>Home</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/info-page" key='info'>Project Info</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="messages" key="messages">Messages</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="profile" key="messages">User Profile</Menu.Item>]
+            <Menu.Item as={NavLink} activeClassName="active" exact to="profile" key="messages">User Profile</Menu.Item>,
+            <Menu.Item as={NavLink} activeClassName="active" exact to="/chatinbox" key='list'>Inbox</Menu.Item>]
         ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
           <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
@@ -38,7 +38,7 @@ class NavBar extends React.Component {
                 </Dropdown.Menu>
               </Dropdown>
               <Icon.Group size='large'>
-                <Icon size='big' name='circle outline' />
+                <Icon size='big' name='circle outline'/>
                 <Icon size="small" name='user'/>
               </Icon.Group>
             </Menu.Item>

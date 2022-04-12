@@ -10,6 +10,7 @@ import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
+import ChatInbox from '../pages/ChatInbox';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -17,6 +18,7 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import UserProfile from '../components/UserProfile';
 import Main from '../pages/Main';
+import Messages from '../pages/Messages';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -33,7 +35,9 @@ class App extends React.Component {
             <Route path="/profile" component={UserProfile}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
             <ProtectedRoute path="/main" component={Main}/>
+            <ProtectedRoute path="/messages" component={Messages}/>
             <ProtectedRoute path="/add" component={AddStuff}/>
+            <ProtectedRoute path="/chatinbox" component={ChatInbox}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
             <Route component={NotFound}/>
