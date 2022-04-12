@@ -31,7 +31,8 @@
       "description": "Kim Binsted received her BSc in Physics at McGill (1991), and her PhD in Artificial Intelligence from the University of Edinburgh (1996). Her thesis topic was the computational modeling and generation of punning riddles, and her program, JAPE (Joke Analysis and Production Engine), generated puns such as What do you call a Martian who drinks beer? An ale-ien!",
       "owner": "admin@foo.com"
     }
-  ]
+  ],
+
   "monti": {
     "appId": "Q5cTSqJNRu8FL49gw",
     "appSecret": "8477a5d2-c06f-4946-8688-d44ae29a3ab2"
