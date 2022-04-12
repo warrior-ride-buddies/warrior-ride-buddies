@@ -16,7 +16,7 @@ import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
-import UserProfile from '../components/UserProfile';
+import UserProfile from '../pages/UserProfile';
 import Main from '../pages/Main';
 import Messages from '../pages/Messages';
 
