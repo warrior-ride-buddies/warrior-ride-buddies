@@ -22,7 +22,7 @@ class UserProfile extends React.Component {
               </GridColumn>
               <GridColumn width={8} textAlign='right'>
                 <Header as='h3'>Car Details</Header>
-                <p>Car Make: Lamborghini<br/>Car Model: Aventador<br/>Car License Plate: 2S3XY</p>
+                <p>Car Make: Lamborghini<br/>Car Model: Aventador<br/>Car Color: Green<br/>Car License Plate: 2S3XY</p>
               </GridColumn>
             </Grid>
             <Header as="h2" textAlign="center" style={{ paddingTop: '30px' }}>Availability</Header>
