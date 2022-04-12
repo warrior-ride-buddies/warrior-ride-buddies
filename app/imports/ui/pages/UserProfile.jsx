@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Header, Icon, Table } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
+import { Grid, GridColumn, Header, Image, Table } from 'semantic-ui-react';
+//import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
@@ -9,16 +9,24 @@ class UserProfile extends React.Component {
     return (
       <Grid style={{ margin: '20px' }}>
         <Grid.Column width={4} textAlign='center'>
-          <div style={{ height: '750px', backgroundColor: 'grey', paddingTop: '30px' }}>
-            <Icon name='user' size='massive'/>
+          <div style={{ height: '750px', backgroundColor: 'grey' }}>
+            <Image src='./images/kobey.jpeg' style={{ padding: '30px' }}/>
           </div>
         </Grid.Column>
         <Grid.Column width={12}>
           <div style={{ height: '750px', paddingTop: '30px' }}>
-            <Header as='h1'>Johnny Appleseed</Header>
-            <p>Driver<br/>Waimalu, 96701</p>
-            <Header as="h2" textAlign="center">Availability</Header>
-            <Table celled>
+            <Grid>
+              <GridColumn width={8}>
+                <Header as='h1'>Johnny Appleseed</Header>
+                <p>Driver<br/>Waimalu, 96701</p>
+              </GridColumn>
+              <GridColumn width={8} textAlign='right'>
+                <Header as='h3'>Car Details</Header>
+                <p>Car Make: Lamborghini<br/>Car Model: Aventador<br/>Car License Plate: 2S3XY</p>
+              </GridColumn>
+            </Grid>
+            <Header as="h2" textAlign="center" style={{ paddingTop: '30px' }}>Availability</Header>
+            <Table>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Day of the Week</Table.HeaderCell>
@@ -62,29 +70,29 @@ class UserProfile extends React.Component {
 }
 
 // Require a document to be passed to this component.
-UserProfile.propTypes = {
-  user: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    userType: PropTypes.string,
-    homeLocation: PropTypes.string,
-    carMake: PropTypes.string,
-    carModel: PropTypes.string,
-    carPlate: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
-};
+// UserProfile.propTypes = {
+//   user: PropTypes.shape({
+//     firstName: PropTypes.string,
+//     lastName: PropTypes.string,
+//     userType: PropTypes.string,
+//     homeLocation: PropTypes.string,
+//     carMake: PropTypes.string,
+//     carModel: PropTypes.string,
+//     carPlate: PropTypes.string,
+//     _id: PropTypes.string,
+//   }).isRequired,
+// };
 
-UserProfile.propTypes = {
-  availability: PropTypes.shape({
-    monday: PropTypes.array,
-    tuesday: PropTypes.array,
-    wednesday: PropTypes.array,
-    thursday: PropTypes.array,
-    friday: PropTypes.array,
-    _id: PropTypes.array,
-  }).isRequired,
-};
+// UserProfile.propTypes = {
+//   availability: PropTypes.shape({
+//     monday: PropTypes.array,
+//     tuesday: PropTypes.array,
+//     wednesday: PropTypes.array,
+//     thursday: PropTypes.array,
+//     friday: PropTypes.array,
+//     _id: PropTypes.array,
+//   }).isRequired,
+// };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
 export default withRouter(UserProfile);
