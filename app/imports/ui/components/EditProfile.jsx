@@ -5,6 +5,7 @@ import EditProfileImage from './EditProfileImage';
 function EditProfile() {
   const [firstOpen, setFirstOpen] = React.useState(false);
   const [secondOpen, setSecondOpen] = React.useState(false);
+
   return (
     <>
       <Button color='green' onClick={() => setFirstOpen(true)}>Edit Profile</Button>
@@ -17,11 +18,8 @@ function EditProfile() {
       >
         <Modal.Header>Edit Profile</Modal.Header>
         <Modal.Content>
-          {/*remove extra div's here when finished*/}
-          <div>
-            <div className='edit-profile-image'>
-              <EditProfileImage/>
-            </div>
+          <div className='edit-profile-image'>
+            <EditProfileImage/>
           </div>
         </Modal.Content>
         <Modal.Content>
@@ -85,41 +83,106 @@ function EditProfile() {
                   <Table.Cell>Monday</Table.Cell>
                   <Table.Cell>
                     <Form.Field control='select'>
-                      <option value='male'>Male</option>
-                      <option value='female'>Female</option>
+                      <option value='time'>Time</option>
+                      <option></option>
                     </Form.Field>
                   </Table.Cell>
-                  <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Tuesday</Table.Cell>
-                  <Table.Cell>January 11, 2014</Table.Cell>
-                  <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Wednesday</Table.Cell>
-                  <Table.Cell>May 11, 2014</Table.Cell>
-                  <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Thursday</Table.Cell>
-                  <Table.Cell>May 11, 2014</Table.Cell>
-                  <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Friday</Table.Cell>
-                  <Table.Cell>May 11, 2014</Table.Cell>
-                  <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Saturday</Table.Cell>
-                  <Table.Cell>May 11, 2014</Table.Cell>
-                  <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Sunday</Table.Cell>
-                  <Table.Cell>May 11, 2014</Table.Cell>
-                  <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Form.Field control='select'>
+                      <option value='time'>Time</option>
+                      <option></option>
+                    </Form.Field>
+                  </Table.Cell>
                 </Table.Row>
               </Table.Body>
             </Table>
@@ -143,13 +206,13 @@ function EditProfile() {
         >
           <Modal.Header>Modal #2</Modal.Header>
           <Modal.Content>
-            <p>That's everything!</p>
+            <p>That&apos;s everything!</p>
           </Modal.Content>
           <Modal.Actions>
             <Button
               icon='check'
               content='All Done'
-              onClick={() => setSecondOpen(false)}
+              onClick={() => setFirstOpen(false)}
             />
           </Modal.Actions>
         </Modal>
