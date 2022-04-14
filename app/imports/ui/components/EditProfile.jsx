@@ -11,12 +11,15 @@ function EditProfile() {
       <Button color='green' onClick={() => setFirstOpen(true)}>Edit Profile</Button>
 
       <Modal
+        closeIcon
         closeOnDimmerClick={false}
         onClose={() => setFirstOpen(false)}
         onOpen={() => setFirstOpen(true)}
         open={firstOpen}
       >
-        <Modal.Header>Edit Profile</Modal.Header>
+        <Modal.Header>
+          Edit Profile
+        </Modal.Header>
         <Modal.Content>
           <div className='edit-profile-image'>
             <EditProfileImage/>
@@ -202,7 +205,7 @@ function EditProfile() {
           closeOnDimmerClick={false}
           onClose={() => setSecondOpen(false)}
           open={secondOpen}
-          size='small'
+          size='tiny'
         >
           <Modal.Header>Modal #2</Modal.Header>
           <Modal.Content>
@@ -211,8 +214,9 @@ function EditProfile() {
           <Modal.Actions>
             <Button
               icon='check'
-              content='All Done'
-              onClick={() => setFirstOpen(false)}
+              content='Save Changes'
+              onClick={() => (window.location.reload(false))}
+            /*  set onClick to refresh profile page instead of closing modal */
             />
           </Modal.Actions>
         </Modal>
