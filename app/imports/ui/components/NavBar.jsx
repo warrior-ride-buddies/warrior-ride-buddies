@@ -5,6 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink, Link } from 'react-router-dom';
 import { Menu, Dropdown, Header, Button, Icon, Form, Message, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
+import LoginDropdown from './LoginDropdown';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
@@ -63,43 +64,7 @@ class NavBar extends React.Component {
                 <Button>
                   <Dropdown id="login-dropdown" text="Login" pointing="top right">
                     <Dropdown.Menu onClick={e => e.stopPropagation()}>
-                      <Dropdown.Item>
-                        <Form onSubmit={this.submit} onKeyDown={this._handleKeyDown}>
-                          <Form.Input
-                            label="Email"
-                            id="signin-form-email"
-                            icon="user"
-                            iconPosition="left"
-                            name="email"
-                            type="email"
-                            placeholder="E-mail address"
-                            onChange={this.handleChange}
-                          />
-                          <Form.Input
-                            label="Password"
-                            id="signin-form-password"
-                            icon="lock"
-                            iconPosition="left"
-                            name="password"
-                            placeholder="Password"
-                            type="password"
-                            onChange={this.handleChange}
-                          />
-                          <a id="signin-form-submit" content="submit" className="ui button" onClick={this.submit}>Submit</a>
-                        </Form>
-                        {this.state.error === '' ? (
-                          ''
-                        ) : (
-                          <Message
-                            error
-                            header="Login was not successful"
-                            content={this.state.error}
-                          />
-                        )}
-                        <Message>
-                          <Link to="/signup">Click here to Register</Link>
-                        </Message>
-                      </Dropdown.Item>
+                      <LoginDropdown/>
                     </Dropdown.Menu>
                   </Dropdown>
                 </Button>
