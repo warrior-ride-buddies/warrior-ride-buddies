@@ -3,6 +3,7 @@ import { Grid, GridColumn, Header, Image, Table } from 'semantic-ui-react';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import CreateReport from '../components/CreateReport';
+import EditProfile from '../components/EditProfile';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
@@ -63,7 +64,7 @@ class UserProfile extends React.Component {
                 </Table.Row>
               </Table.Body>
             </Table>
-            <CreateReport/>
+            <EditProfile/>
           </div>
         </Grid.Column>
       </Grid>

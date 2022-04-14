@@ -7,7 +7,7 @@ class Landing extends React.Component {
     return (
       <Grid id='landing-page' verticalAlign='middle' textAlign='center'>
         <div id='landing-page-image1'>
-          <Header as='h1' centered style={{ padding: '250px', color: 'white', fontSize: '36px' }}>To connect UH Manoa students with similar commutes, enabling them to organize car-pools</Header>
+          <Header as='h1' centered="true" style={{ padding: '250px', color: 'white', fontSize: '36px' }}>To connect UH Manoa students with similar commutes, enabling them to organize car-pools</Header>
         </div>
         <div className='accent-block'>
           <Header as='h2' inverted>Start off by creating your profile including your name, profile photo, UH email address, and neighborhood.</Header>
