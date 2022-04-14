@@ -18,22 +18,22 @@ class ListReports extends React.Component {
       <Container>
         <Header as="h2" textAlign="center">Review Reports</Header>
         <Table celled>
-          <Table.Body>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>user</Table.HeaderCell>
-                <Table.HeaderCell>reported by</Table.HeaderCell>
-                <Table.HeaderCell>issue</Table.HeaderCell>
-                <Table.HeaderCell>date</Table.HeaderCell>
-                <Table.HeaderCell>reported message</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
+          <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>jappleseed@hawaii.edu</Table.HeaderCell>
-              <Table.HeaderCell>jdeer@hawaii.edu</Table.HeaderCell>
-              <Table.HeaderCell>Broke TOS</Table.HeaderCell>
-              <Table.HeaderCell>Mar 13, 2022</Table.HeaderCell>
-              <Table.HeaderCell><a>message link/modal</a></Table.HeaderCell>
+              <Table.HeaderCell>user</Table.HeaderCell>
+              <Table.HeaderCell>reported by</Table.HeaderCell>
+              <Table.HeaderCell>issue</Table.HeaderCell>
+              <Table.HeaderCell>date</Table.HeaderCell>
+              <Table.HeaderCell>reported message</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>jappleseed@hawaii.edu</Table.Cell>
+              <Table.Cell>jdeer@hawaii.edu</Table.Cell>
+              <Table.Cell>Broke TOS</Table.Cell>
+              <Table.Cell>Mar 13, 2022</Table.Cell>
+              <Table.Cell><a>message link/modal</a></Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>
