@@ -17,8 +17,8 @@ class UsersCollection {
       lastName: String,
       userType: {
         type: String,
-        allowedValues: ['driver', 'rider', 'both'],
-        defaultValue: 'rider',
+        allowedValues: ['Driver', 'Rider', 'Both'],
+        defaultValue: 'Rider',
       },
       homeLocation: String,
       carMake: String,

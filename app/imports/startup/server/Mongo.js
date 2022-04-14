@@ -18,10 +18,16 @@ if (Stuffs.collection.find().count() === 0) {
   }
 }
 
-// Initialize the StuffsCollection if empty.
+// Initialize the database with a default data document.
+function addUsers(data) {
+  console.log(`  Adding: ${data.firstName}`);
+  Users.collection.insert(data);
+}
+
+// Initialize the UsersCollection if empty.
 if (Users.collection.find().count() === 0) {
-  if (Meteor.settings.defaultData) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultData.map(data => addData(data));
+  if (Meteor.settings.defaultUsers) {
+    console.log('Creating user data.');
+    Meteor.settings.defaultUsers.map(data => addUsers(data));
   }
 }
