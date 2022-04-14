@@ -84,9 +84,7 @@ UserProfile.propTypes = {
     carPlate: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
-};
 
-UserProfile.propTypes = {
   availability: PropTypes.shape({
     monday: PropTypes.array,
     tuesday: PropTypes.array,
