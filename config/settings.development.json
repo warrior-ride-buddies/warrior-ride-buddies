@@ -12,6 +12,10 @@
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
 
+  "defaultUsers": [
+    { "firstName": "Kobey", "lastName": "Arai", "userType": "Driver", "homeLocation": "Waimalu, 96701", "carMake": "Honda", "carModel": "CR-V", "carColor": "Gray", "carPlate": "ABC 123" }
+  ],
+
   "monti": {
     "appId": "Q5cTSqJNRu8FL49gw",
     "appSecret": "8477a5d2-c06f-4946-8688-d44ae29a3ab2"
