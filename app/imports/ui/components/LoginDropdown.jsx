@@ -2,7 +2,7 @@ import React from 'react';
 import { Dropdown, Form, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-/** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
+/** The Login Dropdown appears when you click the Log in Button in the nav bar while not authenticated. */
 class LoginDropdown extends React.Component {
   render() {
     return (
