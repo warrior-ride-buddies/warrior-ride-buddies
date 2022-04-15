@@ -6,6 +6,7 @@
     "@react-google-maps/api": "^2.8.1",
     "classnames": "^2.3.1",
     "core-js": "^3.21.1",
+    "google-maps-react": "^2.0.6",
     "graphql": "^14.5.8",
     "meteor-node-stubs": "^1.2.1",
     "prop-types": "^15.7.2",
