@@ -18,7 +18,7 @@ if (Stuffs.collection.find().count() === 0) {
   }
 }
 
-// Initialize the database with a default data document.
+// Initialize the database with a default user data document.
 function addUsers(data) {
   console.log(`  Adding: ${data.firstName}`);
   Users.collection.insert(data);
