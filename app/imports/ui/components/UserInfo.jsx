@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, GridColumn, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-/** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
+/** The UserInfo component is visible in every User Profile. Rendered by the User Profile component. */
 class UserInfo extends React.Component {
   render() {
     return (
