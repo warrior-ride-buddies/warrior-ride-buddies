@@ -30,7 +30,7 @@ Meteor.publish(Users.userPublicationName, function () {
   //   return Users.collection.find({ firstName: username });
   // }
   return Users.collection.find();
-  return this.ready();
+  // return this.ready();
 });
 
 // Planning:roles publication
