@@ -102,10 +102,10 @@ class NavBar extends React.Component {
     return (
       <Menu style={menuStyle} attached="top" borderless inverted>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Image src='/images/LogoTransparent.png' className='tiny'/>
-        </Menu.Item>
-        <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Header inverted as='h1'>Warrior Ride Buddies</Header>
+          <Header inverted as='h1' textAlign='center'>
+            <Image src='/images/LogoTransparent.png' verticalAlign='middle'/>
+            <Header.Content>Warrior Ride Buddies</Header.Content>
+          </Header>
         </Menu.Item>
         {this.props.currentUser ? (
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home'>Home</Menu.Item>,
