@@ -38,7 +38,7 @@ class Map extends React.Component {
   });
 
   onClose = () => {
-    if (this.state.showingInfoWindow) {
+    if (this.state.isOpen) {
       this.setState({
         isOpen: false,
       });
