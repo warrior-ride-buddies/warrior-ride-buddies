@@ -1,4 +1,3 @@
-import swal from 'sweetalert';
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { InfoWindow, Marker, GoogleMap, LoadScript } from '@react-google-maps/api';
@@ -23,10 +22,10 @@ class Map extends React.Component {
   constructor() {
     super();
     this.state = {
-      isOpen: false,  // Hides or shows the InfoWindow
+      isOpen: false, // Hides or shows the InfoWindow
       activeLat: null,
       activeLng: null,
-      selectedUser: {}          // Shows the InfoWindow to the selected place upon a marker
+      selectedUser: {},
     };
   }
 
