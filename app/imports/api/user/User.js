@@ -12,6 +12,10 @@ class UsersCollection {
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
+    const LocationSchema = new SimpleSchema({
+      lat: Number,
+      lng: Number,
+    });
     this.schema = new SimpleSchema({
       firstName: String,
       lastName: String,
@@ -21,10 +25,13 @@ class UsersCollection {
         defaultValue: 'Rider',
       },
       homeLocation: String,
+      lat: Number,
+      lng: Number,
       carMake: String,
       carModel: String,
       carColor: String,
       carPlate: String,
+      owner: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
