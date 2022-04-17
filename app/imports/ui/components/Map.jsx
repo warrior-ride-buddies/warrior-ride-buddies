@@ -65,7 +65,6 @@ class Map extends React.Component {
               position={{ lat: user.lat, lng: user.lng }}
               icon='./images/personIcon.png'
               clickable = {true}
-              name={user.firstName}
               onClick={ () => this.onMarkerClick(user) }
             />)
           }
