@@ -9,7 +9,7 @@ import { Text } from '../../api/text/Text';
 const bridge = new SimpleSchema2Bridge(Text.schema);
 
 /** Renders the Page for adding a document. */
-class AddText extends React.Component {
+class AddContactsButton extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
@@ -43,9 +43,9 @@ class AddText extends React.Component {
   }
 }
 
-AddText.propTypes = {
+AddContactsButton.propTypes = {
   owner: PropTypes.string.isRequired,
   contactId: PropTypes.string.isRequired,
 };
 
-export default AddText;
+export default AddContactsButton;

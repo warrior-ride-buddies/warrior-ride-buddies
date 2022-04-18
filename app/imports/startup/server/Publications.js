@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
-import { Text } from '../../api/message/Text';
+import { Text } from '../../api/text/Text';
+import { Contacts } from '../../api/contact/Contacts';
 import { Users } from '../../api/user/User';
 
 // User-level publication.
@@ -14,12 +15,24 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Contacts.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Contacts.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
 Meteor.publish(Text.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Text.collection.find({ owner: username });
   }
   return this.ready();
+});
+
+Meteor.publish(Contacts.adminPublicationName, function () {
+  return Contacts.collection.find();
 });
 
 // Admin-level publication.

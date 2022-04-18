@@ -13,8 +13,8 @@ class ContactsCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      userId1: String,
-      userId2: String,
+      userEmail1: String,
+      userEmail2: String,
       userName1: String,
       userName2: String,
       image1: String,
@@ -24,7 +24,7 @@ class ContactsCollection {
     this.collection.attachSchema(this.schema);
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
-    // this.adminPublicationName = `${this.name}.publication.admin`;
+    this.adminPublicationName = `${this.name}.publication.admin`;
   }
 }
 

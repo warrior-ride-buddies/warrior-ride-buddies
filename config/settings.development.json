@@ -12,6 +12,13 @@
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
 
+  "defaultContacts": [
+    { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "pic",
+      "image2": "pic" },
+    { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "pic",
+      "image2": "pic" }
+  ],
+
   "defaultUsers": [
     { "firstName": "Kobey", "lastName": "Arai", "userType": "Driver", "homeLocation": "Waimalu, 96701", "carMake": "Honda", "carModel": "CR-V", "carColor": "Gray", "carPlate": "ABC 123" }
   ],

@@ -5,7 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Contact from '../components/Contact';
 import { Contacts } from '../../api/contact/Contacts';
-import { Text } from '../../api/message/Text';
+import { Text } from '../../api/text/Text';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListContacts extends React.Component {
