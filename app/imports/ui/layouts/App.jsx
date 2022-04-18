@@ -10,7 +10,6 @@ import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import ListReports from '../pages/ListReports';
 import AddStuff from '../pages/AddStuff';
-import ChatInbox from '../pages/ChatInbox';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -19,6 +18,7 @@ import Signout from '../pages/Signout';
 import UserProfile from '../pages/UserProfile';
 import Main from '../pages/Main';
 import Messages from '../pages/Messages';
+import ChatInbox from '../pages/ChatInbox';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
