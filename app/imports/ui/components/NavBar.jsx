@@ -39,7 +39,7 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const menuStyle = { marginBottom: '10px', backgroundColor: '#024731' };
+    const menuStyle = { backgroundColor: '#024731' };
 
     // const { from } = this.props.location.state || { from: { pathname: '/' } };
     // if correct authentication, redirect to page instead of login screen

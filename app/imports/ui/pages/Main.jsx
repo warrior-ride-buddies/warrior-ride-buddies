@@ -32,35 +32,31 @@ class Main extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Grid>
-        <Grid.Column width={4}>
-          <Form style={{ backgroundColor: 'gray', width: '100%', height: '100%', padding: '20px' }}>
-            <Form.Field>
-              <label>Zip Code</label>
-              <input placeholder='Zip Code' style={{ backgroundColor: 'white' }}/>
-            </Form.Field>
-            <Form.Field>
-              <label>Arrival Time</label>
-              <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
-            </Form.Field>
-            <Form.Select
-              fluid
-              label='Day of the Week'
-              options={dotwOptions}
-              placeholder='Day of the Week'
-            />
-            <Form.Select
-              fluid
-              label='Show:'
-              options={Options}
-              placeholder='Riders/Drivers'
-            />
-          </Form>
-        </Grid.Column>
-        <Grid.Column width={12}>
-          <Map/>
-        </Grid.Column>
-      </Grid>
+      <div style={{ height: '100%', padding: '0px', margin: '0px' }}>
+        <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }}>
+          <Form.Field>
+            <label>Zip Code</label>
+            <input placeholder='Zip Code' style={{ backgroundColor: 'white' }}/>
+          </Form.Field>
+          <Form.Field>
+            <label>Arrival Time</label>
+            <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
+          </Form.Field>
+          <Form.Select
+            fluid
+            label='Day of the Week'
+            options={dotwOptions}
+            placeholder='Day of the Week'
+          />
+          <Form.Select
+            fluid
+            label='Show:'
+            options={Options}
+            placeholder='Riders/Drivers'
+          />
+        </Form>
+        <Map/>
+      </div>
     );
   }
 }
