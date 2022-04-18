@@ -5,6 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink, Link } from 'react-router-dom';
 import { Menu, Dropdown, Header, Button, Icon, Form, Message, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
+import LoginDropdown from './LoginDropdown';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
@@ -63,50 +64,13 @@ class NavBar extends React.Component {
                 <Button>
                   <Dropdown id="login-dropdown" text="Login" pointing="top right">
                     <Dropdown.Menu onClick={e => e.stopPropagation()}>
-                      <Dropdown.Item>
-                        <Form onSubmit={this.submit} onKeyDown={this._handleKeyDown}>
-                          <Form.Input
-                            label="Email"
-                            id="signin-form-email"
-                            icon="user"
-                            iconPosition="left"
-                            name="email"
-                            type="email"
-                            placeholder="E-mail address"
-                            onChange={this.handleChange}
-                          />
-                          <Form.Input
-                            label="Password"
-                            id="signin-form-password"
-                            icon="lock"
-                            iconPosition="left"
-                            name="password"
-                            placeholder="Password"
-                            type="password"
-                            onChange={this.handleChange}
-                          />
-                          <a id="signin-form-submit" content="submit" className="ui button" onClick={this.submit}>Submit</a>
-                        </Form>
-                        {this.state.error === '' ? (
-                          ''
-                        ) : (
-                          <Message
-                            error
-                            header="Login was not successful"
-                            content={this.state.error}
-                          />
-                        )}
-                        <Message>
-                          <Link to="/signup">Click here to Register</Link>
-                        </Message>
-                      </Dropdown.Item>
+                      <LoginDropdown/>
                     </Dropdown.Menu>
                   </Dropdown>
                 </Button>
               ) : (
                 <Menu.Item>
-                  { /* Icon null to remove dropdown caret. Console error for null icon should be intentional */ }
-                  <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right">
+                  <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={null}>
                     <Dropdown.Menu>
                       <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to="/profile"/>
                       <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
@@ -138,10 +102,10 @@ class NavBar extends React.Component {
     return (
       <Menu style={menuStyle} attached="top" borderless inverted>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Image src='/images/LogoTransparent.png' className='tiny'/>
-        </Menu.Item>
-        <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Header inverted as='h1'>Warrior Ride Buddies</Header>
+          <Header inverted as='h1' textAlign='center'>
+            <Image src='/images/LogoTransparent.png' verticalAlign='middle'/>
+            <Header.Content>Warrior Ride Buddies</Header.Content>
+          </Header>
         </Menu.Item>
         {this.props.currentUser ? (
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home'>Home</Menu.Item>,
@@ -199,8 +163,7 @@ class NavBar extends React.Component {
             </Button>
           ) : (
             <Menu.Item>
-              { /* Icon null to remove dropdown caret. Console error for null icon should be intentional */ }
-              <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right">
+              <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={null}>
                 <Dropdown.Menu>
                   <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to="/profile"/>
                   <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>

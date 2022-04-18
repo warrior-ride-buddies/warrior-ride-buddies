@@ -5,6 +5,7 @@
   background: url('/images/annie-spratt-QckxruozjRg-unsplash.jpg') no-repeat center center fixed;
   background-size: cover;
   height: 700px;
+  opacity: 0.95;
   color: white;
   width: 100%;
   text-align: center;
