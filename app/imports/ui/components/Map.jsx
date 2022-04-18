@@ -1,11 +1,7 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
 import { InfoWindow, Marker, GoogleMap, LoadScript } from '@react-google-maps/api';
-import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Loader } from 'semantic-ui-react';
 import ApiKeys from '../../../ApiKeys.json';
-import { Users } from '../../api/user/User';
 import CreateReport from './CreateReport';
 
 const containerStyle = {
@@ -44,10 +40,6 @@ class Map extends React.Component {
   };
 
   render() {
-    return (this.props.ready) ? this.renderComp() : <Loader active>Getting data</Loader>;
-  }
-
-  renderComp() {
     const users = this.props.users;
     return (
       <LoadScript
@@ -73,6 +65,8 @@ class Map extends React.Component {
             >
               <div>
                 <h4>{this.state.selectedUser.firstName}</h4>
+                <h4>{this.state.selectedUser.schedule[1].time.toString()}</h4>
+                <h4>{this.state.selectedUser.schedule[0].rider.toString()}</h4>
                 <CreateReport/>
               </div>
             </InfoWindow>
@@ -85,18 +79,6 @@ class Map extends React.Component {
 
 Map.propTypes = {
   users: PropTypes.array.isRequired,
-  ready: PropTypes.bool.isRequired,
 };
 
-export default withTracker(() => {
-  // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Users.userPublicationName);
-  // Determine if the subscription is ready
-  const ready = subscription.ready();
-  // Get the Stuff documents
-  const users = Users.collection.find({}).fetch();
-  return {
-    users,
-    ready,
-  };
-})(Map);
+export default Map;

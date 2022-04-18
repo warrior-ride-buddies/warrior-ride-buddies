@@ -21,8 +21,8 @@
         "lat": 21.264324,
         "lng": -157.793632
       },
-      "lat": 21.264324,
-      "lng": -157.793632,
+      "schedule": [{"time": "2021-01-01T12:00:00Z", "driver": "true", "rider": "false"},
+        {"time": "2022-01-01T12:00:00Z", "driver": "true", "rider": "false"}],
       "carMake": "Honda",
       "carModel": "CR-V",
       "carColor": "Gray",
@@ -37,8 +37,8 @@
         "lat": 21.383430,
         "lng": -157.751821
       },
-      "lat": 21.383430,
-      "lng": -157.751821,
+      "schedule": [{"time": "2021-01-01T12:00:00Z", "driver": "true", "rider": "false"},
+        {"time": "2022-01-01T12:00:00Z", "driver": "true", "rider": "false"}],
       "carMake": "Toyota",
       "carModel": "Celica",
       "carColor": "Blue",
@@ -52,8 +52,8 @@
         "lat": 21.294876,
         "lng": -157.835588
       },
-      "lat": 21.294876,
-      "lng": -157.835588,
+      "schedule": [{"time": "2021-01-01T12:00:00Z", "driver": "true", "rider": "false"},
+        {"time": "2022-01-01T12:00:00Z", "driver": "true", "rider": "false"}],
       "carMake": "Mazda",
       "carModel": "CX-7",
       "carColor": "Gray",

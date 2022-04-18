@@ -17,11 +17,19 @@ class UsersCollection {
       lat: Number,
       lng: Number,
     });
+
+    const rideSchema = new SimpleSchema({
+      time: Date,
+      driver: Boolean,
+      rider: Boolean,
+    });
+
     this.schema = new SimpleSchema({
       firstName: String,
       lastName: String,
       homeLocation: String,
-      position: SimpleSchema.oneOf(String, positionSchema),
+      position: positionSchema,
+      schedule: [rideSchema],
       carMake: String,
       carModel: String,
       carColor: String,
