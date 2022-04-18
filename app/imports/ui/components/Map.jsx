@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Loader } from 'semantic-ui-react';
 import ApiKeys from '../../../ApiKeys.json';
 import { Users } from '../../api/user/User';
+import CreateReport from './CreateReport';
 
 const containerStyle = {
   width: '100%',
@@ -23,16 +24,14 @@ class Map extends React.Component {
     super();
     this.state = {
       isOpen: false, // Hides or shows the InfoWindow
-      activeLat: null,
-      activeLng: null,
+      activePosition: {},
       selectedUser: {},
     };
   }
 
   onMarkerClick = (user) => this.setState({
     selectedUser: user,
-    activeLat: user.lat,
-    activeLng: user.lng,
+    activePosition: user.position,
     isOpen: true,
   });
 
@@ -62,7 +61,7 @@ class Map extends React.Component {
           {
             users.map((user, index) => <Marker
               key={index}
-              position={{ lat: user.lat, lng: user.lng }}
+              position={user.position}
               icon='./images/personIcon.png'
               clickable = {true}
               onClick={ () => this.onMarkerClick(user) }
@@ -70,10 +69,11 @@ class Map extends React.Component {
           }
           {this.state.isOpen &&
             <InfoWindow
-              position={{ lat: this.state.activeLat, lng: this.state.activeLng }} onCloseClick={this.onClose}
+              position={this.state.activePosition} onCloseClick={this.onClose}
             >
               <div>
                 <h4>{this.state.selectedUser.firstName}</h4>
+                <CreateReport/>
               </div>
             </InfoWindow>
           }

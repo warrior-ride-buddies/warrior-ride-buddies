@@ -13,9 +13,52 @@
   ],
 
   "defaultUsers": [
-    { "firstName": "Kobey", "lastName": "Arai", "userType": "Driver", "homeLocation": "Waimalu, 96701", "lat": 21.264324, "lng": -157.793632, "carMake": "Honda", "carModel": "CR-V", "carColor": "Gray", "carPlate": "ABC 123", "owner": "john@foo.com" },
-    { "firstName": "Jesse", "lastName": "James", "userType": "Driver", "homeLocation": "Kailua, 96734", "lat": 21.383430, "lng": -157.751821, "carMake": "Toyota", "carModel": "Celica", "carColor": "Blue", "carPlate": "QRS 456", "owner": "john@foo.com" },
-    { "firstName": "Yong-Sung", "lastName": "Masuda", "userType": "Driver", "homeLocation": "Waikiki, 96815", "lat": 21.294876, "lng": -157.835588, "carMake": "Mazda", "carModel": "CX-7", "carColor": "Gray", "carPlate": "STR NUM", "owner": "john@foo.com" }
+    { "firstName": "Kobey",
+      "lastName": "Arai",
+      "userType": "Driver",
+      "homeLocation": "Waimalu, 96701",
+      "position": {
+        "lat": 21.264324,
+        "lng": -157.793632
+      },
+      "lat": 21.264324,
+      "lng": -157.793632,
+      "carMake": "Honda",
+      "carModel": "CR-V",
+      "carColor": "Gray",
+      "carPlate": "ABC 123",
+      "owner": "john@foo.com"
+    },
+    { "firstName": "Jesse",
+      "lastName": "James",
+      "userType": "Driver",
+      "homeLocation": "Kailua, 96734",
+      "position": {
+        "lat": 21.383430,
+        "lng": -157.751821
+      },
+      "lat": 21.383430,
+      "lng": -157.751821,
+      "carMake": "Toyota",
+      "carModel": "Celica",
+      "carColor": "Blue",
+      "carPlate": "QRS 456",
+      "owner": "john@foo.com" },
+    { "firstName": "Yong-Sung",
+      "lastName": "Masuda",
+      "userType": "Driver",
+      "homeLocation": "Waikiki, 96815",
+      "position": {
+        "lat": 21.294876,
+        "lng": -157.835588
+      },
+      "lat": 21.294876,
+      "lng": -157.835588,
+      "carMake": "Mazda",
+      "carModel": "CX-7",
+      "carColor": "Gray",
+      "carPlate": "STR NUM",
+      "owner": "john@foo.com" }
   ],
 
   "monti": {
