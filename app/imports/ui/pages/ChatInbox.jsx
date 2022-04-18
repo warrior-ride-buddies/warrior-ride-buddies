@@ -52,8 +52,8 @@ class ChatInbox extends React.Component {
                   <List.Icon name='github' size='large' verticalAlign='middle'/>
                   <List.Content>
                     <a href='#/messages'>
-                      <List.Header as='a'>Semantic-Org/Semantic-UI</List.Header>
-                      <List.Description as='a'>Updated 10 mins ago</List.Description>
+                      <List.Header>Semantic-Org/Semantic-UI</List.Header>
+                      <List.Description>Updated 10 mins ago</List.Description>
                     </a>
                   </List.Content>
                 </List.Item>
