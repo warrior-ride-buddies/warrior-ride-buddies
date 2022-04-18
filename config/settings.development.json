@@ -13,9 +13,9 @@
   ],
 
   "defaultContacts": [
-    { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "pic",
+    { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "images/LogoIcon.ico",
       "image2": "pic" },
-    { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "pic",
+    { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "images/kobey.jpeg",
       "image2": "pic" }
   ],
 

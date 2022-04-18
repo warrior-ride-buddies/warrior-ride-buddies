@@ -18,7 +18,9 @@ Meteor.publish(Stuffs.userPublicationName, function () {
 Meteor.publish(Contacts.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return Contacts.collection.find({ owner: username });
+    console.log(username);
+    const myChat1 = Contacts.collection.find({ $or: [{ userEmail1: username }, { userEmail2: username }] });
+    return myChat1;
   }
   return this.ready();
 });

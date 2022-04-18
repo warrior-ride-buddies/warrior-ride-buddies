@@ -8,7 +8,7 @@ class ChatInboxItem extends React.Component {
   render() {
     return (
       <List.Item>
-        <Image src={this.props.contact.image2} size='small' />
+        <Image src={this.props.contact.image1} size='small' />
         <List.Content>{this.props.contact.userName2}</List.Content>
       </List.Item>
     );

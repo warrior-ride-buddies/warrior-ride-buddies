@@ -4,6 +4,7 @@ import { Grid, Header, List, Segment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Contacts } from '../../api/contact/Contacts';
+import ChatInboxItem from '../components/ChatInboxItem';
 
 /** Renders the Page for adding a document. */
 class ChatInbox extends React.Component {
@@ -18,7 +19,7 @@ class ChatInbox extends React.Component {
           <Header as="h2" textAlign="center">Inbox</Header>
           <Segment>
             <List divided relaxed>
-              {this.props.contacts.map((contact) => <ChatInbox key={contact._id} contact={contact}/>)}
+              {this.props.contacts.map((contact) => <ChatInboxItem key={contact._id} contact={contact}/>)}
             </List>
           </Segment>
         </Grid.Column>
@@ -36,13 +37,16 @@ ChatInbox.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Contacts.adminPublicationName);
+  const subscription = Meteor.subscribe(Contacts.userPublicationName);
+  const ready = subscription.ready();
+  const contacts = Contacts.collection.find({}).fetch();
+  console.log(contacts);
   // Determine if the subscription is ready
   // Get the Stuff documents
   // const userEmail = Meteor.user().username;
   // console.log(userEmail);
   return {
-    contacts: Contacts.collection.find({}).fetch(),
-    ready: subscription.ready(),
+    contacts,
+    ready,
   };
 })(ChatInbox);
