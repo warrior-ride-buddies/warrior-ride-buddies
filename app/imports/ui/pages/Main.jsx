@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { Loader, Form, Grid } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Stuffs } from '../../api/stuff/Stuff';
 import Map from '../components/Map';
 import { Users } from '../../api/user/User';
 
@@ -59,7 +58,7 @@ class Main extends React.Component {
           </Form>
         </Grid.Column>
         <Grid.Column width={12}>
-          <Map users = {this.props.users}/>
+          <Map users={this.props.users}/>
         </Grid.Column>
       </Grid>
     );
