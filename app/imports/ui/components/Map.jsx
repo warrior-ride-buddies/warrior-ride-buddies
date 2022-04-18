@@ -3,6 +3,7 @@ import { InfoWindow, Marker, GoogleMap, LoadScript } from '@react-google-maps/ap
 import PropTypes from 'prop-types';
 import ApiKeys from '../../../ApiKeys.json';
 import CreateReport from './CreateReport';
+import MapPin from './MapPin';
 
 const containerStyle = {
   width: '100%',
@@ -64,9 +65,7 @@ class Map extends React.Component {
               position={this.state.activePosition} onCloseClick={this.onClose}
             >
               <div>
-                <h4>{this.state.selectedUser.firstName}</h4>
-                <h4>{this.state.selectedUser.schedule[1].time.toString()}</h4>
-                <h4>{this.state.selectedUser.schedule[0].rider.toString()}</h4>
+                <MapPin user={this.state.selectedUser}/>
                 <CreateReport/>
               </div>
             </InfoWindow>
