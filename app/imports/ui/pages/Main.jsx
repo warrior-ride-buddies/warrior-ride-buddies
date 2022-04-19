@@ -1,10 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Form, Grid } from 'semantic-ui-react';
+import { Loader, Form, Grid, Select, Label } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Stuffs } from '../../api/stuff/Stuff';
 import Map from '../components/Map';
+import { Users } from '../../api/user/User';
 
 const dotwOptions = [
   { key: 'mon', text: 'Monday', value: 'monday' },
@@ -19,12 +19,43 @@ const dotwOptions = [
 const Options = [
   { key: 'd', text: 'Drivers', value: 'drivers' },
   { key: 'r', text: 'Riders', value: 'riders' },
+  { key: 'b', text: 'Both', value: 'both' },
 ];
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class Main extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      day: 'monday',
+      showDrivers: true,
+      showRiders: true,
+    };
+  }
 
+  changeUserType = (event) => {
+    if (event.target.value === 'drivers') {
+      this.setState({ showDrivers: true, showRiders: false });
+    } else if (event.target.value === 'riders') {
+      this.setState({ showDrivers: false, showRiders: true });
+    } else if (event.target.value === 'both') {
+      this.setState({ showDrivers: true, showRiders: true });
+    }
+  }
+
+  filterUsers = (users) => {
+    let returnVal = users;
+    if (!(this.state.showDrivers === true && this.state.showRiders === true)) {
+      if (this.state.showDrivers === true) {
+        returnVal = users.filter(user => (user.arrivals.some(ride => (ride.driver === true))));
+      } else if (this.state.showRiders === true) {
+        returnVal = users.filter(user => (user.arrivals.some(ride => (ride.rider === true))));
+      }
+    }
+    return returnVal;
+  }
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
+
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
@@ -49,38 +80,46 @@ class Main extends React.Component {
               options={dotwOptions}
               placeholder='Day of the Week'
             />
-            <Form.Select
+            <Select
               fluid
-              label='Show:'
               options={Options}
               placeholder='Riders/Drivers'
+              value={this.state.value}
+              onChange={this.changeUserType}
             />
+            <Label style={{ backgroundColor: 'gray', width: '100%', }}>
+              Show:
+              <select value={this.state.value} onChange={this.changeUserType}>
+                <option value="drivers">Drivers</option>
+                <option value="riders">Riders</option>
+                <option value="both">Both</option>
+              </select>
+            </Label>
           </Form>
         </Grid.Column>
         <Grid.Column width={12}>
-          <Map/>
+          <Map users={this.filterUsers(this.props.users)}/>
         </Grid.Column>
       </Grid>
     );
   }
 }
 
-// Require an array of Stuff documents in the props.
 Main.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  const subscription = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const stuffs = Stuffs.collection.find({}).fetch();
+  const users = Users.collection.find({}).fetch();
   return {
-    stuffs,
+    users,
     ready,
   };
 })(Main);

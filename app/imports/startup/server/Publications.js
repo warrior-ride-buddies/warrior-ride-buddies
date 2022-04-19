@@ -13,6 +13,20 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Users.userPublicationName, function () {
+  if (this.userId) {
+    return Users.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Users.adminPublicationName, function () {
+  if (this.userId) {
+    return Users.collection.find();
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
@@ -20,17 +34,6 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
     return Stuffs.collection.find();
   }
   return this.ready();
-});
-
-// User-level publication.
-// If logged in, then publish documents owned by this user. Otherwise publish nothing.
-Meteor.publish(Users.userPublicationName, function () {
-  // if (this.userId) {
-  //   const username = Meteor.users.findOne(this.userId).username;
-  //   return Users.collection.find({ firstName: username });
-  // }
-  return Users.collection.find();
-  // return this.ready();
 });
 
 // Planning:roles publication

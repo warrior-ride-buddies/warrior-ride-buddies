@@ -5,6 +5,7 @@ import { Tracker } from 'meteor/tracker';
 /**
  * The UsersCollection. It encapsulates state and variable values for stuff.
  */
+
 class UsersCollection {
   constructor() {
     // The name of this collection.
@@ -12,19 +13,28 @@ class UsersCollection {
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
+    const positionSchema = new SimpleSchema({
+      lat: Number,
+      lng: Number,
+    });
+
+    const rideSchema = new SimpleSchema({
+      time: Date,
+      driver: Boolean,
+      rider: Boolean,
+    });
+
     this.schema = new SimpleSchema({
       firstName: String,
       lastName: String,
-      userType: {
-        type: String,
-        allowedValues: ['Driver', 'Rider', 'Both'],
-        defaultValue: 'Rider',
-      },
       homeLocation: String,
+      position: positionSchema,
+      arrivals: [rideSchema],
       carMake: String,
       carModel: String,
       carColor: String,
       carPlate: String,
+      owner: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

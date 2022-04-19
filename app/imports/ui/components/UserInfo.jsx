@@ -9,7 +9,7 @@ class UserInfo extends React.Component {
       <Grid>
         <GridColumn width={8}>
           <Header as='h1'>{this.props.user.firstName} {this.props.user.lastName}</Header>
-          <p>{this.props.user.userType}<br/>{this.props.user.homeLocation}</p>
+          <p>Driver<br/>{this.props.user.homeLocation}</p>
         </GridColumn>
         <GridColumn width={8} textAlign='right'>
           <Header as='h3'>Car Details</Header>
@@ -25,7 +25,6 @@ UserInfo.propTypes = {
   user: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
-    userType: PropTypes.string,
     homeLocation: PropTypes.string,
     carMake: PropTypes.string,
     carModel: PropTypes.string,
