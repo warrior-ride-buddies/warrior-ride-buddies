@@ -7,12 +7,18 @@ import MapPin from './MapPin';
 
 const containerStyle = {
   width: '100%',
-  height: '500px',
+  height: '100%',
+  position: 'absolute',
+  marginTop: '0px',
+};
+
+const mapOptions = {
+  mapTypeControl: false,
 };
 
 const center = {
-  lat: 21.29591292255475,
-  lng: -157.8143491059391,
+  lat: 21.463254,
+  lng: -158.117018,
 };
 
 class Map extends React.Component {
@@ -49,7 +55,8 @@ class Map extends React.Component {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={10}
+          zoom={11}
+          options={mapOptions}
         >
           {
             users.map((user, index) => <Marker

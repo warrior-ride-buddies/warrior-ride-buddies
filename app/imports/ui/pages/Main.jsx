@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Form, Grid, Select, Label } from 'semantic-ui-react';
+import { Loader, Form, Select, Label } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Map from '../components/Map';
@@ -62,62 +62,53 @@ class Main extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Grid>
-        <Grid.Column width={4}>
-          <Form style={{ backgroundColor: 'gray', width: '100%', height: '100%', padding: '20px' }}>
-            <Form.Field>
-              <label>Zip Code</label>
-              <input placeholder='Zip Code' style={{ backgroundColor: 'white' }}/>
-            </Form.Field>
-            <Form.Field>
-              <label>Arrival Time</label>
-              <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
-            </Form.Field>
-            <Form.Select
-              fluid
-              label='Day of the Week'
-              options={dotwOptions}
-              placeholder='Day of the Week'
-            />
-            <Select
-              fluid
-              options={Options}
-              placeholder='Riders/Drivers'
-              value={this.state.value}
-              onChange={this.changeUserType}
-            />
-            <Label style={{ backgroundColor: 'gray', width: '100%' }}>
-              Day of the Week
-              <select value={this.state.value} onChange={this.changeDay}>
-                <option value="7">All</option>
-                <option value="1">Monday</option>
-                <option value="2">Tuesday</option>
-                <option value="3">Wednesday</option>
-                <option value="4">Thursday</option>
-                <option value="5">Friday</option>
-                <option value="6">Saturday</option>
-                <option value="0">Sunday</option>
-              </select>
-            </Label>
-            <Label style={{ backgroundColor: 'gray', width: '100%' }}>
-              Show:
-              <select value={this.state.value} onChange={this.changeUserType}>
-                <option value="both">Both</option>
-                <option value="driver">Drivers</option>
-                <option value="rider">Riders</option>
-              </select>
-            </Label>
-            <label>{this.state.day}</label>
-            <label>{this.props.users[0].arrivals[0].userType}</label>
-            <label>{this.filterRides(this.props.users[0].arrivals, this.state.day, this.state.userType).length }</label>
-            <label>{(this.props.users[0].arrivals[0].userType === this.state.userType).toString()}</label>
-            <label>{this.props.users[0].arrivals[0].time.getDay()}</label>
-          </Form>
-        </Grid.Column>
-        <Grid.Column width={12}>
-          <Map users={this.filterUsers(this.props.users)}/>
-        </Grid.Column>
-      </Grid>
+      <div style={{ height: '100%', padding: '0px', margin: '0px' }}>
+        <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }}>
+          <Form.Field>
+            <label>Zip Code</label>
+            <input placeholder='Zip Code' style={{ backgroundColor: 'white' }}/>
+          </Form.Field>
+          <Form.Field>
+            <label>Arrival Time</label>
+            <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
+          </Form.Field>
+          <Form.Select
+            fluid
+            label='Day of the Week'
+            options={dotwOptions}
+            placeholder='Day of the Week'
+          />
+          <Select
+            fluid
+            options={Options}
+            placeholder='Riders/Drivers'
+            value={this.state.value}
+            onChange={this.changeUserType}
+          />
+          <Label style={{ backgroundColor: 'gray', width: '100%' }}>
+            Day of the Week
+            <select value={this.state.value} onChange={this.changeDay}>
+              <option value="7">All</option>
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3">Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+              <option value="0">Sunday</option>
+            </select>
+          </Label>
+          <Label style={{ backgroundColor: 'gray', width: '100%' }}>
+            Show:
+            <select value={this.state.value} onChange={this.changeUserType}>
+              <option value="both">Both</option>
+              <option value="driver">Drivers</option>
+              <option value="rider">Riders</option>
+            </select>
+          </Label>
+        </Form>
+        <Map users={this.filterUsers(this.props.users)}/>
+      </div>
     );
   }
 }
