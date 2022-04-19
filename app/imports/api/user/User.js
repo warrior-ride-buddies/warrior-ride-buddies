@@ -29,7 +29,7 @@ class UsersCollection {
       lastName: String,
       homeLocation: String,
       position: positionSchema,
-      schedule: [rideSchema],
+      arrivals: [rideSchema],
       carMake: String,
       carModel: String,
       carColor: String,
