@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Form, Grid, Select, Label } from 'semantic-ui-react';
+import { Loader, Form, Select, Label } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Map from '../components/Map';
@@ -63,44 +63,40 @@ class Main extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Grid>
-        <Grid.Column width={4}>
-          <Form style={{ backgroundColor: 'gray', width: '100%', height: '100%', padding: '20px' }}>
-            <Form.Field>
-              <label>Zip Code</label>
-              <input placeholder='Zip Code' style={{ backgroundColor: 'white' }}/>
-            </Form.Field>
-            <Form.Field>
-              <label>Arrival Time</label>
-              <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
-            </Form.Field>
-            <Form.Select
-              fluid
-              label='Day of the Week'
-              options={dotwOptions}
-              placeholder='Day of the Week'
-            />
-            <Select
-              fluid
-              options={Options}
-              placeholder='Riders/Drivers'
-              value={this.state.value}
-              onChange={this.changeUserType}
-            />
-            <Label style={{ backgroundColor: 'gray', width: '100%', }}>
-              Show:
-              <select value={this.state.value} onChange={this.changeUserType}>
-                <option value="drivers">Drivers</option>
-                <option value="riders">Riders</option>
-                <option value="both">Both</option>
-              </select>
-            </Label>
-          </Form>
-        </Grid.Column>
-        <Grid.Column width={12}>
-          <Map users={this.filterUsers(this.props.users)}/>
-        </Grid.Column>
-      </Grid>
+      <div style={{ height: '100%', padding: '0px', margin: '0px' }}>
+        <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }}>
+          <Form.Field>
+            <label>Zip Code</label>
+            <input placeholder='Zip Code' style={{ backgroundColor: 'white' }}/>
+          </Form.Field>
+          <Form.Field>
+            <label>Arrival Time</label>
+            <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
+          </Form.Field>
+          <Form.Select
+            fluid
+            label='Day of the Week'
+            options={dotwOptions}
+            placeholder='Day of the Week'
+          />
+          <Select
+            fluid
+            options={Options}
+            placeholder='Riders/Drivers'
+            value={this.state.value}
+            onChange={this.changeUserType}
+          />
+          <Label style={{ backgroundColor: 'gray', width: '100%' }}>
+            Show:
+            <select value={this.state.value} onChange={this.changeUserType}>
+              <option value="drivers">Drivers</option>
+              <option value="riders">Riders</option>
+              <option value="both">Both</option>
+            </select>
+          </Label>
+        </Form>
+        <Map users={this.filterUsers(this.props.users)}/>
+      </div>
     );
   }
 }
