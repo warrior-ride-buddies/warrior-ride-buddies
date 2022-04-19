@@ -20,8 +20,11 @@ class UsersCollection {
 
     const rideSchema = new SimpleSchema({
       time: Date,
-      driver: Boolean,
-      rider: Boolean,
+      userType: {
+        type: String,
+        allowedValues: ['driver', 'rider', 'both'],
+        defaultValue: 'both',
+      },
     });
 
     this.schema = new SimpleSchema({
@@ -29,7 +32,16 @@ class UsersCollection {
       lastName: String,
       homeLocation: String,
       position: positionSchema,
-      arrivals: [rideSchema],
+      arrivals: {
+        type: Array,
+        optional: true,
+      },
+      'arrivals.$': { type: rideSchema },
+      departures: {
+        type: Array,
+        optional: true,
+      },
+      'departures.$': { type: rideSchema },
       carMake: String,
       carModel: String,
       carColor: String,

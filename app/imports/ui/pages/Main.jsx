@@ -27,31 +27,30 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      day: 'monday',
-      showDrivers: true,
-      showRiders: true,
+      day: 7,
+      userType: 'both',
     };
   }
 
   changeUserType = (event) => {
-    if (event.target.value === 'drivers') {
-      this.setState({ showDrivers: true, showRiders: false });
-    } else if (event.target.value === 'riders') {
-      this.setState({ showDrivers: false, showRiders: true });
-    } else if (event.target.value === 'both') {
-      this.setState({ showDrivers: true, showRiders: true });
+    this.setState({ userType: event.target.value });
+  }
+
+  changeDay = (event) => {
+    this.setState({ day: parseInt(event.target.value, 10) });
+  }
+
+  filterRides = (rides, day, userType) => {
+    let returnVal = rides;
+    if (day !== 7) {
+      returnVal = returnVal.filter(ride => (ride.time.getDay() === day));
     }
+    returnVal = (returnVal.filter(ride => (userType === 'both' || ride.userType === userType)));
+    return returnVal;
   }
 
   filterUsers = (users) => {
-    let returnVal = users;
-    if (!(this.state.showDrivers === true && this.state.showRiders === true)) {
-      if (this.state.showDrivers === true) {
-        returnVal = users.filter(user => (user.arrivals.some(ride => (ride.driver === true))));
-      } else if (this.state.showRiders === true) {
-        returnVal = users.filter(user => (user.arrivals.some(ride => (ride.rider === true))));
-      }
-    }
+    const returnVal = users.filter(user => (this.filterRides(user.arrivals, this.state.day, this.state.userType).length > 0));
     return returnVal;
   }
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -87,14 +86,32 @@ class Main extends React.Component {
               value={this.state.value}
               onChange={this.changeUserType}
             />
-            <Label style={{ backgroundColor: 'gray', width: '100%', }}>
-              Show:
-              <select value={this.state.value} onChange={this.changeUserType}>
-                <option value="drivers">Drivers</option>
-                <option value="riders">Riders</option>
-                <option value="both">Both</option>
+            <Label style={{ backgroundColor: 'gray', width: '100%' }}>
+              Day of the Week
+              <select value={this.state.value} onChange={this.changeDay}>
+                <option value="7">All</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="0">Sunday</option>
               </select>
             </Label>
+            <Label style={{ backgroundColor: 'gray', width: '100%' }}>
+              Show:
+              <select value={this.state.value} onChange={this.changeUserType}>
+                <option value="both">Both</option>
+                <option value="driver">Drivers</option>
+                <option value="rider">Riders</option>
+              </select>
+            </Label>
+            <label>{this.state.day}</label>
+            <label>{this.props.users[0].arrivals[0].userType}</label>
+            <label>{this.filterRides(this.props.users[0].arrivals, this.state.day, this.state.userType).length }</label>
+            <label>{(this.props.users[0].arrivals[0].userType === this.state.userType).toString()}</label>
+            <label>{this.props.users[0].arrivals[0].time.getDay()}</label>
           </Form>
         </Grid.Column>
         <Grid.Column width={12}>
