@@ -7,8 +7,8 @@ import { withRouter } from 'react-router-dom';
 class ChatInboxItem extends React.Component {
   render() {
     return (
-      <List.Item>
-        <Image src={this.props.contact.image1} size='small' />
+      <List.Item href='#messages'>
+        <Image src={this.props.contact.image1} size='tiny' />
         <List.Content>{this.props.contact.userName2}</List.Content>
       </List.Item>
     );
