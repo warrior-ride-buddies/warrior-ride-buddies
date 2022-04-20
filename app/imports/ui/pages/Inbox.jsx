@@ -29,7 +29,7 @@ class Inbox extends React.Component {
 
 // Require an array of Stuff documents in the props.
 Inbox.propTypes = {
-  profiles: PropTypes.array.isRequired,
+  conversations: PropTypes.array.isRequired,
   messages: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -37,15 +37,15 @@ Inbox.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Profiles.userPublicationName);
+  const subscription = Meteor.subscribe(Conversations.userPublicationName);
   const subscription2 = Meteor.subscribe(Messages.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready();
   // Get the Stuff documents
-  const profiles = Profiles.collection.find({}).fetch();
+  const conversations = Conversations.collection.find({}).fetch();
   const messages = Messages.collection.find({}).fetch();
   return {
-    profiles,
+    conversations,
     messages,
     ready,
   };

@@ -13,8 +13,8 @@ class AddMessage extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { message, owner, profileId, createdAt } = data;
-    Messages.collection.insert({ message, profileId, createdAt, owner },
+    const { message, conversationId, from, createdAt } = data;
+    Messages.collection.insert({ message, conversationId, from, createdAt, },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -34,8 +34,8 @@ class AddMessage extends React.Component {
           <TextField label="Send a message." name='message'/>
           <SubmitField value='Send'/>
           <ErrorsField/>
-          <HiddenField name='owner' value={this.props.owner}/>
-          <HiddenField name='profileId' value={this.props.profileId}/>
+          <HiddenField name='conversationId' value={this.props.conversationId}/>
+          <HiddenField name='fromUser' value={this.props.fromUser}/>
           <HiddenField name='createdAt' value={new Date()}/>
         </Segment>
       </AutoForm>
@@ -44,8 +44,8 @@ class AddMessage extends React.Component {
 }
 
 AddMessage.propTypes = {
-  owner: PropTypes.string.isRequired,
-  profileId: PropTypes.string.isRequired,
+  fromUser: PropTypes.string.isRequired,
+  conversationId: PropTypes.string.isRequired,
 };
 
 export default AddMessage;

@@ -14,8 +14,8 @@ class MessagesCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       message: String,
-      profileId: String,
-      owner: String,
+      conversationId: String,
+      from: String,
       createdAt: Date,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
