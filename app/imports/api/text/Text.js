@@ -14,8 +14,8 @@ class TextCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       text: String,
-      contactId: String,
-      owner: String,
+      receiver: String,
+      sender: String,
       createdAt: Date,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
