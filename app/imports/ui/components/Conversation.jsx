@@ -13,7 +13,7 @@ class Conversation extends React.Component {
     return (
       <Card centered>
         <Card.Content>
-          <Card.Header>{conversation.usernames[0]} {conversation.usernames[1]}</Card.Header>
+          <Card.Header>{conversation.usernames.filter(user => (user !== currentUser))}</Card.Header>
         </Card.Content>
         <Card.Content extra>
           <Feed>
