@@ -82,6 +82,15 @@
     }
   ],
 
+  "defaultConversations": [
+    {
+      "usernames": ["admin@foo.com", "john@foo.com"]
+    },
+    {
+      "usernames": ["kobeya@hawaii.edu", "john@foo.com"]
+    }
+  ],
+
   "monti": {
     "appId": "Q5cTSqJNRu8FL49gw",
     "appSecret": "8477a5d2-c06f-4946-8688-d44ae29a3ab2"

@@ -14,6 +14,7 @@ class MessagesCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       message: String,
+      usernames: [String],
       conversationId: String,
       from: String,
       createdAt: Date,

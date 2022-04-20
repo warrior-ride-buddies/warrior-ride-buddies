@@ -4,7 +4,7 @@ import { Container, Header, Loader, Card } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Conversation from '../components/Conversation';
-import { Profiles } from '../../api/profile/Profiles';
+import { Conversations } from '../../api/conversation/Conversations';
 import { Messages } from '../../api/message/Messages';
 
 class Inbox extends React.Component {
@@ -20,7 +20,13 @@ class Inbox extends React.Component {
       <Container>
         <Header as="h2" textAlign="center" inverted>List Profiles</Header>
         <Card.Group>
-          {this.props.profiles.map((profile, index) => <Conversation key={index} profile={profile} messages={this.props.messages.filter(message => (message.profileId === profile._id))}/>)}
+          {this.props.conversations.map((conversation, index) =>
+            <Conversation
+              key={index}
+              currentUser={this.props.currentUser}
+              conversation={conversation}
+              messages={this.props.messages.filter(message => (message.conversationId === conversation._id))}
+            />)}
         </Card.Group>
       </Container>
     );
@@ -29,10 +35,15 @@ class Inbox extends React.Component {
 
 // Require an array of Stuff documents in the props.
 Inbox.propTypes = {
-  conversations: PropTypes.array.isRequired,
-  messages: PropTypes.array.isRequired,
+  currentUser: PropTypes.string,
+  conversations: PropTypes.array,
+  messages: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
+
+const InboxContainer = withTracker(() => ({
+  currentUser: Meteor.user() ? Meteor.user().username : '',
+}))(Inbox);
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
@@ -49,4 +60,4 @@ export default withTracker(() => {
     messages,
     ready,
   };
-})(Inbox);
+})(InboxContainer);
