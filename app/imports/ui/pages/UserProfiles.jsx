@@ -8,7 +8,7 @@ import UserInfo from '../components/UserInfo';
 import EditProfile from '../components/EditProfile';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class UserProfile extends React.Component {
+class UserProfiles extends React.Component {
   render() {
     return (
       <Grid style={{ margin: '20px' }}>
@@ -66,7 +66,7 @@ class UserProfile extends React.Component {
 }
 
 // Require a document to be passed to this component.
-UserProfile.propTypes = {
+UserProfiles.propTypes = {
 
   // availability: PropTypes.shape({
   //   monday: PropTypes.array,
@@ -82,9 +82,7 @@ UserProfile.propTypes = {
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(({ match }) => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const documentId = match.params._id;
+export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
@@ -95,4 +93,4 @@ export default withTracker(({ match }) => {
     users,
     ready,
   };
-})(UserProfile);
+})(UserProfiles);
