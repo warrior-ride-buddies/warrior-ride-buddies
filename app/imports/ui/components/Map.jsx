@@ -1,19 +1,55 @@
 import React from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import ApiKeys from '../../../ApiKeys.json';
+import { InfoWindow, Marker, GoogleMap, LoadScript } from '@react-google-maps/api';
+import PropTypes from 'prop-types';
+import ApiKeys from '../../../ApiKeys.json';
+import CreateReport from './CreateReport';
+import MapPin from './MapPin';
 
 const containerStyle = {
   width: '100%',
-  height: '500px',
+  height: '100%',
+  position: 'absolute',
+  marginTop: '0px',
+};
+
+const mapOptions = {
+  mapTypeControl: false,
 };
 
 const center = {
-  lat: 21.29591292255475,
-  lng: -157.8143491059391,
+  lat: 21.463254,
+  lng: -158.117018,
 };
 
 class Map extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      isOpen: false, // Hides or shows the InfoWindow
+      activePosition: {},
+      selectedUser: {},
+    };
+  }
+
+  onMarkerClick = (user) => this.setState({
+    selectedUser: user,
+    activePosition: user.position,
+    isOpen: true,
+  });
+
+  onClose = () => {
+    if (this.state.isOpen) {
+      this.setState({
+        isOpen: false,
+      });
+    }
+  };
+
   render() {
+    const users = this.props.users;
     return (
       <LoadScript
         googleMapsApiKey={ApiKeys.MapsApiKey}
@@ -21,14 +57,36 @@ class Map extends React.Component {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={10}
+          zoom={11}
+          options={mapOptions}
         >
-          { /* Child components, such as markers, info windows, etc. */ }
-          <></>
+          {
+            users.map((user, index) => <Marker
+              key={index}
+              position={user.position}
+              icon='./images/personIcon.png'
+              clickable = {true}
+              onClick={ () => this.onMarkerClick(user) }
+            />)
+          }
+          {this.state.isOpen &&
+            <InfoWindow
+              position={this.state.activePosition} onCloseClick={this.onClose}
+            >
+              <div>
+                <MapPin user={this.state.selectedUser}/>
+                <CreateReport/>
+              </div>
+            </InfoWindow>
+          }
         </GoogleMap>
       </LoadScript>
     );
   }
 }
+
+Map.propTypes = {
+  users: PropTypes.array.isRequired,
+};
 
 export default Map;

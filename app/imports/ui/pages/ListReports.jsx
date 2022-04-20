@@ -3,11 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Profiles } from '../../api/profile/Profiles';
 import { Stuffs } from '../../api/stuff/Stuff';
-import StuffItemAdmin from '../components/StuffItemAdmin';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListReports extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -23,22 +20,22 @@ class ListReports extends React.Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
+
+              <Table.HeaderCell>user</Table.HeaderCell>
               <Table.HeaderCell>reported by</Table.HeaderCell>
               <Table.HeaderCell>issue</Table.HeaderCell>
               <Table.HeaderCell>date</Table.HeaderCell>
               <Table.HeaderCell>reported message</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Johnny Appleseed</Table.HeaderCell>
-            <Table.HeaderCell>Jane Deer</Table.HeaderCell>
-            <Table.HeaderCell>Broke TOS</Table.HeaderCell>
-            <Table.HeaderCell>Mar 13, 2022</Table.HeaderCell>
-            <Table.HeaderCell>message link</Table.HeaderCell>
-          </Table.Row>
           <Table.Body>
-            {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
+            <Table.Row>
+              <Table.Cell>jappleseed@hawaii.edu</Table.Cell>
+              <Table.Cell>jdeer@hawaii.edu</Table.Cell>
+              <Table.Cell>Broke TOS</Table.Cell>
+              <Table.Cell>Mar 13, 2022</Table.Cell>
+              <Table.Cell><a>message link/modal</a></Table.Cell>
+            </Table.Row>
           </Table.Body>
         </Table>
       </Container>

@@ -1,0 +1,25 @@
+#landing-page {
+}
+
+#landing-page-image1 {
+  background: url('/images/annie-spratt-QckxruozjRg-unsplash.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 700px;
+  opacity: 0.95;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.accent-block {
+  background: url('/images/artur-luczka-loAfOVk1eNc-unsplash.jpg');
+  height: 60px;
+  width: 100%;
+  text-align: center;
+  vertical-align: center;
+  padding: 15px;
+}
+
+.edit-profile-image {
+  text-align: center;
+}
