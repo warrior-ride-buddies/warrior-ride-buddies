@@ -19,7 +19,7 @@ class UserProfile extends React.Component {
         </Grid.Column>
         <Grid.Column width={12}>
           <div style={{ height: '750px', paddingTop: '30px' }}>
-            {this.props.users.map((user) => <UserInfo key={user._id} user={user} />)}
+            {this.props.user.map((user) => <UserInfo key={user._id} user={user} />)}
             <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Availability</Header>
             <Table>
               <Table.Header>
@@ -77,22 +77,21 @@ UserProfile.propTypes = {
   //   _id: PropTypes.array,
   // }).isRequired,
 
-  users: PropTypes.array.isRequired,
+  user: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(({ match }) => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const documentId = match.params._id;
+export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const users = Users.collection.find({}).fetch();
+  const user = Users.collection.find({ owner: Meteor.user().username }).fetch();
+  console.log(user);
   return {
-    users,
+    user,
     ready,
   };
 })(UserProfile);

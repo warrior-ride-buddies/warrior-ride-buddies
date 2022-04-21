@@ -54,7 +54,7 @@ class NavBar extends React.Component {
               [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home'>Home</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact to="/info-page" key='info'>Project Info</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact to="messages" key="messages">Messages</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="profiles" key="profiles">View Profiles</Menu.Item>]
+                <Menu.Item as={NavLink} activeClassName="active" exact to="/profiles" key="profiles">View Profiles</Menu.Item>]
             ) : ''}
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
               <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
@@ -72,7 +72,7 @@ class NavBar extends React.Component {
                 <Menu.Item>
                   <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={null}>
                     <Dropdown.Menu>
-                      <Dropdown.Item id="navbar-sign-out" icon="user" text="View Profile" as={Link} exact to={`/profile/${Meteor.userId()}`}/>
+                      <Dropdown.Item id="navbar-sign-out" icon="user" text="View Profile" as={NavLink} exact to={`/profile/${Meteor.userId()}`}/>
                       { /* <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to=<EditProfile/>/> */ }
                       <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                     </Dropdown.Menu>
@@ -112,7 +112,7 @@ class NavBar extends React.Component {
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home'>Home</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/info-page" key='info'>Project Info</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/chatinbox" key='list'>Inbox</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="profiles" key="profiles">View Profiles</Menu.Item>]
+            <Menu.Item as={NavLink} activeClassName="active" exact to="/profiles" key="profiles">View Profiles</Menu.Item>]
         ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
           <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
@@ -166,8 +166,7 @@ class NavBar extends React.Component {
             <Menu.Item>
               <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={null}>
                 <Dropdown.Menu>
-                  { console.log(Meteor.userId()) }
-                  <Dropdown.Item id="navbar-sign-out" icon="user" text="View Profile" as={Link} exact to={`/profile/${Meteor.userId()}`}/>
+                  <Dropdown.Item id="navbar-sign-out" icon="user" text="View Profile" as={NavLink} exact to={`/profile/${Meteor.userId()}`}/>
                   { /* <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to=<EditProfile/>/> */ }
                   <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                 </Dropdown.Menu>
