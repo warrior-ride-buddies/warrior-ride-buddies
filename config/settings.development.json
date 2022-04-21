@@ -61,6 +61,11 @@
       "owner": "admin@foo.com" }
   ],
 
+  "defaultConversations": [
+    {"usernames":  ["john@foo.com", "admin@foo.com"]},
+    {"usernames": ["john@foo.com", "kobeya@hawaii.edu"]}
+  ],
+
   "monti": {
     "appId": "Q5cTSqJNRu8FL49gw",
     "appSecret": "8477a5d2-c06f-4946-8688-d44ae29a3ab2"

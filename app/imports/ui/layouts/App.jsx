@@ -9,7 +9,7 @@ import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import ListReports from '../pages/ListReports';
 import AddStuff from '../pages/AddStuff';
-import ChatInbox from '../pages/ChatInbox';
+import Inbox from '../pages/Inbox';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -36,7 +36,7 @@ class App extends React.Component {
             <ProtectedRoute path="/main" component={Main}/>
             <ProtectedRoute path="/messages" component={Messages}/>
             <ProtectedRoute path="/add" component={AddStuff}/>
-            <ProtectedRoute path="/chatinbox" component={ChatInbox}/>
+            <ProtectedRoute path="/chatinbox" component={Inbox}/>
             <ProtectedRoute path="/profile/:owner" component={UserProfile}/>
             <AdminProtectedRoute path="/admin" component={ListReports}/>
             <Route component={NotFound}/>
