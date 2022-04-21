@@ -45,7 +45,7 @@ class NavBar extends React.Component {
     if (this.props.location.state) {
       return (
         <div>
-          <Menu style={menuStyle} attached="top" borderless secondary inverted>
+          <Menu style={menuStyle} attached="top" borderless secondary inverted stackable>
             <Menu.Item as={NavLink} activeClassName="" exact to="/">
               <Header inverted as='h1'>Warrior Ride Buddies</Header>
             </Menu.Item>
@@ -136,7 +136,7 @@ class NavBar extends React.Component {
     }
 
     return (
-      <Menu style={menuStyle} attached="top" borderless secondary inverted>
+      <Menu style={menuStyle} attached="top" borderless secondary inverted stackable>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
           <Image src='/images/LogoTransparent.png' className='tiny'/>
         </Menu.Item>
