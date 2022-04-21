@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Grid, Header, Image, Table } from 'semantic-ui-react';
+import { Button, Grid, Header, Image, Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Users } from '../../api/user/User';
@@ -14,7 +14,7 @@ class UserProfile extends React.Component {
       <Grid style={{ margin: '20px' }}>
         <Grid.Column width={4} textAlign='center'>
           <div style={{ height: '750px', backgroundColor: 'grey', borderRadius: '20px' }}>
-            <Image src='./images/kobey.jpeg' style={{ padding: '30px' }} circular/>
+            <Image src='./images/kobey.jpeg' style={{ padding: '30px' }} circular bordered/>
           </div>
         </Grid.Column>
         <Grid.Column width={12}>
@@ -58,6 +58,7 @@ class UserProfile extends React.Component {
               </Table.Body>
             </Table>
             <EditProfile/>
+            <Button>Message {this.props.user.firstName}</Button>
           </div>
         </Grid.Column>
       </Grid>
