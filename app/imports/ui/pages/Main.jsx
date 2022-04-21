@@ -7,18 +7,19 @@ import Map from '../components/Map';
 import { Users } from '../../api/user/User';
 
 const dotwOptions = [
-  { key: 'mon', text: 'Monday', value: 'monday' },
-  { key: 'tue', text: 'Tuesday', value: 'tuesday' },
-  { key: 'wed', text: 'Wednesday', value: 'wednesday' },
-  { key: 'thu', text: 'Thursday', value: 'thursday' },
-  { key: 'fri', text: 'Friday', value: 'friday' },
-  { key: 'sat', text: 'Saturday', value: 'saturday' },
-  { key: 'sun', text: 'Sunday', value: 'sunday' },
+  { key: 'all', text: 'All', value: '7' },
+  { key: 'mon', text: 'Monday', value: '1' },
+  { key: 'tue', text: 'Tuesday', value: '2' },
+  { key: 'wed', text: 'Wednesday', value: '3' },
+  { key: 'thu', text: 'Thursday', value: '4' },
+  { key: 'fri', text: 'Friday', value: '5' },
+  { key: 'sat', text: 'Saturday', value: '6' },
+  { key: 'sun', text: 'Sunday', value: '0' },
 ];
 
 const Options = [
-  { key: 'd', text: 'Drivers', value: 'drivers' },
-  { key: 'r', text: 'Riders', value: 'riders' },
+  { key: 'd', text: 'Drivers', value: 'driver' },
+  { key: 'r', text: 'Riders', value: 'rider' },
   { key: 'b', text: 'Both', value: 'both' },
 ];
 
@@ -32,12 +33,12 @@ class Main extends React.Component {
     };
   }
 
-  changeUserType = (event) => {
-    this.setState({ userType: event.target.value });
+  changeUserType = (e, { value }) => {
+    this.setState({ userType: value });
   }
 
-  changeDay = (event) => {
-    this.setState({ day: parseInt(event.target.value, 10) });
+  changeDay = (e, { value }) => {
+    this.setState({ day: parseInt(value, 10) });
   }
 
   filterRides = (rides, day, userType) => {
@@ -50,6 +51,8 @@ class Main extends React.Component {
   }
 
   filterUsers = (users) => {
+    console.log(`this.state.day: ${this.state.day}`);
+    users.filter(user => (console.log(user.arrivals)));
     const returnVal = users.filter(user => (this.filterRides(user.arrivals, this.state.day, this.state.userType).length > 0));
     return returnVal;
   }
@@ -72,40 +75,22 @@ class Main extends React.Component {
             <label>Arrival Time</label>
             <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
           </Form.Field>
-          <Form.Select
+          <Form.Field
+            control={Select}
             fluid
             label='Day of the Week'
             options={dotwOptions}
             placeholder='Day of the Week'
+            onChange={this.changeDay}
           />
-          <Select
+          <Form.Field
+            control={Select}
             fluid
+            label='Show:'
             options={Options}
             placeholder='Riders/Drivers'
-            value={this.state.value}
             onChange={this.changeUserType}
           />
-          <Label style={{ backgroundColor: 'gray', width: '100%' }}>
-            Day of the Week
-            <select value={this.state.value} onChange={this.changeDay}>
-              <option value="7">All</option>
-              <option value="1">Monday</option>
-              <option value="2">Tuesday</option>
-              <option value="3">Wednesday</option>
-              <option value="4">Thursday</option>
-              <option value="5">Friday</option>
-              <option value="6">Saturday</option>
-              <option value="0">Sunday</option>
-            </select>
-          </Label>
-          <Label style={{ backgroundColor: 'gray', width: '100%' }}>
-            Show:
-            <select value={this.state.value} onChange={this.changeUserType}>
-              <option value="both">Both</option>
-              <option value="driver">Drivers</option>
-              <option value="rider">Riders</option>
-            </select>
-          </Label>
         </Form>
         <Map users={this.filterUsers(this.props.users)}/>
       </div>
