@@ -16,7 +16,7 @@ class ListReports extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center">Review Reports</Header>
+        <Header as="h2" textAlign="center" id="listreports-page">Review Reports</Header>
         <Table celled>
           <Table.Header>
             <Table.Row>

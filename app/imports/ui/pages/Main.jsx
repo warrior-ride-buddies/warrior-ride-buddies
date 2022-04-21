@@ -62,7 +62,7 @@ class Main extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <div style={{ height: '100%', padding: '0px', margin: '0px' }}>
+      <div style={{ height: '100%', padding: '0px', margin: '0px' }} id={'main-page'}>
         <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }}>
           <Form.Field>
             <label>Zip Code</label>
