@@ -82,13 +82,15 @@ UserProfile.propTypes = {
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(() => {
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  const email = match.params.owner;
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const user = Users.collection.find({ owner: Meteor.user().username }).fetch();
+  const user = Users.collection.find({ owner: email }).fetch();
   console.log(user);
   return {
     user,

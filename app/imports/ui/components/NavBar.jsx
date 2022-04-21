@@ -72,7 +72,7 @@ class NavBar extends React.Component {
                 <Menu.Item>
                   <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={null}>
                     <Dropdown.Menu>
-                      <Dropdown.Item id="navbar-sign-out" icon="user" text="View Profile" as={NavLink} exact to={`/profile/${Meteor.userId()}`}/>
+                      <Dropdown.Item id="navbar-sign-out" icon="user" text="View Profile" as={NavLink} exact to={`/profile/${this.props.currentUser}`}/>
                       { /* <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to=<EditProfile/>/> */ }
                       <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                     </Dropdown.Menu>
@@ -166,7 +166,7 @@ class NavBar extends React.Component {
             <Menu.Item>
               <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={null}>
                 <Dropdown.Menu>
-                  <Dropdown.Item id="navbar-sign-out" icon="user" text="View Profile" as={NavLink} exact to={`/profile/${Meteor.userId()}`}/>
+                  <Dropdown.Item id="navbar-sign-out" icon="user" text="View Profile" as={NavLink} exact to={`/profile/${this.props.currentUser}`}/>
                   { /* <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to=<EditProfile/>/> */ }
                   <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                 </Dropdown.Menu>

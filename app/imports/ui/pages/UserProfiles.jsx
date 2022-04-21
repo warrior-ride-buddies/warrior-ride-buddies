@@ -1,82 +1,34 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Grid, Header, Image, Table } from 'semantic-ui-react';
+import { CardGroup, Container, Header, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Users } from '../../api/user/User';
-import UserInfo from '../components/UserInfo';
-import EditProfile from '../components/EditProfile';
+import UserCard from '../components/UserCard';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfiles extends React.Component {
+
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     return (
-      <Grid style={{ margin: '20px' }}>
-        <Grid.Column width={4} textAlign='center'>
-          <div style={{ height: '750px', backgroundColor: 'grey', borderRadius: '20px' }}>
-            <Image src='./images/kobey.jpeg' style={{ padding: '30px' }} circular/>
-          </div>
-        </Grid.Column>
-        <Grid.Column width={12}>
-          <div style={{ height: '750px', paddingTop: '30px' }}>
-            {this.props.users.map((user) => <UserInfo key={user._id} user={user} />)}
-            <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Availability</Header>
-            <Table>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Day of the Week</Table.HeaderCell>
-                  <Table.HeaderCell>UHM Arrival Time</Table.HeaderCell>
-                  <Table.HeaderCell>UHM Departure Time</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                <Table.Row>
-                  <Table.Cell>Monday</Table.Cell>
-                  <Table.Cell>10:00AM</Table.Cell>
-                  <Table.Cell>10:00PM</Table.Cell>
-                </Table.Row>
-                {/* <Table.Row>
-                  <Table.Cell>Tuesday</Table.Cell>
-                  <Table.Cell>{this.props.availability.tuesday[0]}</Table.Cell>
-                  <Table.Cell>{this.props.availability.tuesday[1]}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Wednesday</Table.Cell>
-                  <Table.Cell>{this.props.availability.wednesday[0]}</Table.Cell>
-                  <Table.Cell>{this.props.availability.wednesday[1]}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Thursday</Table.Cell>
-                  <Table.Cell>{this.props.availability.thursday[0]}</Table.Cell>
-                  <Table.Cell>{this.props.availability.thursday[1]}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Friday</Table.Cell>
-                  <Table.Cell>{this.props.availability.friday[0]}</Table.Cell>
-                  <Table.Cell>{this.props.availability.friday[1]}</Table.Cell>
-                </Table.Row> */}
-              </Table.Body>
-            </Table>
-            <EditProfile/>
-          </div>
-        </Grid.Column>
-      </Grid>
+      <Container style={{ paddingTop: '20px' }}>
+        <div style={{ backgroundColor: 'grey', borderRadius: '20px', paddingBottom: '40px' }}>
+          <Header as="h2" textAlign="center" style={{ paddingTop: '20px' }}>View Profiles</Header>
+          <CardGroup centered>
+            {this.props.users.map((user, index) => <UserCard key={index} user={user}/>)}
+          </CardGroup>
+        </div>
+      </Container>
     );
   }
 }
 
 // Require a document to be passed to this component.
 UserProfiles.propTypes = {
-
-  // availability: PropTypes.shape({
-  //   monday: PropTypes.array,
-  //   tuesday: PropTypes.array,
-  //   wednesday: PropTypes.array,
-  //   thursday: PropTypes.array,
-  //   friday: PropTypes.array,
-  //   _id: PropTypes.array,
-  // }).isRequired,
-
   users: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
