@@ -2,7 +2,7 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" },
-    { "email": "kobeya@hawaii.edu", "password": "changeme", "role": "admin" }
+    { "email": "kobeya@hawaii.edu", "password": "changeme", "role": "admin"}
   ],
 
   "defaultData": [
@@ -34,7 +34,7 @@
       "carModel": "CR-V",
       "carColor": "Gray",
       "carPlate": "ABC 123",
-      "owner": "john@foo.com"
+      "owner": "kobeya@hawaii.edu"
     },
     { "firstName": "Jesse",
       "lastName": "James",
@@ -65,7 +65,7 @@
       "carModel": "CX-7",
       "carColor": "Gray",
       "carPlate": "STR NUM",
-      "owner": "john@foo.com" }
+      "owner": "admin@foo.com" }
   ],
 
   "monti": {

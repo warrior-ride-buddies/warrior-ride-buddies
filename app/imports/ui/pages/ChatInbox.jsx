@@ -22,6 +22,20 @@ class ChatInbox extends React.Component {
               {this.props.contacts.map((contact) => <ChatInboxItem key={contact._id} contact={contact}/>)}
             </List>
           </Segment>
+          <Header as="h2" textAlign="center" id="chatinbox-page">Inbox</Header>
+          <Segment>
+            <List divided relaxed>
+              <List.Item>
+                <List.Icon name='github' size='large' verticalAlign='middle'/>
+                <List.Content>
+                  <a href='#/messages'>
+                    <List.Header id={'goto-messages'}>Semantic-Org/Semantic-UI</List.Header>
+                    <List.Description>Updated 10 mins ago</List.Description>
+                  </a>
+                </List.Content>
+              </List.Item>
+            </List>
+          </Segment>
         </Grid.Column>
       </Grid>
     );

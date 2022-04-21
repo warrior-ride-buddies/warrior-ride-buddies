@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button, Form, Grid, Header, Icon, Input, Modal, Table } from 'semantic-ui-react';
+import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
+import swal from 'sweetalert';
 import EditProfileImage from './EditProfileImage';
 
 function EditProfile() {
   const [firstOpen, setFirstOpen] = React.useState(false);
-  const [secondOpen, setSecondOpen] = React.useState(false);
 
   return (
     <>
@@ -43,8 +44,8 @@ function EditProfile() {
                     <Input placeholder='Zipcode'/>
                   </Form.Field>
                   <Form.Field required>
-                    <label>AVAILABILITY</label>
-                    <Input placeholder='Availablity dropdown boxes'/>
+                    <label>CITY</label>
+                    <Input placeholder='City'/>
                   </Form.Field>
                 </Form>
               </Grid.Column>
@@ -85,105 +86,91 @@ function EditProfile() {
                 <Table.Row>
                   <Table.Cell>Monday</Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Tuesday</Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Wednesday</Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Thursday</Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Friday</Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Saturday</Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Sunday</Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                   <Table.Cell>
-                    <Form.Field control='select'>
-                      <option value='time'>Time</option>
-                      <option></option>
+                    <Form.Field>
+                      <input type="time" id="Min datetime" name="Min datetime" className="css-17rlcm6"/>
                     </Form.Field>
                   </Table.Cell>
                 </Table.Row>
@@ -196,30 +183,10 @@ function EditProfile() {
             <Icon name={'times'}/>
             Cancel
           </Button>
-          <Button color='green' onClick={() => setSecondOpen(true)}>
+          <Button color='green' onClick={() => { swal('Success', 'Saved Changes Successfully', 'success').then(() => window.location.reload(false)); }}>
             Proceed <Icon name='right chevron'/>
           </Button>
         </Modal.Actions>
-
-        <Modal
-          closeOnDimmerClick={false}
-          onClose={() => setSecondOpen(false)}
-          open={secondOpen}
-          size='tiny'
-        >
-          <Modal.Header>Modal #2</Modal.Header>
-          <Modal.Content>
-            <p>That&apos;s everything!</p>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button
-              icon='check'
-              content='Save Changes'
-              onClick={() => (window.location.reload(false))}
-            /*  set onClick to refresh profile page instead of closing modal */
-            />
-          </Modal.Actions>
-        </Modal>
       </Modal>
     </>
   );
