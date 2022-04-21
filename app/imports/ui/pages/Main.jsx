@@ -1,7 +1,8 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Form, Select, Label } from 'semantic-ui-react';
+import { Loader, Form, Select } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
+import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PropTypes from 'prop-types';
 import Map from '../components/Map';
 import { Users } from '../../api/user/User';
@@ -41,6 +42,14 @@ class Main extends React.Component {
     this.setState({ day: parseInt(value, 10) });
   }
 
+  changeArrivalTime = (event) => {
+    console.log(event.target.value);
+  }
+
+  changeDepartureTime = (event) => {
+    console.log(event.target.value);
+  }
+
   filterRides = (rides, day, userType) => {
     let returnVal = rides;
     if (day !== 7) {
@@ -51,8 +60,6 @@ class Main extends React.Component {
   }
 
   filterUsers = (users) => {
-    console.log(`this.state.day: ${this.state.day}`);
-    users.filter(user => (console.log(user.arrivals)));
     const returnVal = users.filter(user => (this.filterRides(user.arrivals, this.state.day, this.state.userType).length > 0));
     return returnVal;
   }
@@ -73,7 +80,11 @@ class Main extends React.Component {
           </Form.Field>
           <Form.Field>
             <label>Arrival Time</label>
-            <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
+            <input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime}/>
+          </Form.Field>
+          <Form.Field>
+            <label>Departure Time</label>
+            <input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime}/>
           </Form.Field>
           <Form.Field
             control={Select}
