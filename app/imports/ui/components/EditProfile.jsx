@@ -183,7 +183,7 @@ function EditProfile() {
             <Icon name={'times'}/>
             Cancel
           </Button>
-          <Button color='green' onClick={() => { swal('Success', 'Saved Chances Successfully', 'success').then(() => window.location.reload(false)); }}>
+          <Button color='green' onClick={() => { swal('Success', 'Saved Changes Successfully', 'success').then(() => window.location.reload(false)); }}>
             Proceed <Icon name='right chevron'/>
           </Button>
         </Modal.Actions>
