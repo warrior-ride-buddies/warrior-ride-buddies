@@ -1,15 +1,17 @@
 import React from 'react';
-import { Grid, GridColumn, Header, Image, Table } from 'semantic-ui-react';
-// import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import CreateReport from '../components/CreateReport';
+import { Meteor } from 'meteor/meteor';
+import { Grid, Header, Image, Table } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Users } from '../../api/user/User';
+import UserInfo from '../components/UserInfo';
 import EditProfile from '../components/EditProfile';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
   render() {
     return (
-      <Grid style={{ margin: '20px' }}>
+      <Grid style={{ margin: '20px' }} id={'userprofile-page'}>
         <Grid.Column width={4} textAlign='center'>
           <div style={{ height: '750px', backgroundColor: 'grey', borderRadius: '20px' }}>
             <Image src='./images/kobey.jpeg' style={{ padding: '30px' }} circular/>
@@ -17,17 +19,8 @@ class UserProfile extends React.Component {
         </Grid.Column>
         <Grid.Column width={12}>
           <div style={{ height: '750px', paddingTop: '30px' }}>
-            <Grid>
-              <GridColumn width={8}>
-                <Header as='h1'>Johnny Appleseed</Header>
-                <p>Driver<br/>Waimalu, 96701</p>
-              </GridColumn>
-              <GridColumn width={8} textAlign='right'>
-                <Header as='h3'>Car Details</Header>
-                <p>Car Make: Lamborghini<br/>Car Model: Aventador<br/>Car Color: Green<br/>Car License Plate: 2S3XY</p>
-              </GridColumn>
-            </Grid>
-            <Header as="h2" textAlign="center" style={{ paddingTop: '30px' }}>Availability</Header>
+            {this.props.user.map((user) => <UserInfo key={user._id} user={user} />)}
+            <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Availability</Header>
             <Table>
               <Table.Header>
                 <Table.Row>
@@ -42,26 +35,26 @@ class UserProfile extends React.Component {
                   <Table.Cell>10:00AM</Table.Cell>
                   <Table.Cell>10:00PM</Table.Cell>
                 </Table.Row>
-                <Table.Row>
+                {/* <Table.Row>
                   <Table.Cell>Tuesday</Table.Cell>
-                  <Table.Cell>10:00AM</Table.Cell>
-                  <Table.Cell>10:00PM</Table.Cell>
+                  <Table.Cell>{this.props.availability.tuesday[0]}</Table.Cell>
+                  <Table.Cell>{this.props.availability.tuesday[1]}</Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Wednesday</Table.Cell>
-                  <Table.Cell>10:00AM</Table.Cell>
-                  <Table.Cell>10:00PM</Table.Cell>
+                  <Table.Cell>{this.props.availability.wednesday[0]}</Table.Cell>
+                  <Table.Cell>{this.props.availability.wednesday[1]}</Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Thursday</Table.Cell>
-                  <Table.Cell>10:00AM</Table.Cell>
-                  <Table.Cell>10:00PM</Table.Cell>
+                  <Table.Cell>{this.props.availability.thursday[0]}</Table.Cell>
+                  <Table.Cell>{this.props.availability.thursday[1]}</Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>Friday</Table.Cell>
-                  <Table.Cell>10:00AM</Table.Cell>
-                  <Table.Cell>10:00PM</Table.Cell>
-                </Table.Row>
+                  <Table.Cell>{this.props.availability.friday[0]}</Table.Cell>
+                  <Table.Cell>{this.props.availability.friday[1]}</Table.Cell>
+                </Table.Row> */}
               </Table.Body>
             </Table>
             <EditProfile/>
@@ -73,29 +66,34 @@ class UserProfile extends React.Component {
 }
 
 // Require a document to be passed to this component.
-// UserProfile.propTypes = {
-//   user: PropTypes.shape({
-//     firstName: PropTypes.string,
-//     lastName: PropTypes.string,
-//     userType: PropTypes.string,
-//     homeLocation: PropTypes.string,
-//     carMake: PropTypes.string,
-//     carModel: PropTypes.string,
-//     carPlate: PropTypes.string,
-//     _id: PropTypes.string,
-//   }).isRequired,
-// };
+UserProfile.propTypes = {
 
-// UserProfile.propTypes = {
-//   availability: PropTypes.shape({
-//     monday: PropTypes.array,
-//     tuesday: PropTypes.array,
-//     wednesday: PropTypes.array,
-//     thursday: PropTypes.array,
-//     friday: PropTypes.array,
-//     _id: PropTypes.array,
-//   }).isRequired,
-// };
+  // availability: PropTypes.shape({
+  //   monday: PropTypes.array,
+  //   tuesday: PropTypes.array,
+  //   wednesday: PropTypes.array,
+  //   thursday: PropTypes.array,
+  //   friday: PropTypes.array,
+  //   _id: PropTypes.array,
+  // }).isRequired,
 
-// Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(UserProfile);
+  user: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+// withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+export default withTracker(({ match }) => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  const email = match.params.owner;
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe(Users.userPublicationName);
+  // Determine if the subscription is ready
+  const ready = subscription.ready();
+  // Get the Stuff documents
+  const user = Users.collection.find({ owner: email }).fetch();
+  console.log(user);
+  return {
+    user,
+    ready,
+  };
+})(UserProfile);

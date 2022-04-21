@@ -44,16 +44,16 @@ class ChatInbox extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Inbox</Header>
+          <Header as="h2" textAlign="center" id="chatinbox-page">Inbox</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
             <Segment>
               <List divided relaxed>
                 <List.Item>
                   <List.Icon name='github' size='large' verticalAlign='middle'/>
                   <List.Content>
-                    <a href='/messages#/messages'>
-                      <List.Header as='a'>Semantic-Org/Semantic-UI</List.Header>
-                      <List.Description as='a'>Updated 10 mins ago</List.Description>
+                    <a href='#/messages'>
+                      <List.Header id={'goto-messages'}>Semantic-Org/Semantic-UI</List.Header>
+                      <List.Description>Updated 10 mins ago</List.Description>
                     </a>
                   </List.Content>
                 </List.Item>
