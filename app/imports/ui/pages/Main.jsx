@@ -31,9 +31,10 @@ class Main extends React.Component {
     this.state = {
       filterParams: {
         day: 7,
-        arrivalTime: 2460,
-        departureTime: 2460,
-        rangeTime: 200,
+        arrivalTime: 1480,
+        departureTime: 1480,
+        arrivalRange: 120,
+        departureRange: 120,
         userType: 'both',
       },
     };
@@ -41,49 +42,65 @@ class Main extends React.Component {
 
   changeUserType = (e, { value }) => {
     this.setState({ userType: value });
+    const userType = value;
+    this.setState(prevState => ({
+      filterParams: { ...prevState.filterParams,
+        userType: userType,
+      },
+    }));
   }
 
   changeDay = (e, { value }) => {
-    this.setState({ day: parseInt(value, 10) });
+    const day = parseInt(value, 10);
+    this.setState(prevState => ({
+      filterParams: { ...prevState.filterParams,
+        day: day,
+      },
+    }));
   }
 
   changeArrivalTime = (event) => {
-    const arrivalTime = parseInt(event.target.value.substring(0, 2) + event.target.value.substring(3, 5), 10);
+    const arrivalTime = (parseInt(event.target.value.substring(0, 2), 10) * 60) + parseInt(event.target.value.substring(3, 5), 10);
     this.setState(prevState => ({
       filterParams: { ...prevState.filterParams,
         arrivalTime: arrivalTime,
       },
     }));
-    setTimeout(() => { console.log(this.state.filterParams.arrivalTime); }, 1000);
   }
 
   changeDepartureTime = (event) => {
-    const departureTime = parseInt(event.target.value.substring(0, 2) + event.target.value.substring(3, 5), 10);
+    const departureTime = (parseInt(event.target.value.substring(0, 2), 10) * 60) + parseInt(event.target.value.substring(3, 5), 10);
     this.setState(prevState => ({
       filterParams: { ...prevState.filterParams,
         departureTime: departureTime,
       },
     }));
-    setTimeout(() => { console.log(this.state.filterParams.departureTime); }, 1000);
   }
 
-  filterRides = (rides, filterParams) => {
-    let returnVal = rides;
-    const { day, arrivalTime, departureTime, rangeTime, userType } = filterParams;
+  filterRides = (trips, filterParams) => {
+    let returnVal = trips;
+    const { day, arrivalTime, departureTime, arrivalRange, departureRange, userType } = filterParams;
     if (filterParams.day !== 7) {
-      returnVal = returnVal.filter(ride => (ride.time.getDay() === day));
+      returnVal = returnVal.filter(trip => (trip.day === day));
     }
-    if (arrivalTime !== 2460) {
-      returnVal = returnVal.filter(ride => (
-        ((100 * ride.time.getHours() + ride.time.getMinutes()) <= arrivalTime) &&
-        ((100 * ride.time.getHours() + ride.time.getMinutes()) >= arrivalTime - rangeTime)));
+    if (arrivalTime !== 1480) {
+      returnVal = returnVal.filter(trip => (
+        trip.arrivalTime <= arrivalTime) &&
+        (trip.arrivalTime >= arrivalTime - arrivalRange));
     }
-    returnVal = (returnVal.filter(ride => (userType === 'both' || ride.userType === userType)));
+    if (departureTime !== 1480) {
+      returnVal = returnVal.filter(trip => (
+        trip.departureTime >= departureTime) &&
+        (trip.departureTime <= departureTime + departureRange));
+    }
+    if (userType !== 'both') {
+      returnVal = (returnVal.filter(trip => (trip.userType === userType)));
+    }
     return returnVal;
   }
 
   filterUsers = (users) => {
-    const returnVal = users.filter(user => (this.filterRides(user.arrivals, this.state.filterParams).length > 0));
+    const returnVal = users.filter(user => (this.filterRides(user.trips, this.state.filterParams).length > 0));
     return returnVal;
   }
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
