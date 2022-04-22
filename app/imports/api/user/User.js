@@ -26,11 +26,11 @@ class UsersCollection {
       },
       arrivalTime: {
         type: Number,
-        defaultValue: 1480, //  Time is stored in minutes, default value is out of bounds of the input to represent All
+        defaultValue: 1440, //  Time is stored in minutes, default value is out of bounds of the input to represent All
       },
       departureTime: {
         type: Number,
-        defaultValue: 1480,
+        defaultValue: 1440,
       },
       userType: {
         type: String,

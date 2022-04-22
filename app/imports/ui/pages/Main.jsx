@@ -31,8 +31,8 @@ class Main extends React.Component {
     this.state = {
       filterParams: {
         day: 7,
-        arrivalTime: 1480,
-        departureTime: 1480,
+        arrivalTime: 1440,
+        departureTime: 1440,
         arrivalRange: 120,
         departureRange: 120,
         userType: 'both',
