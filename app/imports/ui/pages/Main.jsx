@@ -77,7 +77,7 @@ class Main extends React.Component {
     }));
   }
 
-  filterRides = (trips, filterParams) => {
+  filterTrips = (trips, filterParams) => {
     let returnVal = trips;
     const { day, arrivalTime, departureTime, arrivalRange, departureRange, userType } = filterParams;
     if (filterParams.day !== 7) {
@@ -100,7 +100,7 @@ class Main extends React.Component {
   }
 
   filterUsers = (users) => {
-    const returnVal = users.filter(user => (this.filterRides(user.trips, this.state.filterParams).length > 0));
+    const returnVal = users.filter(user => (this.filterTrips(user.trips, this.state.filterParams).length > 0));
     return returnVal;
   }
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
