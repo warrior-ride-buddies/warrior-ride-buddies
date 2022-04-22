@@ -83,12 +83,12 @@ class Main extends React.Component {
     if (filterParams.day !== 7) {
       returnVal = returnVal.filter(trip => (trip.day === day));
     }
-    if (arrivalTime !== 1480) {
+    if (arrivalTime !== 1440) {
       returnVal = returnVal.filter(trip => (
         trip.arrivalTime <= arrivalTime) &&
         (trip.arrivalTime >= arrivalTime - arrivalRange));
     }
-    if (departureTime !== 1480) {
+    if (departureTime !== 1440) {
       returnVal = returnVal.filter(trip => (
         trip.departureTime >= departureTime) &&
         (trip.departureTime <= departureTime + departureRange));
