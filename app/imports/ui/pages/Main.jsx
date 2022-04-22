@@ -29,8 +29,13 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      day: 7,
-      userType: 'both',
+      filterParams: {
+        day: 7,
+        arrivalTime: 2460,
+        departureTime: 2460,
+        rangeTime: 200,
+        userType: 'both',
+      },
     };
   }
 
@@ -43,24 +48,42 @@ class Main extends React.Component {
   }
 
   changeArrivalTime = (event) => {
-    console.log(event.target.value);
+    const arrivalTime = parseInt(event.target.value.substring(0, 2) + event.target.value.substring(3, 5), 10);
+    this.setState(prevState => ({
+      filterParams: { ...prevState.filterParams,
+        arrivalTime: arrivalTime,
+      },
+    }));
+    setTimeout(() => { console.log(this.state.filterParams.arrivalTime); }, 1000);
   }
 
   changeDepartureTime = (event) => {
-    console.log(event.target.value);
+    const departureTime = parseInt(event.target.value.substring(0, 2) + event.target.value.substring(3, 5), 10);
+    this.setState(prevState => ({
+      filterParams: { ...prevState.filterParams,
+        departureTime: departureTime,
+      },
+    }));
+    setTimeout(() => { console.log(this.state.filterParams.departureTime); }, 1000);
   }
 
-  filterRides = (rides, day, userType) => {
+  filterRides = (rides, filterParams) => {
     let returnVal = rides;
-    if (day !== 7) {
+    const { day, arrivalTime, departureTime, rangeTime, userType } = filterParams;
+    if (filterParams.day !== 7) {
       returnVal = returnVal.filter(ride => (ride.time.getDay() === day));
+    }
+    if (arrivalTime !== 2460) {
+      returnVal = returnVal.filter(ride => (
+        ((100 * ride.time.getHours() + ride.time.getMinutes()) <= arrivalTime) &&
+        ((100 * ride.time.getHours() + ride.time.getMinutes()) >= arrivalTime - rangeTime)));
     }
     returnVal = (returnVal.filter(ride => (userType === 'both' || ride.userType === userType)));
     return returnVal;
   }
 
   filterUsers = (users) => {
-    const returnVal = users.filter(user => (this.filterRides(user.arrivals, this.state.day, this.state.userType).length > 0));
+    const returnVal = users.filter(user => (this.filterRides(user.arrivals, this.state.filterParams).length > 0));
     return returnVal;
   }
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
