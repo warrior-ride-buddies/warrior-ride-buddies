@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Conversations } from '../../api/conversation/Conversations';
 import { Users } from '../../api/user/User';
-import { Messages } from '../../api/message/Messages';
 
 // User-level publication.
 
@@ -15,14 +14,6 @@ Meteor.publish(Users.userPublicationName, function () {
 Meteor.publish(Users.adminPublicationName, function () {
   if (this.userId) {
     return Users.collection.find();
-  }
-  return this.ready();
-});
-
-Meteor.publish(Messages.userPublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Messages.collection.find({ usernames: username });
   }
   return this.ready();
 });

@@ -9,8 +9,18 @@ class ConversationsCollection {
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
+    const messageSchema = new SimpleSchema({
+      message: String,
+      from: String,
+      createdAt: Date,
+    });
     this.schema = new SimpleSchema({
       usernames: [String],
+      messages: {
+        type: Array,
+        optional: true,
+      },
+      'messages.$': { type: messageSchema },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

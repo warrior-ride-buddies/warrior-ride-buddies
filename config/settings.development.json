@@ -62,8 +62,8 @@
   ],
 
   "defaultConversations": [
-    {"usernames":  ["john@foo.com", "admin@foo.com"]},
-    {"usernames": ["john@foo.com", "kobeya@hawaii.edu"]}
+    {"usernames":  ["john@foo.com", "admin@foo.com"], "messages": []},
+    {"usernames": ["john@foo.com", "kobeya@hawaii.edu"], "messages":  []}
   ],
 
   "monti": {
