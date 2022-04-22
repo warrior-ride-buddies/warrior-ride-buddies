@@ -5,7 +5,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Conversation from '../components/Conversation';
 import { Conversations } from '../../api/conversation/Conversations';
-import { Messages } from '../../api/message/Messages';
 
 class Inbox extends React.Component {
 
@@ -25,7 +24,6 @@ class Inbox extends React.Component {
               key={index}
               currentUser={this.props.currentUser}
               conversation={conversation}
-              messages={this.props.messages.filter(message => (message.conversationId === conversation._id))}
             />)}
         </Card.Group>
       </Container>
@@ -37,7 +35,6 @@ class Inbox extends React.Component {
 Inbox.propTypes = {
   currentUser: PropTypes.string,
   conversations: PropTypes.array,
-  messages: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -49,15 +46,12 @@ const InboxContainer = withTracker(() => ({
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Conversations.userPublicationName);
-  const subscription2 = Meteor.subscribe(Messages.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready();
+  const ready = subscription.ready();
   // Get the Stuff documents
   const conversations = Conversations.collection.find({}).fetch();
-  const messages = Messages.collection.find({}).fetch();
   return {
     conversations,
-    messages,
     ready,
   };
 })(InboxContainer);

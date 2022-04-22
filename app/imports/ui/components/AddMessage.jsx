@@ -4,17 +4,26 @@ import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField } from 'unif
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { Messages } from '../../api/message/Messages';
+import SimpleSchema from 'simpl-schema';
+import { Conversations } from '../../api/conversation/Conversations';
 
-const bridge = new SimpleSchema2Bridge(Messages.schema);
+const messageSchema = new SimpleSchema({
+  message: String,
+  from: String,
+  createdAt: Date,
+});
+
+const bridge = new SimpleSchema2Bridge(messageSchema);
 
 /** Renders the Page for adding a document. */
 class AddMessage extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { message, usernames, conversationId, from, createdAt } = data;
-    Messages.collection.insert({ message, usernames, conversationId, from, createdAt },
+    const { message, from, createdAt } = data;
+    const messages = this.props.conversation.messages;
+    messages.push({ message: message, from: from, createdAt: createdAt });
+    Conversations.collection.update({ _id: this.props.conversation._id }, { $set: { messages: messages } },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -34,8 +43,6 @@ class AddMessage extends React.Component {
           <TextField label="Send a message." name='message'/>
           <SubmitField value='Send'/>
           <ErrorsField/>
-          <HiddenField name='usernames' value={this.props.usernames}/>
-          <HiddenField name='conversationId' value={this.props.conversationId}/>
           <HiddenField name='from' value={this.props.from}/>
           <HiddenField name='createdAt' value={new Date()}/>
         </Segment>
@@ -45,8 +52,7 @@ class AddMessage extends React.Component {
 }
 
 AddMessage.propTypes = {
-  usernames: PropTypes.array.isRequired,
-  conversationId: PropTypes.string.isRequired,
+  conversation: PropTypes.object.isRequired,
   from: PropTypes.string.isRequired,
 };
 

@@ -17,11 +17,11 @@ class Conversation extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Feed>
-            {this.props.messages.map((message, index) => <Message key={index} message={message}/>)}
+            {this.props.conversation.messages.map((message, index) => <Message key={index} message={message}/>)}
           </Feed>
         </Card.Content>
         <Card.Content extra>
-          <AddMessage usernames={conversation.usernames} conversationId={conversation._id} from={currentUser}/>
+          <AddMessage conversation={conversation} from={currentUser}/>
         </Card.Content>
       </Card>
     );
@@ -32,7 +32,6 @@ class Conversation extends React.Component {
 Conversation.propTypes = {
   currentUser: PropTypes.string.isRequired,
   conversation: PropTypes.object.isRequired,
-  messages: PropTypes.array,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
