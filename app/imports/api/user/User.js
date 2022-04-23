@@ -24,14 +24,8 @@ class UsersCollection {
         allowedValues: [0, 1, 2, 3, 4, 5, 6, 7], // 0 is Sunday, 1 is Monday... 7 is All
         defaultValue: 7,
       },
-      arrivalTime: {
-        type: Number,
-        defaultValue: 1440, //  Time is stored in minutes, default value is out of bounds of the input to represent All
-      },
-      departureTime: {
-        type: Number,
-        defaultValue: 1440,
-      },
+      arrivalTime: Number,
+      departureTime: Number,
       userType: {
         type: String,
         allowedValues: ['driver', 'rider', 'both'],
