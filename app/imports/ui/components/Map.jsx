@@ -7,7 +7,7 @@ import MapPin from './MapPin';
 
 const containerStyle = {
   width: '100%',
-  height: '100%',
+  height: '88.5%',
   position: 'absolute',
   marginTop: '0px',
 };
@@ -17,8 +17,8 @@ const mapOptions = {
 };
 
 const center = {
-  lat: 21.463254,
-  lng: -158.117018,
+  lat: 21.483254,
+  lng: -158.097018,
 };
 
 class Map extends React.Component {
