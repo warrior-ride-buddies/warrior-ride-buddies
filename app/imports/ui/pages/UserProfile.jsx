@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Users } from '../../api/user/User';
 import UserInfo from '../components/UserInfo';
-import EditProfile from '../components/EditProfile';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
@@ -57,7 +56,6 @@ class UserProfile extends React.Component {
                 </Table.Row> */}
               </Table.Body>
             </Table>
-            <EditProfile/>
           </div>
         </Grid.Column>
       </Grid>
