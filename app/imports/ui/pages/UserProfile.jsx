@@ -11,7 +11,7 @@ import EditProfile from '../components/EditProfile';
 class UserProfile extends React.Component {
   render() {
     return (
-      <Grid style={{ margin: '20px' }}>
+      <Grid style={{ margin: '20px' }} id={'userprofile-page'}>
         <Grid.Column width={4} textAlign='center'>
           <div style={{ height: '750px', backgroundColor: 'grey', borderRadius: '20px' }}>
             <Image src='./images/kobey.jpeg' style={{ padding: '30px' }} circular/>

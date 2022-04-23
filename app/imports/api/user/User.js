@@ -18,8 +18,13 @@ class UsersCollection {
       lng: Number,
     });
 
-    const rideSchema = new SimpleSchema({
-      time: Date,
+    const tripSchema = new SimpleSchema({
+      day: {
+        type: Number,
+        allowedValues: [0, 1, 2, 3, 4, 5, 6], //  0 is Sunday, 1 is Monday...
+      },
+      arrivalTime: Number, // minutes
+      departureTime: Number,
       userType: {
         type: String,
         allowedValues: ['driver', 'rider', 'both'],
@@ -32,16 +37,11 @@ class UsersCollection {
       lastName: String,
       homeLocation: String,
       position: positionSchema,
-      arrivals: {
+      trips: {
         type: Array,
         optional: true,
       },
-      'arrivals.$': { type: rideSchema },
-      departures: {
-        type: Array,
-        optional: true,
-      },
-      'departures.$': { type: rideSchema },
+      'trips.$': { type: tripSchema },
       carMake: String,
       carModel: String,
       carColor: String,

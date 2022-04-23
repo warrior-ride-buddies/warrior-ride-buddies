@@ -17,7 +17,7 @@ class UserProfiles extends React.Component {
     return (
       <Container style={{ paddingTop: '20px' }}>
         <div style={{ backgroundColor: 'grey', borderRadius: '20px', paddingBottom: '40px' }}>
-          <Header as="h2" textAlign="center" style={{ paddingTop: '20px' }}>View Profiles</Header>
+          <Header as="h2" textAlign="center" style={{ paddingTop: '20px' }} id={'userprofiles-page'}>View Profiles</Header>
           <CardGroup centered>
             {this.props.users.map((user, index) => <UserCard key={index} user={user}/>)}
           </CardGroup>

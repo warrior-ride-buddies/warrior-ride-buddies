@@ -8,15 +8,15 @@ import { Stuffs } from '../../api/stuff/Stuff';
 class ListReports extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
-  render() {
+  renderWait() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   // Render the page once subscriptions have been received.
-  renderPage() {
+  render() {
     return (
       <Container>
-        <Header as="h2" textAlign="center">Review Reports</Header>
+        <Header as="h2" textAlign="center" id="listreports-page">Review Reports</Header>
         <Table celled>
           <Table.Header>
             <Table.Row>
