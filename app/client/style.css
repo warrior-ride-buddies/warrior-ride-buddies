@@ -23,3 +23,8 @@
 .edit-profile-image {
   text-align: center;
 }
+
+.ui.cards>.card>.content img {
+  border-radius: 5px;
+  border-color: dimgrey;
+}

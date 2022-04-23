@@ -10,6 +10,7 @@ class UserCard extends React.Component {
       <Card>
         <Card.Content>
           <Image
+            bordered
             floated='right'
             size='mini'
             src='./images/kobey.jpeg'
