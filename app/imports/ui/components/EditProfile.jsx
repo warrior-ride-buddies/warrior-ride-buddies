@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Grid, Header, Icon, Input, Modal, Table } from 'semantic-ui-react';
+import { Button, Dropdown, Form, Grid, Header, Icon, Input, Modal, Table } from 'semantic-ui-react';
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import swal from 'sweetalert';
 import EditProfileImage from './EditProfileImage';
@@ -9,8 +9,10 @@ function EditProfile() {
 
   return (
     <>
-      <Button color='green' onClick={() => setFirstOpen(true)}>Edit Profile</Button>
-
+      <Dropdown.Item onClick={() => setFirstOpen(true)}>
+        <Icon name='pencil alternate'/>
+          Edit Profile
+      </Dropdown.Item>
       <Modal
         closeIcon
         closeOnDimmerClick={false}
