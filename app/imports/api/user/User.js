@@ -21,10 +21,9 @@ class UsersCollection {
     const tripSchema = new SimpleSchema({
       day: {
         type: Number,
-        allowedValues: [0, 1, 2, 3, 4, 5, 6, 7], // 0 is Sunday, 1 is Monday... 7 is All
-        defaultValue: 7,
+        allowedValues: [0, 1, 2, 3, 4, 5, 6], //  0 is Sunday, 1 is Monday...
       },
-      arrivalTime: Number,
+      arrivalTime: Number, // minutes
       departureTime: Number,
       userType: {
         type: String,
