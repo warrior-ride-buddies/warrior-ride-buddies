@@ -1,14 +1,20 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Button, Grid, Header, Image, Table } from 'semantic-ui-react';
+import { Button, Grid, Header, Image, Loader, Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Users } from '../../api/user/User';
 import UserInfo from '../components/UserInfo';
+import Schedule from '../components/Schedule';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
+    const user = this.props.user[0];
     return (
       <Grid style={{ margin: '20px' }} id={'userprofile-page'}>
         <Grid.Column width={4} textAlign='center'>
@@ -18,44 +24,9 @@ class UserProfile extends React.Component {
         </Grid.Column>
         <Grid.Column width={12}>
           <div style={{ height: '750px', paddingTop: '30px' }}>
-            {this.props.user.map((user) => <UserInfo key={user._id} user={user} />)}
+            <UserInfo key={user._id} user={user} />
             <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Availability</Header>
-            <Table>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Day of the Week</Table.HeaderCell>
-                  <Table.HeaderCell>UHM Arrival Time</Table.HeaderCell>
-                  <Table.HeaderCell>UHM Departure Time</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                <Table.Row>
-                  <Table.Cell>Monday</Table.Cell>
-                  <Table.Cell>10:00AM</Table.Cell>
-                  <Table.Cell>10:00PM</Table.Cell>
-                </Table.Row>
-                {/* <Table.Row>
-                  <Table.Cell>Tuesday</Table.Cell>
-                  <Table.Cell>{this.props.availability.tuesday[0]}</Table.Cell>
-                  <Table.Cell>{this.props.availability.tuesday[1]}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Wednesday</Table.Cell>
-                  <Table.Cell>{this.props.availability.wednesday[0]}</Table.Cell>
-                  <Table.Cell>{this.props.availability.wednesday[1]}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Thursday</Table.Cell>
-                  <Table.Cell>{this.props.availability.thursday[0]}</Table.Cell>
-                  <Table.Cell>{this.props.availability.thursday[1]}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Friday</Table.Cell>
-                  <Table.Cell>{this.props.availability.friday[0]}</Table.Cell>
-                  <Table.Cell>{this.props.availability.friday[1]}</Table.Cell>
-                </Table.Row> */}
-              </Table.Body>
-            </Table>
+            <Schedule trips={user.trips}/>
             <Button>Message {this.props.user.firstName}</Button>
           </div>
         </Grid.Column>

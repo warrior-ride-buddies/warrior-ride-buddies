@@ -6,6 +6,7 @@ import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PropTypes from 'prop-types';
 import Map from '../components/Map';
 import { Users } from '../../api/user/User';
+import Parse from '../../api/parse/parse';
 
 const dotwOptions = [
   { key: 'all', text: 'All', value: '7' },
