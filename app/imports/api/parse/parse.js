@@ -4,9 +4,14 @@ class Parse {
   }
 
   static timeToString(num) {
-    const hours = Math.floor(num / 60);
+    let hours = Math.floor(num / 60);
+    let suffix = 'AM';
     const minutes = num % 60;
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    if (hours > 12) {
+      hours -= 12;
+      suffix = 'PM';
+    }
+    return `${hours}:${minutes.toString().padStart(2, '0')} ${suffix}`;
   }
 
   static dayToString(num) {
