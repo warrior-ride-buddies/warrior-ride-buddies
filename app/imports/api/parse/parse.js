@@ -1,15 +1,15 @@
 class Parse {
-  timeToNum(string) {
+  static timeToNum(string) {
     return (parseInt(string.substring(0, 2), 10) * 60) + parseInt(string.substring(3, 5), 10);
   }
 
-  timeToString(num) {
+  static timeToString(num) {
     const hours = Math.floor(num / 60);
     const minutes = num % 60;
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
   }
 
-  dayToString(num) {
+  static dayToString(num) {
     let day = '';
     switch (num) {
     case 0:

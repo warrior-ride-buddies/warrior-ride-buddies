@@ -25,7 +25,7 @@ class UserProfile extends React.Component {
         <Grid.Column width={12}>
           <div style={{ height: '750px', paddingTop: '30px' }}>
             <UserInfo key={user._id} user={user} />
-            <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Availability</Header>
+            <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
             <Schedule trips={user.trips}/>
             <Button>Message {this.props.user.firstName}</Button>
           </div>

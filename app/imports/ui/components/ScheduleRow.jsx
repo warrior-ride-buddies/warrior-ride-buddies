@@ -8,12 +8,11 @@ import Parse from '../../api/parse/parse';
 class ScheduleRow extends React.Component {
   render() {
     const trip = this.props.trip;
-    const parse = new Parse();
     return (
       <Table.Row>
-        <Table.Cell>{parse.dayToString(trip.day)}</Table.Cell>
-        <Table.Cell>{parse.timeToString(trip.arrivalTime)}</Table.Cell>
-        <Table.Cell>{parse.timeToString((trip.departureTime))}</Table.Cell>
+        <Table.Cell>{Parse.dayToString(trip.day)}</Table.Cell>
+        <Table.Cell>{Parse.timeToString(trip.arrivalTime)}</Table.Cell>
+        <Table.Cell>{Parse.timeToString((trip.departureTime))}</Table.Cell>
         <Table.Cell>{trip.userType}</Table.Cell>
       </Table.Row>
     );
