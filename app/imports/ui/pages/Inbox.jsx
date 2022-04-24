@@ -17,7 +17,7 @@ class Inbox extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center" inverted>List Profiles</Header>
+        <Header as="h2" textAlign="center" id="inbox-page" inverted>List Profiles</Header>
         <Card.Group>
           {this.props.conversations.map((conversation, index) =>
             <Conversation

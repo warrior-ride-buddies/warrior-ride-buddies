@@ -36,7 +36,7 @@ class App extends React.Component {
             <ProtectedRoute path="/main" component={Main}/>
             <ProtectedRoute path="/messages" component={Messages}/>
             <ProtectedRoute path="/add" component={AddStuff}/>
-            <ProtectedRoute path="/chatinbox" component={Inbox}/>
+            <ProtectedRoute path="/inbox" component={Inbox}/>
             <ProtectedRoute path="/profile/:owner" component={UserProfile}/>
             <AdminProtectedRoute path="/admin" component={ListReports}/>
             <Route component={NotFound}/>
