@@ -9,6 +9,7 @@
   color: white;
   width: 100%;
   text-align: center;
+  z-index: -1;
 }
 
 .accent-block {
@@ -22,4 +23,14 @@
 
 .edit-profile-image {
   text-align: center;
+}
+
+.ui.cards>.card>.content img {
+  border-radius: 5px;
+  border-color: dimgrey;
+}
+
+#main-filter>.field
+{
+  padding-top: 0.8em;
 }

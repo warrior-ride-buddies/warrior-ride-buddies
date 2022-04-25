@@ -6,6 +6,7 @@ import { withRouter, NavLink, Link } from 'react-router-dom';
 import { Menu, Dropdown, Header, Button, Icon, Form, Message, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 import LoginDropdown from './LoginDropdown';
+import EditProfile from './EditProfile';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
@@ -52,7 +53,6 @@ class NavBar extends React.Component {
             </Menu.Item>
             {this.props.currentUser ? (
               [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home' id={'home'}>Home</Menu.Item>,
-                <Menu.Item as={NavLink} activeClassName="active" exact to="/info-page" key='info'>Project Info</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact to="messages" key="messages" id={'inbox'}>Messages</Menu.Item>,
                 <Menu.Item as={NavLink} activeClassName="active" exact to="/profiles" key="profiles" id={'profiles'}>View Profiles</Menu.Item>]
             ) : ''}
@@ -110,7 +110,6 @@ class NavBar extends React.Component {
         </Menu.Item>
         {this.props.currentUser ? (
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home' id={'home'}>Home</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/info-page" key='info'>Project Info</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/chatinbox" key='list' id={'inbox'}>Inbox</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/profiles" key="profiles" id={'profiles'}>View Profiles</Menu.Item>]
         ) : ''}
@@ -167,7 +166,7 @@ class NavBar extends React.Component {
               <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={null}>
                 <Dropdown.Menu>
                   <Dropdown.Item id="navbar-profile" icon="user" text="View Profile" as={NavLink} exact to={`/profile/${this.props.currentUser}`}/>
-                  { /* <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to=<EditProfile/>/> */ }
+                  <EditProfile/>
                   <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                 </Dropdown.Menu>
               </Dropdown>

@@ -69,7 +69,7 @@ test('Test that user profiles page shows up', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test.skip('Test that user profile page work', async (testController) => {
+test('Test that user profile page work', async (testController) => {
   await navBar.openSignInDropdown(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await mainPage.isDisplayed(testController);

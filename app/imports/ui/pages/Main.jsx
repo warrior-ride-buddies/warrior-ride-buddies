@@ -1,24 +1,26 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Form, Select, Label } from 'semantic-ui-react';
+import { Loader, Form, Select, Header } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
+import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PropTypes from 'prop-types';
 import Map from '../components/Map';
 import { Users } from '../../api/user/User';
 
 const dotwOptions = [
-  { key: 'mon', text: 'Monday', value: 'monday' },
-  { key: 'tue', text: 'Tuesday', value: 'tuesday' },
-  { key: 'wed', text: 'Wednesday', value: 'wednesday' },
-  { key: 'thu', text: 'Thursday', value: 'thursday' },
-  { key: 'fri', text: 'Friday', value: 'friday' },
-  { key: 'sat', text: 'Saturday', value: 'saturday' },
-  { key: 'sun', text: 'Sunday', value: 'sunday' },
+  { key: 'all', text: 'All', value: '7' },
+  { key: 'mon', text: 'Monday', value: '1' },
+  { key: 'tue', text: 'Tuesday', value: '2' },
+  { key: 'wed', text: 'Wednesday', value: '3' },
+  { key: 'thu', text: 'Thursday', value: '4' },
+  { key: 'fri', text: 'Friday', value: '5' },
+  { key: 'sat', text: 'Saturday', value: '6' },
+  { key: 'sun', text: 'Sunday', value: '0' },
 ];
 
 const Options = [
-  { key: 'd', text: 'Drivers', value: 'drivers' },
-  { key: 'r', text: 'Riders', value: 'riders' },
+  { key: 'd', text: 'Drivers', value: 'driver' },
+  { key: 'r', text: 'Riders', value: 'rider' },
   { key: 'b', text: 'Both', value: 'both' },
 ];
 
@@ -27,30 +29,78 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      day: 7,
-      userType: 'both',
+      filterParams: {
+        day: 7,
+        arrivalTime: 1440,
+        departureTime: 1440,
+        arrivalRange: 120,
+        departureRange: 120,
+        userType: 'both',
+      },
     };
   }
 
-  changeUserType = (event) => {
-    this.setState({ userType: event.target.value });
+  changeUserType = (e, { value }) => {
+    this.setState({ userType: value });
+    const userType = value;
+    this.setState(prevState => ({
+      filterParams: { ...prevState.filterParams,
+        userType: userType,
+      },
+    }));
   }
 
-  changeDay = (event) => {
-    this.setState({ day: parseInt(event.target.value, 10) });
+  changeDay = (e, { value }) => {
+    const day = parseInt(value, 10);
+    this.setState(prevState => ({
+      filterParams: { ...prevState.filterParams,
+        day: day,
+      },
+    }));
   }
 
-  filterRides = (rides, day, userType) => {
-    let returnVal = rides;
-    if (day !== 7) {
-      returnVal = returnVal.filter(ride => (ride.time.getDay() === day));
+  changeArrivalTime = (event) => {
+    const arrivalTime = (parseInt(event.target.value.substring(0, 2), 10) * 60) + parseInt(event.target.value.substring(3, 5), 10);
+    this.setState(prevState => ({
+      filterParams: { ...prevState.filterParams,
+        arrivalTime: arrivalTime,
+      },
+    }));
+  }
+
+  changeDepartureTime = (event) => {
+    const departureTime = (parseInt(event.target.value.substring(0, 2), 10) * 60) + parseInt(event.target.value.substring(3, 5), 10);
+    this.setState(prevState => ({
+      filterParams: { ...prevState.filterParams,
+        departureTime: departureTime,
+      },
+    }));
+  }
+
+  filterTrips = (trips, filterParams) => {
+    let returnVal = trips;
+    const { day, arrivalTime, departureTime, arrivalRange, departureRange, userType } = filterParams;
+    if (filterParams.day !== 7) {
+      returnVal = returnVal.filter(trip => (trip.day === day));
     }
-    returnVal = (returnVal.filter(ride => (userType === 'both' || ride.userType === userType)));
+    if (arrivalTime !== 1440) {
+      returnVal = returnVal.filter(trip => (
+        trip.arrivalTime <= arrivalTime) &&
+        (trip.arrivalTime >= arrivalTime - arrivalRange));
+    }
+    if (departureTime !== 1440) {
+      returnVal = returnVal.filter(trip => (
+        trip.departureTime >= departureTime) &&
+        (trip.departureTime <= departureTime + departureRange));
+    }
+    if (userType !== 'both') {
+      returnVal = (returnVal.filter(trip => (trip.userType === userType)));
+    }
     return returnVal;
   }
 
   filterUsers = (users) => {
-    const returnVal = users.filter(user => (this.filterRides(user.arrivals, this.state.day, this.state.userType).length > 0));
+    const returnVal = users.filter(user => (this.filterTrips(user.trips, this.state.filterParams).length > 0));
     return returnVal;
   }
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -63,49 +113,34 @@ class Main extends React.Component {
   renderPage() {
     return (
       <div style={{ height: '100%', padding: '0px', margin: '0px' }} id={'main-page'}>
-        <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }}>
+        <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }} id='main-filter'>
+          <div className='accent-block' style={{ borderRadius: '5px', marginBottom: '20px', opacity: '0.95' }}>
+            <Header as='h2'>Find your buddy</Header>
+          </div>
           <Form.Field>
-            <label>Zip Code</label>
-            <input placeholder='Zip Code' style={{ backgroundColor: 'white' }}/>
+            <label>Arriving to UH at:</label>
+            <input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime}/>
           </Form.Field>
           <Form.Field>
-            <label>Arrival Time</label>
-            <input placeholder='Arrival Time' style={{ backgroundColor: 'white' }}/>
+            <label>Leaving UH at:</label>
+            <input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime}/>
           </Form.Field>
-          <Form.Select
+          <Form.Field
+            control={Select}
             fluid
-            label='Day of the Week'
+            label='Day of the Week:'
             options={dotwOptions}
             placeholder='Day of the Week'
+            onChange={this.changeDay}
           />
-          <Select
+          <Form.Field
+            control={Select}
             fluid
+            label='Show:'
             options={Options}
             placeholder='Riders/Drivers'
-            value={this.state.value}
             onChange={this.changeUserType}
           />
-          <Label style={{ backgroundColor: 'gray', width: '100%' }}>
-            Day of the Week
-            <select value={this.state.value} onChange={this.changeDay}>
-              <option value="7">All</option>
-              <option value="1">Monday</option>
-              <option value="2">Tuesday</option>
-              <option value="3">Wednesday</option>
-              <option value="4">Thursday</option>
-              <option value="5">Friday</option>
-              <option value="6">Saturday</option>
-              <option value="0">Sunday</option>
-            </select>
-          </Label>
-          <Label style={{ backgroundColor: 'gray', width: '100%' }}>
-            Show:
-            <select value={this.state.value} onChange={this.changeUserType}>
-              <option value="both">Both</option>
-              <option value="driver">Drivers</option>
-              <option value="rider">Riders</option>
-            </select>
-          </Label>
         </Form>
         <Map users={this.filterUsers(this.props.users)}/>
       </div>
