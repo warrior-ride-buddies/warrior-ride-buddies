@@ -6,7 +6,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Landing from '../pages/Landing';
-import ListStuff from '../pages/ListStuff';
 import ListReports from '../pages/ListReports';
 import AddStuff from '../pages/AddStuff';
 import Inbox from '../pages/Inbox';
@@ -18,6 +17,7 @@ import Main from '../pages/Main';
 import Messages from '../pages/Messages';
 import UserProfiles from '../pages/UserProfiles';
 import UserProfile from '../pages/UserProfile';
+import EditProfile from '../pages/EditProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -32,12 +32,12 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route path="/profiles" component={UserProfiles}/>
-            <ProtectedRoute path="/list" component={ListStuff}/>
             <ProtectedRoute path="/main" component={Main}/>
             <ProtectedRoute path="/messages" component={Messages}/>
             <ProtectedRoute path="/add" component={AddStuff}/>
             <ProtectedRoute path="/chatinbox" component={Inbox}/>
             <ProtectedRoute path="/profile/:owner" component={UserProfile}/>
+            <ProtectedRoute path="/edit/:owner" component={EditProfile}/>
             <AdminProtectedRoute path="/admin" component={ListReports}/>
             <Route component={NotFound}/>
           </Switch>
