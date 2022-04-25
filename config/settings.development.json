@@ -69,8 +69,8 @@
   ],
 
   "defaultConversations": [
-    {"usernames":  ["john@foo.com", "admin@foo.com"], "messages": []},
-    {"usernames": ["john@foo.com", "kobeya@hawaii.edu"], "messages":  []}
+    {"users":  [{"username": "john@foo.com", "image": "images/personIcon.png" }, {"username": "admin@foo.com", "image": "images/personIcon.png" }], "messages": []},
+    {"users": [{"username": "john@foo.com", "image": "images/personIcon.png" }, {"username": "kobey@hawaii.edu", "image": "images/kobey.jpeg" }], "messages":  []}
   ],
 
   "monti": {

@@ -48,7 +48,7 @@ if (Users.collection.find().count() === 0) {
 }
 
 function addConversations(data) {
-  console.log(`  Adding conversation between: ${data.usernames[0]}, ${data.usernames[1]}`);
+  console.log(`  Adding conversation between: ${data.users[0].username}, ${data.users[1].username}`);
   Conversations.collection.insert(data);
 }
 

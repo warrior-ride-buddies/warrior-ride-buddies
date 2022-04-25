@@ -57,7 +57,7 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
 Meteor.publish(Conversations.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return Conversations.collection.find({ usernames: username });
+    return Conversations.collection.find({ 'users.username': username });
   }
   return this.ready();
 });

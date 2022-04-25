@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Modal, List } from 'semantic-ui-react';
+import { Feed, Modal, List, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Message from './Message';
@@ -33,20 +33,21 @@ class Conversation extends React.Component {
   render() {
     const conversation = this.props.conversation;
     const currentUser = this.props.currentUser;
+    const something = conversation.users.filter(user => (user.username !== currentUser));
     return (
       <Modal
         onClose={this.onClose}
         onOpen={this.onOpen}
         open={this.isOpen}
         trigger={<List.Item>
-          <List.Icon name='github' size='large' verticalAlign='middle' />
+          <Image src={something[0].image} avatar />
           <List.Content>
-            <List.Header as='a'> {conversation.usernames.filter(user => (user !== currentUser))} </List.Header>
+            <List.Header as='a'> {something[0].username} </List.Header>
             {/* <List.Description as='a'>Updated 10 mins ago</List.Description> */}
           </List.Content>
         </List.Item>}
       >
-        <Modal.Header>{conversation.usernames.filter(user => (user !== currentUser))}</Modal.Header>
+        <Modal.Header> {something[0].username} </Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <Feed>

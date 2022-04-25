@@ -10,10 +10,13 @@ class Message extends React.Component {
     return (
       <Feed.Event >
         <Feed.Content>
-          <Feed.Date content={message.createdAt.toLocaleDateString('en-US')} />
           <Feed.Summary>
-            {message.message}
+            {message.from}
+            <Feed.Date content={message.createdAt.toLocaleDateString('en-US')} />
           </Feed.Summary>
+          <Feed.Extra>
+            {message.message}
+          </Feed.Extra>
         </Feed.Content>
       </Feed.Event>
     );
