@@ -33,18 +33,18 @@ class EditProfile extends React.Component {
         <Grid.Column>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.user}>
             <Segment>
-              <TextField name='firstName'/>
-              <TextField name='lastName'/>
-              <TextField name='homeLocation'/>
-              <NumField name='position.lng'/>
-              <NumField name='position.lat'/>
-              <HiddenField name='trips' />
-              <TextField name='carMake' />
-              <TextField name='carModel' />
-              <TextField name='carColor' />
-              <TextField name='carPlate' />
-              <HiddenField name='owner' />
-              <SubmitField value='Submit'/>
+              <TextField id="edit-profile-firstName" name='firstName'/>
+              <TextField id="edit-profile-lastName" name='lastName'/>
+              <TextField id="edit-profile-homeLocation" name='homeLocation'/>
+              <NumField id="edit-profile-position.lng" name='position.lng'/>
+              <NumField id="edit-profile-position.lat" name='position.lat'/>
+              <HiddenField id="edit-profile-trips" name='trips' />
+              <TextField id="edit-profile-carMake" name='carMake' />
+              <TextField id="edit-profile-carModel" name='carModel' />
+              <TextField id="edit-profile-carColor" name='carColor' />
+              <TextField id="edit-profile-carPlate" name='carPlate' />
+              <HiddenField id="edit-profile-owner" name='owner' />
+              <SubmitField id="edit-profile-submit" value='Submit'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>

@@ -12,7 +12,7 @@ function ModalExampleModal() {
       onOpen={() => setOpen(true)}
       open={open}
       trigger={
-        <Dropdown.Item>
+        <Dropdown.Item id="edit-profile">
           <Icon name='pencil alternate'/>
           Edit Profile
         </Dropdown.Item>}
@@ -25,7 +25,7 @@ function ModalExampleModal() {
         <EditProfile/>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => setOpen(false)}>
+        <Button if="done-editing-button" color='black' onClick={() => setOpen(false)}>
           Done Editing
         </Button>
       </Modal.Actions>
