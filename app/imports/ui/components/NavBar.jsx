@@ -6,7 +6,7 @@ import { withRouter, NavLink, Link } from 'react-router-dom';
 import { Menu, Dropdown, Header, Button, Icon, Form, Message, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 import LoginDropdown from './LoginDropdown';
-import EditProfile from './EditProfile';
+import EditProfileModal from './EditProfileModal';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
@@ -182,7 +182,7 @@ class NavBar extends React.Component {
               >
                 <Dropdown.Menu>
                   <Dropdown.Item id="navbar-profile" icon="user" text="View Profile" as={NavLink} exact to={`/profile/${this.props.currentUser}`}/>
-                  <EditProfile/>
+                  <EditProfileModal/>
                   <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                 </Dropdown.Menu>
               </Dropdown>

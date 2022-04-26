@@ -61,7 +61,6 @@ export default withTracker(({ match }) => {
   const ready = subscription.ready();
   // Get the Stuff documents
   const user = Users.collection.find({ owner: email }).fetch();
-  console.log(user);
   return {
     user,
     ready,

@@ -23,6 +23,7 @@
 
 .edit-profile-image {
   text-align: center;
+  padding-bottom: 20px;
 }
 
 .ui.cards>.card>.content img {
@@ -34,3 +35,4 @@
 {
   padding-top: 0.8em;
 }
+
