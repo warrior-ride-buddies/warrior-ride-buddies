@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Form, Select, Header } from 'semantic-ui-react';
+import { Loader, Form, Select, Header, Dropdown } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PropTypes from 'prop-types';
@@ -19,11 +19,26 @@ const dotwOptions = [
   { key: 'sun', text: 'Sunday', value: '0' },
 ];
 
-const Options = [
+const resetOptions = [{ key: 'arrivalTime', text: 'Arrival Time', value: 'arrivalTime' },
+  { key: 'departureTime', text: 'Departure Time', value: 'departureTime' },
+  { key: 'day', text: 'Day of the week', value: 'day' },
+  { key: 'userType', text: 'User Type', value: 'userType' },
+  { key: 'all', text: 'All', value: 'all' }];
+
+const userTypeOptions = [
   { key: 'd', text: 'Drivers', value: 'driver' },
   { key: 'r', text: 'Riders', value: 'rider' },
   { key: 'b', text: 'Both', value: 'both' },
 ];
+
+const defaultFilterParams = {
+  day: 7,
+  arrivalTime: 1440,
+  departureTime: 1440,
+  arrivalRange: 120,
+  departureRange: 120,
+  userType: 'both',
+};
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class Main extends React.Component {
@@ -31,12 +46,12 @@ class Main extends React.Component {
     super();
     this.state = {
       filterParams: {
-        day: 7,
-        arrivalTime: 1440,
-        departureTime: 1440,
-        arrivalRange: 120,
-        departureRange: 120,
-        userType: 'both',
+        day: defaultFilterParams.day,
+        arrivalTime: defaultFilterParams.arrivalTime,
+        departureTime: defaultFilterParams.departureTime,
+        arrivalRange: defaultFilterParams.arrivalRange,
+        departureRange: defaultFilterParams.departureRange,
+        userType: defaultFilterParams.userType,
       },
     };
   }
@@ -104,6 +119,18 @@ class Main extends React.Component {
     const returnVal = users.filter(user => (this.filterTrips(user.trips, this.state.filterParams).length > 0));
     return returnVal;
   }
+
+  handleReset = (e, { value }) => {
+    if (value === 'all') {
+      this.setState({ filterParams: defaultFilterParams });
+    } else {
+      this.setState(prevState => ({
+        filterParams: { ...prevState.filterParams,
+          [value]: defaultFilterParams[value],
+        },
+      }));
+    }
+  }
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
 
   render() {
@@ -120,11 +147,11 @@ class Main extends React.Component {
           </div>
           <Form.Field>
             <label>Arriving to UH at:</label>
-            <input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime}/>
+            <input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime} value={Parse.timeToString(this.state.filterParams.arrivalTime)}/>
           </Form.Field>
           <Form.Field>
             <label>Leaving UH at:</label>
-            <input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime}/>
+            <input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime} value={Parse.timeToString(this.state.filterParams.departureTime)}/>
           </Form.Field>
           <Form.Field
             control={Select}
@@ -133,15 +160,25 @@ class Main extends React.Component {
             options={dotwOptions}
             placeholder='Day of the Week'
             onChange={this.changeDay}
+            value={String(this.state.filterParams.day)}
           />
           <Form.Field
             control={Select}
             fluid
             label='Show:'
-            options={Options}
+            options={userTypeOptions}
             placeholder='Riders/Drivers'
             onChange={this.changeUserType}
+            value={this.state.filterParams.userType}
           />
+          <Dropdown text='' icon='erase' direction='left' style={{ float: 'right', padding: '0.5em 0.2em 0.5em 0.7em' }} className='ui compact black inverted button'>
+            <Dropdown.Menu>
+              <Dropdown.Header icon='filter' content='Reset the filters' />
+              {resetOptions.map((option) => (
+                <Dropdown.Item key={option.value} {...option} onClick={this.handleReset}/>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </Form>
         <Map users={this.filterUsers(this.props.users)}/>
       </div>
