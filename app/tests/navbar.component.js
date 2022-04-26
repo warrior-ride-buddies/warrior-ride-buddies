@@ -36,8 +36,8 @@ class NavBar {
     await testController.click('#login-dropdown-sign-up');
   }
 
-  /** Open the Chat Inbox */
-  async openChatInbox(testController) {
+  /** Open the Inbox */
+  async openInbox(testController) {
     await testController.click('#inbox');
   }
 

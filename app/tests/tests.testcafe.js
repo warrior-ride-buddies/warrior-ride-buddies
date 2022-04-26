@@ -2,12 +2,11 @@ import { landingPage } from './landing.page';
 import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { navBar } from './navbar.component';
-import { chatInboxPage } from './chatinbox.page';
+import { inboxPage } from './inbox.page';
 import { listReportsPage } from './listreports.page';
 import { mainPage } from './main.page';
 import { userProfilesPage } from './userprofiles.page';
 import { userProfilePage } from './userprofile.page';
-import { messagesPage } from './messages.page';
 
 /* global fixture:false, test:false */
 
@@ -34,10 +33,8 @@ test('Test that signin and signout work', async (testController) => {
 test('Test that chat inbox page and messages page shows up', async (testController) => {
   await navBar.openSignInDropdown(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await navBar.openChatInbox(testController);
-  await chatInboxPage.isDisplayed(testController);
-  await chatInboxPage.openMessagesPage(testController);
-  await messagesPage.isDisplayed(testController);
+  await navBar.openInbox(testController);
+  await inboxPage.isDisplayed(testController);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
 });

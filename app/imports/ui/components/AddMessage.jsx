@@ -40,7 +40,7 @@ class AddMessage extends React.Component {
     return (
       <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
         <Segment>
-          <TextField label="Send a message." name='message'/>
+          <TextField label="Send a message." name='message' autoComplete="off"/>
           <SubmitField value='Send'/>
           <ErrorsField/>
           <HiddenField name='from' value={this.props.from}/>

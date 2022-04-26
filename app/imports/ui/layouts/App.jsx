@@ -16,6 +16,7 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Main from '../pages/Main';
 import Messages from '../pages/Messages';
+// import ChatInbox from '../pages/ChatInbox';
 import UserProfiles from '../pages/UserProfiles';
 import UserProfile from '../pages/UserProfile';
 
@@ -36,7 +37,7 @@ class App extends React.Component {
             <ProtectedRoute path="/main" component={Main}/>
             <ProtectedRoute path="/messages" component={Messages}/>
             <ProtectedRoute path="/add" component={AddStuff}/>
-            <ProtectedRoute path="/chatinbox" component={Inbox}/>
+            <ProtectedRoute path="/inbox" component={Inbox}/>
             <ProtectedRoute path="/profile/:owner" component={UserProfile}/>
             <AdminProtectedRoute path="/admin" component={ListReports}/>
             <Route component={NotFound}/>
