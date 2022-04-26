@@ -2,7 +2,8 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" },
-    { "email": "kobeya@hawaii.edu", "password": "changeme", "role": "admin"}
+    { "email": "kobeya@hawaii.edu", "password": "changeme", "role": "admin"},
+    { "email": "dummy@foo.com", "password": "changeme"}
   ],
 
   "defaultData": [
@@ -35,6 +36,22 @@
       "carColor": "Gray",
       "carPlate": "ABC 123",
       "owner": "kobeya@hawaii.edu"
+    },
+    { "firstName": "Dummy",
+      "lastName": "Foo",
+      "userType": "Driver",
+      "homeLocation": "Waimalu, 96701",
+      "position": {
+        "lat": 21.264324,
+        "lng": -157.793632
+      },
+      "trips": [{"day": 5, "arrivalTime": 600, "departureTime": 960, "userType": "driver"},
+        {"day": 6, "arrivalTime": 600, "departureTime": 960, "userType": "driver"}],
+      "carMake": "Honda",
+      "carModel": "CR-V",
+      "carColor": "Gray",
+      "carPlate": "ABC 123",
+      "owner": "dummy@foo.com"
     },
     { "firstName": "Jesse",
       "lastName": "James",

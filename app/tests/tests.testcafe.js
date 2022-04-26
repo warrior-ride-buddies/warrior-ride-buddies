@@ -15,6 +15,7 @@ import { editprofilePage } from './editprofile.page';
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'john@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
+const dummy = { username: 'dummy@foo.com', password: 'changeme' };
 
 fixture('meteor-application-template-react localhost test with default db')
   .page('http://localhost:3000');
@@ -88,7 +89,7 @@ test('Test that user profile page works', async (testController) => {
 
 test.only('Test that edit profile works', async (testController) => {
   await navBar.openSignInDropdown(testController);
-  await signinPage.signin(testController, credentials.username, credentials.password);
+  await signinPage.signin(testController, dummy.username, dummy.password);
   await mainPage.isDisplayed(testController);
   await editprofilePage.editProfile(testController, 'testFirstName', 'testLastName', 'Honolulu 96817', 'Honda', 'Civic', 'Blue', 's3xy');
   await navBar.logout(testController);
