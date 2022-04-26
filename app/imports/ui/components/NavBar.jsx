@@ -83,7 +83,7 @@ class NavBar extends React.Component {
                   >
                     <Dropdown.Menu>
                       <Dropdown.Item id={'navbar-profile'} icon="user" text="View Profile" as={NavLink} exact to={`/profile/${this.props.currentUser}`}/>
-                      { /* <Dropdown.Item id="navbar-sign-out" icon="pencil alternate" text="Edit Profile" as={NavLink} exact to=<EditProfile/>/> */ }
+                      <EditProfileModal/>
                       <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
                     </Dropdown.Menu>
                   </Dropdown>

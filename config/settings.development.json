@@ -25,8 +25,8 @@
       "userType": "Driver",
       "homeLocation": "Waimalu, 96701",
       "position": {
-        "lat": 21.264324,
-        "lng": -157.793632
+        "lat": 21.3904,
+        "lng": -157.9495
       },
       "trips": [{"day": 5, "arrivalTime": 600, "departureTime": 960, "userType": "driver"},
         {"day": 6, "arrivalTime": 600, "departureTime": 960, "userType": "driver"}],
