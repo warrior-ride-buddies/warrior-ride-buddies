@@ -25,7 +25,7 @@ const resetOptions = [{ key: 'arrivalTime', text: 'Arrival Time', value: 'arriva
   { key: 'userType', text: 'User Type', value: 'userType' },
   { key: 'all', text: 'All', value: 'all' }];
 
-const Options = [
+const userTypeOptions = [
   { key: 'd', text: 'Drivers', value: 'driver' },
   { key: 'r', text: 'Riders', value: 'rider' },
   { key: 'b', text: 'Both', value: 'both' },
@@ -38,14 +38,6 @@ const defaultFilterParams = {
   arrivalRange: 120,
   departureRange: 120,
   userType: 'both',
-};
-
-const convertMinsToHrsMins = (mins) => {
-  let h = Math.floor(mins / 60);
-  let m = mins % 60;
-  h = h < 10 ? `0${h}` : h; // (or alternatively) h = String(h).padStart(2, '0')
-  m = m < 10 ? `0${m}` : m; // (or alternatively) m = String(m).padStart(2, '0')
-  return `${h}:${m}`;
 };
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -155,11 +147,11 @@ class Main extends React.Component {
           </div>
           <Form.Field>
             <label>Arriving to UH at:</label>
-            <input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime} value={convertMinsToHrsMins(this.state.filterParams.arrivalTime)}/>
+            <input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime} value={Parse.timeToString(this.state.filterParams.arrivalTime)}/>
           </Form.Field>
           <Form.Field>
             <label>Leaving UH at:</label>
-            <input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime} value={convertMinsToHrsMins(this.state.filterParams.departureTime)}/>
+            <input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime} value={Parse.timeToString(this.state.filterParams.departureTime)}/>
           </Form.Field>
           <Form.Field
             control={Select}
@@ -174,7 +166,7 @@ class Main extends React.Component {
             control={Select}
             fluid
             label='Show:'
-            options={Options}
+            options={userTypeOptions}
             placeholder='Riders/Drivers'
             onChange={this.changeUserType}
             value={this.state.filterParams.userType}
