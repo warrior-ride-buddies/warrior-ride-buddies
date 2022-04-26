@@ -12,7 +12,7 @@ function ModalExampleModal() {
       onOpen={() => setOpen(true)}
       open={open}
       trigger={
-        <Dropdown.Item>
+        <Dropdown.Item id="edit-profile">
           <Icon name='pencil alternate'/>
           Edit Profile
         </Dropdown.Item>}
