@@ -7,8 +7,8 @@ import { listReportsPage } from './listreports.page';
 import { mainPage } from './main.page';
 import { userProfilesPage } from './userprofiles.page';
 import { userProfilePage } from './userprofile.page';
-import { messagesPage } from './messages.page';
 import { signupPage } from './signup.page';
+import { editprofilePage } from './editprofile.page';
 
 /* global fixture:false, test:false */
 
@@ -90,4 +90,5 @@ test.only('Test that edit profile works', async (testController) => {
   await navBar.openSignInDropdown(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await mainPage.isDisplayed(testController);
+  await editprofilePage.editProfile(testController, 'testFirstName', 'testLastName', 'Honolulu 96817', 0.00001, 0.0000, 'Honda', 'Civic', 'Blue', 's3xy');
 });
