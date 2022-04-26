@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Image } from 'semantic-ui-react';
+import { Feed } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
