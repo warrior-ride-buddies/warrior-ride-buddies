@@ -45,7 +45,8 @@
         "lng": -157.751821
       },
       "trips": [{"day": 5, "arrivalTime": 600, "departureTime": 960, "userType": "rider"},
-        {"day": 6, "arrivalTime": 600, "departureTime": 960, "userType": "rider"}],
+        {"day": 6, "arrivalTime": 600, "departureTime": 960, "userType": "rider"},
+        {"day": 1, "arrivalTime": 630, "departureTime": 990, "userType": "rider"}],
       "carMake": "Toyota",
       "carModel": "Celica",
       "carColor": "Blue",
