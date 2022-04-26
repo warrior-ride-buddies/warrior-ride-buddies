@@ -87,7 +87,7 @@ test('Test that user profile page works', async (testController) => {
   await userProfilePage.isDisplayed(testController);
 });
 
-test.only('Test that edit profile works', async (testController) => {
+test('Test that edit profile works', async (testController) => {
   await navBar.openSignInDropdown(testController);
   await signinPage.signin(testController, dummy.username, dummy.password);
   await mainPage.isDisplayed(testController);
