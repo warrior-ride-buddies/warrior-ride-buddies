@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Modal, List, Image } from 'semantic-ui-react';
+import { Feed, Image, List, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Message from './Message';
@@ -40,7 +40,7 @@ class Conversation extends React.Component {
         onOpen={this.onOpen}
         open={this.isOpen}
         trigger={<List.Item>
-          <Image src={something[0].image} avatar />
+          <Image src={something[0].image} avatar/>
           <List.Content>
             <List.Header as='a'> {something[0].username} </List.Header>
             {/* <List.Description as='a'>Updated 10 mins ago</List.Description> */}
