@@ -5,13 +5,6 @@
     { "email": "kobeya@hawaii.edu", "password": "changeme", "role": "admin"}
   ],
 
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "kobeya@hawaii.edu", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-  ],
-
   "defaultContacts": [
     { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "images/personIcon.png",
       "image2": "images/personIcon.png" },
