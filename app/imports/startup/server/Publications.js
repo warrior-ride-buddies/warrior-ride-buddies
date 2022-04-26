@@ -1,6 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
-import { Stuffs } from '../../api/stuff/Stuff';
 import { Text } from '../../api/text/Text';
 import { Contacts } from '../../api/contact/Contacts';
 import { Conversations } from '../../api/conversation/Conversations';
@@ -43,15 +41,6 @@ Meteor.publish(Users.adminPublicationName, function () {
 
 Meteor.publish(Contacts.adminPublicationName, function () {
   return Contacts.collection.find();
-});
-
-// Admin-level publication.
-// If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
-// eslint-disable-next-line consistent-return
-Meteor.publish(Stuffs.adminPublicationName, function () {
-  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Stuffs.collection.find();
-  }
 });
 
 Meteor.publish(Conversations.userPublicationName, function () {

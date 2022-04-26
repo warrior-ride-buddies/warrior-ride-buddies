@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Users } from '../../api/user/User';
 
 class ListReports extends React.Component {
 
@@ -44,20 +44,20 @@ class ListReports extends React.Component {
 
 // Require an array of Stuff documents in the props.
 ListReports.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.adminPublicationName);
+  const subscription = Meteor.subscribe(Users.adminPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const stuffs = Stuffs.collection.find({}).fetch();
+  const users = Users.collection.find({}).fetch();
   return {
-    stuffs,
+    users,
     ready,
   };
 })(ListReports);
