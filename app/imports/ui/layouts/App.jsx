@@ -16,6 +16,7 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Main from '../pages/Main';
 import Messages from '../pages/Messages';
+// import ChatInbox from '../pages/ChatInbox';
 import UserProfiles from '../pages/UserProfiles';
 import UserProfile from '../pages/UserProfile';
 

@@ -2,32 +2,23 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
-class ConversationsCollection {
+/**
+ * The StuffsCollection. It encapsulates state and variable values for stuff.
+ */
+class ContactsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'ConversationsCollection';
+    this.name = 'ContactsCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
-    const messageSchema = new SimpleSchema({
-      message: String,
-      from: String,
-      createdAt: Date,
-    });
-    const userSchema = new SimpleSchema({
-      username: String,
-      image: String,
-    });
     this.schema = new SimpleSchema({
-      users: {
-        type: Array,
-      },
-      'users.$': { type: userSchema },
-      messages: {
-        type: Array,
-        optional: true,
-      },
-      'messages.$': { type: messageSchema },
+      userEmail1: String,
+      userEmail2: String,
+      userName1: String,
+      userName2: String,
+      image1: String,
+      image2: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
@@ -38,7 +29,7 @@ class ConversationsCollection {
 }
 
 /**
- * The singleton instance of the ConversationsCollection.
- * @type {ConversationsCollection}
+ * The singleton instance of the StuffsCollection.
+ * @type {ContactsCollection}
  */
-export const Conversations = new ConversationsCollection();
+export const Contacts = new ContactsCollection();

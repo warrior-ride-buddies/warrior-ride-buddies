@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Card } from 'semantic-ui-react';
+import { Container, Header, Loader, List } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Conversation from '../components/Conversation';
@@ -17,15 +17,14 @@ class Inbox extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center" id="inbox-page" inverted>List Profiles</Header>
-        <Card.Group>
-          {this.props.conversations.map((conversation, index) =>
-            <Conversation
-              key={index}
-              currentUser={this.props.currentUser}
-              conversation={conversation}
-            />)}
-        </Card.Group>
+        <Header as="h2" textAlign="center" inverted>List Profiles</Header>
+        <List divided relaxed>
+          {this.props.conversations.map((conversation, index) => <Conversation
+            key={index}
+            currentUser={this.props.currentUser}
+            conversation={conversation}
+          />)}
+        </List>
       </Container>
     );
   }

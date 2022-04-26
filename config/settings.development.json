@@ -12,6 +12,13 @@
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
 
+  "defaultContacts": [
+    { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "images/personIcon.png",
+      "image2": "images/personIcon.png" },
+    { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "images/personIcon.png",
+      "image2": "images/personIcon.png" }
+  ],
+
   "defaultUsers": [
     { "firstName": "Kobey",
       "lastName": "Arai",
@@ -63,8 +70,8 @@
   ],
 
   "defaultConversations": [
-    {"usernames":  ["john@foo.com", "admin@foo.com"], "messages": []},
-    {"usernames": ["john@foo.com", "kobeya@hawaii.edu"], "messages":  []}
+    {"users":  [{"username": "john@foo.com", "image": "images/personIcon.png" }, {"username": "admin@foo.com", "image": "images/personIcon.png" }], "messages": []},
+    {"users": [{"username": "john@foo.com", "image": "images/personIcon.png" }, {"username": "kobey@hawaii.edu", "image": "images/kobey.jpeg" }], "messages":  []}
   ],
 
   "monti": {
