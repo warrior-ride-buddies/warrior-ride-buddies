@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink, Link } from 'react-router-dom';
-import { Menu, Dropdown, Header, Button, Icon, Form, Message, Image } from 'semantic-ui-react';
+import { Menu, Dropdown, Header, Button, Form, Message, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 import LoginDropdown from './LoginDropdown';
 import EditProfile from './EditProfile';
@@ -192,7 +192,7 @@ class NavBar extends React.Component {
         <Menu.Item>
           {this.props.currentUser === '' ? (
             <Menu.Item>
-              <Button id='login-dropdown-sign-up' as={NavLink} exact to={'/signup'}>
+              <Button id='signup' as={NavLink} exact to={'/signup'}>
                 Sign up
               </Button>
             </Menu.Item>

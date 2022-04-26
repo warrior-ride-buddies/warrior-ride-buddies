@@ -29,11 +29,10 @@ class NavBar {
     await testController.click('#navbar-sign-out');
   }
 
-  /** Pull down login menu, go to sign up page. */
+  /** Go to sign up page. */
   async gotoSignupPage(testController) {
     await this.ensureLogout(testController);
-    await testController.click('#login-dropdown');
-    await testController.click('#login-dropdown-sign-up');
+    await testController.click('#signup');
   }
 
   /** Open the Chat Inbox */

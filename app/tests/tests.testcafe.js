@@ -8,6 +8,7 @@ import { mainPage } from './main.page';
 import { userProfilesPage } from './userprofiles.page';
 import { userProfilePage } from './userprofile.page';
 import { messagesPage } from './messages.page';
+import { signupPage } from './signup.page';
 
 /* global fixture:false, test:false */
 
@@ -22,11 +23,20 @@ test('Test that landing page shows up', async (testController) => {
   await landingPage.isDisplayed(testController);
 });
 
-test('Test that signin and signout work', async (testController) => {
+test('Test that signin and signout works', async (testController) => {
   await navBar.openSignInDropdown(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await mainPage.isDisplayed(testController);
   await navBar.isLoggedIn(testController, credentials.username);
+  await navBar.logout(testController);
+  await signoutPage.isDisplayed(testController);
+});
+
+test.only('Test that signup works', async (testController) => {
+  const newMockUser = `user-${new Date().getTime()}@foo.com`; //user@foo.com
+  await navBar.gotoSignupPage(testController);
+  await signupPage.signupUser(testController, newMockUser, credentials.password);
+  await navBar.isLoggedIn(testController, newMockUser);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
 });
