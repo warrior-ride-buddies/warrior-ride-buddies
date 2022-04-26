@@ -14,7 +14,7 @@ class Message extends React.Component {
             {message.from}
             <Feed.Date content={message.createdAt.toLocaleDateString('en-US')} />
           </Feed.Summary>
-          <Feed.Extra>
+          <Feed.Extra autoComplete="off">
             {message.message}
           </Feed.Extra>
         </Feed.Content>
