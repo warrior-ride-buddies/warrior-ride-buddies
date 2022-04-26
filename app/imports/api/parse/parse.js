@@ -3,15 +3,12 @@ class Parse {
     return (parseInt(string.substring(0, 2), 10) * 60) + parseInt(string.substring(3, 5), 10);
   }
 
-  static timeToString(num) {
-    let hours = Math.floor(num / 60);
-    let suffix = 'AM';
-    const minutes = num % 60;
-    if (hours > 12) {
-      hours -= 12;
-      suffix = 'PM';
-    }
-    return `${hours}:${minutes.toString().padStart(2, '0')} ${suffix}`;
+  static timeToString(mins) {
+    let h = Math.floor(mins / 60);
+    let m = mins % 60;
+    h = h < 10 ? `0${h}` : h; // (or alternatively) h = String(h).padStart(2, '0')
+    m = m < 10 ? `0${m}` : m; // (or alternatively) m = String(m).padStart(2, '0')
+    return `${h}:${m}`;
   }
 
   static dayToString(num) {

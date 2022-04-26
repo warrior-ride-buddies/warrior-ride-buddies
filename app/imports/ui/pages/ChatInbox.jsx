@@ -1,70 +1,52 @@
 import React from 'react';
-import { Grid, Header, List, Segment } from 'semantic-ui-react';
-import { AutoForm, ErrorsField } from 'uniforms-semantic';
-import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import SimpleSchema from 'simpl-schema';
-import { Stuffs } from '../../api/stuff/Stuff';
-
-// Create a schema to specify the structure of the data to appear in the form.
-const formSchema = new SimpleSchema({
-  name: String,
-  quantity: Number,
-  condition: {
-    type: String,
-    allowedValues: ['excellent', 'good', 'fair', 'poor'],
-    defaultValue: 'good',
-  },
-});
-
-const bridge = new SimpleSchema2Bridge(formSchema);
+import { Grid, Header, List, Segment } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Contacts } from '../../api/contact/Contacts';
+import ChatInboxItem from '../components/ChatInboxItem';
 
 /** Renders the Page for adding a document. */
 class ChatInbox extends React.Component {
-
-  // On submit, insert the data.
-  submit(data, formRef) {
-    const { name, quantity, condition } = data;
-    const owner = Meteor.user().username;
-    Stuffs.collection.insert({ name, quantity, condition, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
-        }
-      });
+  render() {
+    return (this.props.ready) ? this.renderPage() : '';
   }
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
-  render() {
-    let fRef = null;
+  renderPage() {
     return (
       <Grid container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center" id="chatinbox-page">Inbox</Header>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-            <Segment>
-              <List divided relaxed>
-                <List.Item>
-                  <List.Icon name='github' size='large' verticalAlign='middle'/>
-                  <List.Content>
-                    <a href='#/messages'>
-                      <List.Header id={'goto-messages'}>Semantic-Org/Semantic-UI</List.Header>
-                      <List.Description>Updated 10 mins ago</List.Description>
-                    </a>
-                  </List.Content>
-                </List.Item>
-              </List>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
+          <Header as="h2" textAlign="center">Inbox</Header>
+          <Segment>
+            <List divided relaxed>
+              {this.props.contacts.map((contact) => <ChatInboxItem key={contact._id} contact={contact}/>)}
+            </List>
+          </Segment>
         </Grid.Column>
       </Grid>
     );
   }
 }
 
-export default ChatInbox;
+// Require a document to be passed to this component.
+ChatInbox.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+// withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+export default withTracker(() => {
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe(Contacts.userPublicationName);
+  const ready = subscription.ready();
+  const contacts = Contacts.collection.find({}).fetch();
+  console.log(contacts);
+  // Determine if the subscription is ready
+  // Get the Stuff documents
+  // const userEmail = Meteor.user().username;
+  // console.log(userEmail);
+  return {
+    contacts,
+    ready,
+  };
+})(ChatInbox);

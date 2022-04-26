@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Button, Grid, Header, Image, Loader, Table } from 'semantic-ui-react';
+import { Button, Grid, Header, Image, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Users } from '../../api/user/User';
@@ -61,7 +61,6 @@ export default withTracker(({ match }) => {
   const ready = subscription.ready();
   // Get the Stuff documents
   const user = Users.collection.find({ owner: email }).fetch();
-  console.log(user);
   return {
     user,
     ready,
