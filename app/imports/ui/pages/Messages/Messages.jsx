@@ -7,7 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Users } from '../../api/user/User';
+import { Users } from '../../../api/user/User';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({

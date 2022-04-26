@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { Users } from '../../api/user/User';
+import { Users } from '../../../api/user/User';
 
 const bridge = new SimpleSchema2Bridge(Users.schema);
 

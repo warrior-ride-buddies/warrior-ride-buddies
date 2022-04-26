@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Dropdown, Icon, Modal } from 'semantic-ui-react';
-import EditProfile from '../pages/EditProfile';
+import EditProfile from '../../pages/UserProfile/EditProfile';
 import EditProfileImage from './EditProfileImage';
 
 function ModalExampleModal() {

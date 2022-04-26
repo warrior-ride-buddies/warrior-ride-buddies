@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { CardGroup, Container, Header, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Users } from '../../api/user/User';
-import UserCard from '../components/UserCard';
+import { Users } from '../../../api/user/User';
+import UserCard from '../../components/UserProfile/UserCard';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfiles extends React.Component {

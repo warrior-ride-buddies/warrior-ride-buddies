@@ -3,9 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { Button, Grid, Header, Image, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Users } from '../../api/user/User';
-import UserInfo from '../components/UserInfo';
-import Schedule from '../components/Schedule';
+import { Users } from '../../../api/user/User';
+import UserInfo from '../../components/UserProfile/UserInfo';
+import Schedule from '../../components/UserProfile/Schedule';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
