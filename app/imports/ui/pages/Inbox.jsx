@@ -16,7 +16,7 @@ class Inbox extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container>
+      <Container id={'inbox-page'}>
         <Header as="h2" textAlign="center" inverted>List Profiles</Header>
         <List divided relaxed>
           {this.props.conversations.map((conversation, index) => <Conversation
