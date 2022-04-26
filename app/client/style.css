@@ -29,3 +29,8 @@
   border-radius: 5px;
   border-color: dimgrey;
 }
+
+#main-filter>.field
+{
+  padding-top: 0.8em;
+}
