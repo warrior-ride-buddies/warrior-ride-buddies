@@ -6,6 +6,7 @@ import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PropTypes from 'prop-types';
 import Map from '../components/Map';
 import { Users } from '../../api/user/User';
+import Parse from '../../api/parse/parse';
 
 const dotwOptions = [
   { key: 'all', text: 'All', value: '7' },
@@ -60,7 +61,7 @@ class Main extends React.Component {
   }
 
   changeArrivalTime = (event) => {
-    const arrivalTime = (parseInt(event.target.value.substring(0, 2), 10) * 60) + parseInt(event.target.value.substring(3, 5), 10);
+    const arrivalTime = Parse.timeToNum(event.target.value);
     this.setState(prevState => ({
       filterParams: { ...prevState.filterParams,
         arrivalTime: arrivalTime,
@@ -69,7 +70,7 @@ class Main extends React.Component {
   }
 
   changeDepartureTime = (event) => {
-    const departureTime = (parseInt(event.target.value.substring(0, 2), 10) * 60) + parseInt(event.target.value.substring(3, 5), 10);
+    const departureTime = Parse.timeToNum(event.target.value);
     this.setState(prevState => ({
       filterParams: { ...prevState.filterParams,
         departureTime: departureTime,
