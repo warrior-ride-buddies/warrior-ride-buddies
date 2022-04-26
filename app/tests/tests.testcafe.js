@@ -32,8 +32,8 @@ test('Test that signin and signout works', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test.only('Test that signup works', async (testController) => {
-  const newMockUser = `user-${new Date().getTime()}@foo.com`; //user@foo.com
+test('Test that signup works', async (testController) => {
+  const newMockUser = `user-${new Date().getTime()}@foo.com`;
   await navBar.gotoSignupPage(testController);
   await signupPage.signupUser(testController, newMockUser, credentials.password);
   await navBar.isLoggedIn(testController, newMockUser);
@@ -79,11 +79,18 @@ test('Test that user profiles page shows up', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test('Test that user profile page work', async (testController) => {
+test('Test that user profile page works', async (testController) => {
   await navBar.openSignInDropdown(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await mainPage.isDisplayed(testController);
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.openUserProfilePage(testController);
   await userProfilePage.isDisplayed(testController);
+});
+
+test('Test that edit profile works', async (testController) => {
+  await navBar.openSignInDropdown(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await mainPage.isDisplayed(testController);
+  
 });
