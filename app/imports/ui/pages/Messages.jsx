@@ -7,7 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Users } from '../../api/user/User';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -23,7 +23,7 @@ class Messages extends React.Component {
   submit(data, formRef) {
     const { name, quantity, condition } = data;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert({ name, quantity, condition, owner },
+    Users.collection.insert({ name, quantity, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -90,11 +90,11 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  const subscription = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the document
-  const doc = Stuffs.collection.findOne(documentId);
+  const doc = Users.collection.findOne(documentId);
   return {
     doc,
     ready,
