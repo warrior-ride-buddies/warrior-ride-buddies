@@ -1,5 +1,4 @@
 import { Selector } from 'testcafe';
-import { navBar } from './navbar.component';
 
 class EditprofilePage {
   constructor() {
@@ -14,16 +13,36 @@ class EditprofilePage {
 
   /** Fills out profile edit boxes and saves changes */
   async editProfile(testController, firstName, lastName, homeLocation, positionLng, positionLat, carMake, carModel, carColor, carPlate) {
+    await testController.click('#navbar-current-user');
     await testController.click('#edit-profile');
-    await testController.typeText('#edit-profile-firstName', firstName);
-    await testController.typeText('#edit-profile-lastName', lastName);
-    await testController.typeText('#edit-profile-homeLocation', homeLocation);
-    await testController.typeText('#edit-profile-position.lng', positionLng);
-    await testController.typeText('#edit-profile-position.lat', positionLat);
-    await testController.typeText('#edit-profile-carMake', carMake);
-    await testController.typeText('#edit-profile-carModel', carModel);
-    await testController.typeText('#edit-profile-carColor', carColor);
-    await testController.typeText('#edit-profile-carPlate', carPlate);
+    await testController
+      .click('#edit-profile-firstName')
+      .pressKey('ctrl+a delete')
+      .typeText('#edit-profile-firstName', firstName);
+    await testController
+      .click('#edit-profile-lastName')
+      .pressKey('ctrl+a delete')
+      .typeText('#edit-profile-lastName', lastName);
+    await testController
+      .click('#edit-profile-homeLocation')
+      .pressKey('ctrl+a delete')
+      .typeText('#edit-profile-homeLocation', homeLocation);
+    await testController
+      .click('#edit-profile-carMake')
+      .pressKey('ctrl+a delete')
+      .typeText('#edit-profile-carMake', carMake);
+    await testController
+      .click('#edit-profile-carModel')
+      .pressKey('ctrl+a delete')
+      .typeText('#edit-profile-carModel', carModel);
+    await testController
+      .click('#edit-profile-carColor')
+      .pressKey('ctrl+a delete')
+      .typeText('#edit-profile-carColor', carColor);
+    await testController
+      .click('#edit-profile-carPlate')
+      .pressKey('ctrl+a delete')
+      .typeText('#edit-profile-carPlate', carPlate);
     await testController.click('#edit-profile-submit');
   }
 }
