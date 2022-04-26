@@ -12,7 +12,7 @@ class EditprofilePage {
   }
 
   /** Fills out profile edit boxes and saves changes */
-  async editProfile(testController, firstName, lastName, homeLocation, positionLng, positionLat, carMake, carModel, carColor, carPlate) {
+  async editProfile(testController, firstName, lastName, homeLocation, carMake, carModel, carColor, carPlate) {
     await testController.click('#navbar-current-user');
     await testController.click('#edit-profile');
     await testController
@@ -44,6 +44,7 @@ class EditprofilePage {
       .pressKey('ctrl+a delete')
       .typeText('#edit-profile-carPlate', carPlate);
     await testController.click('#edit-profile-submit');
+    await testController.pressKey('esc');
   }
 }
 
