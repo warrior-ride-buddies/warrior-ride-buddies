@@ -5,8 +5,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink, Link } from 'react-router-dom';
 import { Menu, Dropdown, Header, Button, Form, Message, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
-import LoginDropdown from './LoginDropdown';
-import EditProfileModal from './EditProfileModal';
+import LoginDropdown from './UserAuthentication/LoginDropdown';
+import EditProfileModal from './UserProfile/EditProfileModal';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {

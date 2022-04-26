@@ -6,18 +6,18 @@ import { Roles } from 'meteor/alanning:roles';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Landing from '../pages/Landing';
-import ListReports from '../pages/ListReports';
-import Inbox from '../pages/Inbox';
+import ListReports from '../pages/Admin/ListReports';
+import Inbox from '../pages/Messages/Inbox';
 import NotFound from '../pages/NotFound';
-import Signin from '../pages/Signin';
-import Signup from '../pages/Signup';
-import Signout from '../pages/Signout';
+import Signin from '../pages/UserAuthentication/Signin';
+import Signup from '../pages/UserAuthentication/Signup';
+import Signout from '../pages/UserAuthentication/Signout';
 import Main from '../pages/Main';
-import Messages from '../pages/Messages';
+import Messages from '../pages/Messages/Messages';
 // import ChatInbox from '../pages/ChatInbox';
-import UserProfiles from '../pages/UserProfiles';
-import UserProfile from '../pages/UserProfile';
-import EditProfile from '../pages/EditProfile';
+import UserProfiles from '../pages/UserProfile/UserProfiles';
+import UserProfile from '../pages/UserProfile/UserProfile';
+import EditProfile from '../pages/UserProfile/EditProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {

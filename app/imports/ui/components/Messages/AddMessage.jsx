@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Conversations } from '../../api/conversation/Conversations';
+import { Conversations } from '../../../api/conversation/Conversations';
 
 const messageSchema = new SimpleSchema({
   message: String,

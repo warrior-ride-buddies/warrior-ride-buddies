@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader, List } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import Conversation from '../components/Conversation';
-import { Conversations } from '../../api/conversation/Conversations';
+import Conversation from '../../components/Messages/Conversation';
+import { Conversations } from '../../../api/conversation/Conversations';
 
 class Inbox extends React.Component {
 
