@@ -1,11 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Loader, Form, Select } from 'semantic-ui-react';
+import { Loader, Form, Select, Header } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PropTypes from 'prop-types';
 import Map from '../components/Map';
 import { Users } from '../../api/user/User';
+import Parse from '../../api/parse/parse';
 
 const dotwOptions = [
   { key: 'all', text: 'All', value: '7' },
@@ -60,7 +61,7 @@ class Main extends React.Component {
   }
 
   changeArrivalTime = (event) => {
-    const arrivalTime = (parseInt(event.target.value.substring(0, 2), 10) * 60) + parseInt(event.target.value.substring(3, 5), 10);
+    const arrivalTime = Parse.timeToNum(event.target.value);
     this.setState(prevState => ({
       filterParams: { ...prevState.filterParams,
         arrivalTime: arrivalTime,
@@ -69,7 +70,7 @@ class Main extends React.Component {
   }
 
   changeDepartureTime = (event) => {
-    const departureTime = (parseInt(event.target.value.substring(0, 2), 10) * 60) + parseInt(event.target.value.substring(3, 5), 10);
+    const departureTime = Parse.timeToNum(event.target.value);
     this.setState(prevState => ({
       filterParams: { ...prevState.filterParams,
         departureTime: departureTime,
@@ -113,23 +114,22 @@ class Main extends React.Component {
   renderPage() {
     return (
       <div style={{ height: '100%', padding: '0px', margin: '0px' }} id={'main-page'}>
-        <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }}>
+        <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }} id='main-filter'>
+          <div className='accent-block' style={{ borderRadius: '5px', marginBottom: '20px', opacity: '0.95' }}>
+            <Header as='h2'>Find your buddy</Header>
+          </div>
           <Form.Field>
-            <label>Zip Code</label>
-            <input placeholder='Zip Code' style={{ backgroundColor: 'white' }}/>
-          </Form.Field>
-          <Form.Field>
-            <label>Arrival Time</label>
+            <label>Arriving to UH at:</label>
             <input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime}/>
           </Form.Field>
           <Form.Field>
-            <label>Departure Time</label>
+            <label>Leaving UH at:</label>
             <input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime}/>
           </Form.Field>
           <Form.Field
             control={Select}
             fluid
-            label='Day of the Week'
+            label='Day of the Week:'
             options={dotwOptions}
             placeholder='Day of the Week'
             onChange={this.changeDay}
