@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { Text } from '../../api/text/Text';
 import { Contacts } from '../../api/contact/Contacts';
 import { Conversations } from '../../api/conversation/Conversations';
@@ -45,7 +46,20 @@ Meteor.publish(Contacts.adminPublicationName, function () {
 });
 
 Meteor.publish(Reports.adminPublicationName, function () {
-  return Reports.collection.find();
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Reports.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Conversations.adminPublicationName, function () {
+  const conversationIdsArrays = Reports.collection.find().map((report) => (report.conversationIds));
+  const conversationIds = [].concat(...conversationIdsArrays);
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Conversations.collection.find({ _id: { $in: conversationIds } });
+  }
+  return this.ready();
+
 });
 
 Meteor.publish(Conversations.userPublicationName, function () {

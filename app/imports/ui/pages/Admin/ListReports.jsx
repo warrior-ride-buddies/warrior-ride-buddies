@@ -5,6 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Users } from '../../../api/user/User';
 import { Reports } from '../../../api/report/Reports';
+import { Conversations } from '../../../api/conversation/Conversations';
 
 class ListReports extends React.Component {
 
@@ -47,6 +48,7 @@ class ListReports extends React.Component {
 ListReports.propTypes = {
   users: PropTypes.array.isRequired,
   reports: PropTypes.array.isRequired,
+  conversations: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -55,12 +57,15 @@ export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Users.adminPublicationName);
   const subscription2 = Meteor.subscribe(Reports.adminPublicationName);
+  const subscription3 = Meteor.subscribe(Conversations.adminPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready();
   // Get the Stuff documents
   const users = Users.collection.find({}).fetch();
   const reports = Reports.collection.find({}).fetch();
+  const conversations = Conversations.collection.find({}).fetch();
   return {
+    conversations,
     reports,
     users,
     ready,
