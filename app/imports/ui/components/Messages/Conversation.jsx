@@ -35,9 +35,9 @@ class Conversation extends React.Component {
     const currentUser = this.props.currentUser;
     const something = conversation.users.filter(user => (user.username !== currentUser));
     return (
-      <Container style={{ paddingBottom: '10px' }}>
+      <Container style={{ paddingBottom: '10px' }} >
         <div style={{ backgroundColor: 'grey', borderRadius: '10px', paddingLeft: '10px', paddingTop: '5px', paddingBottom: '5px' }}>
-          <Modal
+          <Modal style={{ overflow: 'auto', maxHeight: '40em' }}
             onClose={this.onClose}
             onOpen={this.onOpen}
             open={this.isOpen}
