@@ -18,6 +18,7 @@ import Messages from '../pages/Messages/Messages';
 import UserProfiles from '../pages/UserProfile/UserProfiles';
 import UserProfile from '../pages/UserProfile/UserProfile';
 import EditProfile from '../pages/UserProfile/EditProfile';
+import CreateProfile from '../pages/UserAuthentication/CreateProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
             <ProtectedRoute path="/main" component={Main}/>
             <ProtectedRoute path="/messages" component={Messages}/>
             <ProtectedRoute path="/inbox" component={Inbox}/>
+            <ProtectedRoute path="/createProfile" component={CreateProfile}/>
             <ProtectedRoute path="/profile/:owner" component={UserProfile}/>
             <ProtectedRoute path="/edit/:owner" component={EditProfile}/>
             <AdminProtectedRoute path="/admin" component={ListReports}/>
