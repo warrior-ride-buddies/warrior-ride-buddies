@@ -4,7 +4,7 @@ import { Loader, Form, Select, Header, Dropdown } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PropTypes from 'prop-types';
-import Map from '../components/Map';
+import Map from '../components/Map/Map';
 import { Users } from '../../api/user/User';
 import Parse from '../../api/parse/parse';
 

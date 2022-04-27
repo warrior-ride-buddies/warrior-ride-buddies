@@ -2,8 +2,8 @@ import React from 'react';
 import { Card, Image, Feed } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-import Text from './Text';
-import AddText from './AddText';
+import Text from '../Messages/Text';
+import AddText from '../Messages/AddText';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class Contact extends React.Component {

@@ -6,13 +6,6 @@
     { "email": "dummy@foo.com", "password": "changeme"}
   ],
 
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "kobeya@hawaii.edu", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-  ],
-
   "defaultContacts": [
     { "userEmail1": "john@foo.com", "userEmail2": "admin@foo.com", "userName1": "john", "userName2": "admin", "image1": "images/personIcon.png",
       "image2": "images/personIcon.png" },
@@ -26,8 +19,8 @@
       "userType": "Driver",
       "homeLocation": "Waimalu, 96701",
       "position": {
-        "lat": 21.264324,
-        "lng": -157.793632
+        "lat": 21.3904,
+        "lng": -157.9495
       },
       "trips": [{"day": 5, "arrivalTime": 600, "departureTime": 960, "userType": "driver"},
         {"day": 6, "arrivalTime": 600, "departureTime": 960, "userType": "driver"}],

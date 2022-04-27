@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Users } from '../../api/user/User';
+import { Users } from '../../../api/user/User';
 
 class ListReports extends React.Component {
 

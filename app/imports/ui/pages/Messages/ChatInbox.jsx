@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Grid, Header, List, Segment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Contacts } from '../../api/contact/Contacts';
-import ChatInboxItem from '../components/ChatInboxItem';
+import { Contacts } from '../../../api/contact/Contacts';
+import ChatInboxItem from '../../components/Messages/ChatInboxItem';
 
 /** Renders the Page for adding a document. */
 class ChatInbox extends React.Component {

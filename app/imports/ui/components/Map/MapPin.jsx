@@ -2,8 +2,8 @@ import React from 'react';
 import { Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import UserInfo from '../components/UserInfo';
-import Schedule from '../components/Schedule';
+import UserInfo from '../UserProfile/UserInfo';
+import Schedule from '../UserProfile/Schedule';
 
 class MapPin extends React.Component {
   render() {

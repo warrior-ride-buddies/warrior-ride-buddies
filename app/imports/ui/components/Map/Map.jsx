@@ -2,8 +2,8 @@ import React from 'react';
 import { InfoWindow, Marker, GoogleMap, LoadScript } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import ApiKeys from '../../../ApiKeys.json';
-import CreateReport from './CreateReport';
+import ApiKeys from '../../../../ApiKeys.json';
+import CreateReport from '../UserProfile/CreateReport';
 import MapPin from './MapPin';
 
 const containerStyle = {
