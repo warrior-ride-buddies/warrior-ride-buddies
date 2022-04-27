@@ -3,6 +3,7 @@ import { Text } from '../../api/text/Text';
 import { Contacts } from '../../api/contact/Contacts';
 import { Conversations } from '../../api/conversation/Conversations';
 import { Users } from '../../api/user/User';
+import { Reports } from '../../api/report/Reports';
 
 // User-level publication.
 
@@ -41,6 +42,10 @@ Meteor.publish(Users.adminPublicationName, function () {
 
 Meteor.publish(Contacts.adminPublicationName, function () {
   return Contacts.collection.find();
+});
+
+Meteor.publish(Reports.adminPublicationName, function () {
+  return Reports.collection.find();
 });
 
 Meteor.publish(Conversations.userPublicationName, function () {
