@@ -74,7 +74,7 @@ class Map extends React.Component {
             >
               <div>
                 <MapPin user={this.state.selectedUser}/>
-                <CreateReport/>
+                <CreateReport reportedUser={this.state.selectedUser.owner}/>
               </div>
             </InfoWindow>
           }

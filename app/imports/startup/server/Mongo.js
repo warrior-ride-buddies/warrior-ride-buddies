@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Users } from '../../api/user/User';
 import { Contacts } from '../../api/contact/Contacts';
 import { Conversations } from '../../api/conversation/Conversations';
+import { Reports } from '../../api/report/Reports';
 
 /* eslint-disable no-console */
 
@@ -43,5 +44,18 @@ if (Conversations.collection.find().count() === 0) {
   if (Meteor.settings.defaultConversations) {
     console.log('Creating user data.');
     Meteor.settings.defaultConversations.map(data => addConversations(data));
+  }
+}
+
+function addReports(data) {
+  console.log(`  Adding report of: ${data.reportedUser} by: ${data.createdBy}`);
+  Reports.collection.insert(data);
+}
+
+// Initialize the ConversationsCollection if empty.
+if (Reports.collection.find().count() === 0) {
+  if (Meteor.settings.defaultReports) {
+    console.log('Creating reports.');
+    Meteor.settings.defaultReports.map(data => addReports(data));
   }
 }
