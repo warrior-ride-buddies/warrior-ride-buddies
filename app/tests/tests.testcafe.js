@@ -37,6 +37,17 @@ test('Test that signup works', async (testController) => {
   const newMockUser = `user-${new Date().getTime()}@foo.com`;
   await navBar.openSignupPage(testController);
   await signupPage.signupUser(testController, newMockUser, credentials.password);
+  await signupPage.updateInfo(testController,
+    `${new Date().getTime()}-firstName`,
+    `${new Date().getTime()}-lastName`,
+    `${new Date().getTime()}-firstName`,
+    `${new Date().getTime()}-homeLocal`,
+    `${Math.random()}`,
+    `${Math.random()}`,
+    `${new Date().getTime()}-carMake`,
+    `${new Date().getTime()}-carModel`,
+    `${new Date().getTime()}-carColor`,
+    `${new Date().getTime()}-carPlate`);
   await navBar.isLoggedIn(testController, newMockUser);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
@@ -96,7 +107,7 @@ test('Test that edit profile works', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test.only('Test that login page loads and works', async (testController) => {
+test('Test that login page loads and works', async (testController) => {
   await navBar.openSignupPage(testController);
   await signinPage.openLoginPage(testController);
   await signinPage.signinPage(testController, credentials.username, credentials.password);

@@ -52,17 +52,17 @@ class CreateProfile extends React.Component {
           <Header as="h2" textAlign="center">Add Stuff</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <TextField name='firstName'/>
-              <TextField name='lastName'/>
-              <TextField name='userType'/>
-              <TextField name='homeLocation'/>
-              <TextField name='lat'/>
-              <TextField name='lng'/>
-              <TextField name='carMake'/>
-              <TextField name='carModel'/>
-              <TextField name='carColor'/>
-              <TextField name='carPlate'/>
-              <SubmitField value='Submit'/>
+              <TextField id="create-profile-firstName" name='firstName'/>
+              <TextField id="create-profile-lastName" name='lastName'/>
+              <TextField id="create-profile-userType" name='userType'/>
+              <TextField id="create-profile-homeLocation" name='homeLocation'/>
+              <TextField id="create-profile-lat" name='lat'/>
+              <TextField id="create-profile-lng" name='lng'/>
+              <TextField id="create-profile-carMake" name='carMake'/>
+              <TextField id="create-profile-carModel" name='carModel'/>
+              <TextField id="create-profile-carColor" name='carColor'/>
+              <TextField id="create-profile-carPlate" name='carPlate'/>
+              <SubmitField id="create-profile-submit" value='Submit'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>
