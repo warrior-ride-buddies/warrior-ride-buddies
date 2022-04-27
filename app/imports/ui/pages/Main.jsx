@@ -139,6 +139,8 @@ class Main extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    const myEmail = Meteor.user().username;
+    const myUser = this.props.users.filter(user => user.owner === myEmail);
     return (
       <div style={{ height: '100%', padding: '0px', margin: '0px' }} id={'main-page'}>
         <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }} id='main-filter'>
@@ -180,7 +182,7 @@ class Main extends React.Component {
             </Dropdown.Menu>
           </Dropdown>
         </Form>
-        <Map users={this.filterUsers(this.props.users)}/>
+        <Map users={this.filterUsers(this.props.users)} myUser={myUser[0]}/>
       </div>
     );
   }

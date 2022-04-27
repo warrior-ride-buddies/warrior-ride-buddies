@@ -49,6 +49,7 @@ class Map extends React.Component {
 
   render() {
     const users = this.props.users;
+    const myUser = this.props.myUser;
     return (
       <LoadScript
         googleMapsApiKey={ApiKeys.mapsApiKey}
@@ -73,7 +74,7 @@ class Map extends React.Component {
               position={this.state.activePosition} onCloseClick={this.onClose}
             >
               <div>
-                <MapPin user={this.state.selectedUser}/>
+                <MapPin user={this.state.selectedUser} myUser={myUser}/>
                 <CreateReport/>
               </div>
             </InfoWindow>
@@ -86,6 +87,7 @@ class Map extends React.Component {
 
 Map.propTypes = {
   users: PropTypes.array.isRequired,
+  myUser: PropTypes.object.isRequired,
 };
 
 export default withRouter(Map);

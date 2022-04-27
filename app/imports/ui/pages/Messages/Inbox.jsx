@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, List } from 'semantic-ui-react';
+import { Container, Loader, List, Header } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Conversation from '../../components/Messages/Conversation';
@@ -17,7 +17,7 @@ class Inbox extends React.Component {
   renderPage() {
     return (
       <Container id={'inbox-page'}>
-        <Header as="h2" textAlign="center" inverted>List Profiles</Header>
+        <Header as="h2" textAlign="center" style={{ paddingTop: '20px' }} id={'Inbox-page'} >Message Your Buddy</Header>
         <List divided relaxed>
           {this.props.conversations.map((conversation, index) => <Conversation
             key={index}

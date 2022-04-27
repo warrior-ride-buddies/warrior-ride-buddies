@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Image, List, Modal } from 'semantic-ui-react';
+import { Container, Feed, Image, List, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Message from './Message';
@@ -35,28 +35,32 @@ class Conversation extends React.Component {
     const currentUser = this.props.currentUser;
     const something = conversation.users.filter(user => (user.username !== currentUser));
     return (
-      <Modal
-        onClose={this.onClose}
-        onOpen={this.onOpen}
-        open={this.isOpen}
-        trigger={<List.Item>
-          <Image src={something[0].image} avatar/>
-          <List.Content>
-            <List.Header as='a'> {something[0].username} </List.Header>
-            {/* <List.Description as='a'>Updated 10 mins ago</List.Description> */}
-          </List.Content>
-        </List.Item>}
-      >
-        <Modal.Header> {something[0].username} </Modal.Header>
-        <Modal.Content>
-          <Modal.Description>
-            <Feed>
-              {this.props.conversation.messages.map((message, index) => <Message key={index} message={message}/>)}
-            </Feed>
-            <AddMessage conversation={conversation} from={currentUser}/>
-          </Modal.Description>
-        </Modal.Content>
-      </Modal>
+      <Container style={{ paddingBottom: '10px' }}>
+        <div style={{ backgroundColor: 'grey', borderRadius: '10px', paddingLeft: '10px', paddingTop: '5px', paddingBottom: '5px' }}>
+          <Modal
+            onClose={this.onClose}
+            onOpen={this.onOpen}
+            open={this.isOpen}
+            trigger={<List.Item>
+              <List.Content>
+                <Image src={something[0].image} avatar />
+                <List.Header as='a' style={{ color: 'black' }}> {something[0].username} </List.Header>
+                {/* <List.Description as='a'>Updated 10 mins ago</List.Description> */}
+              </List.Content>
+            </List.Item>}
+          >
+            <Modal.Header> {something[0].username} </Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Feed>
+                  {this.props.conversation.messages.map((message, index) => <Message key={index} message={message}/>)}
+                </Feed>
+                <AddMessage conversation={conversation} from={currentUser}/>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
+        </div>
+      </Container>
     );
   }
 }
