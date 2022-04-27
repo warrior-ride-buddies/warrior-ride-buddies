@@ -30,7 +30,7 @@ class NavBar {
   }
 
   /** Go to sign up page. */
-  async gotoSignupPage(testController) {
+  async openSignupPage(testController) {
     await this.ensureLogout(testController);
     await testController.click('#signup');
   }
