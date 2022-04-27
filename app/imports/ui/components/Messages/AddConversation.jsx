@@ -65,7 +65,7 @@ class AddConversation extends React.Component {
         onClose={this.onClose}
         onOpen={this.onOpen}
         open={this.isOpen}
-        trigger={<Button> Add Conversation </Button>}
+        trigger={<Button> Start Conversation </Button>}
       >
         <Modal.Content>
           <Modal.Description>
