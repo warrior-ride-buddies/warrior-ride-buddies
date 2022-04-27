@@ -71,8 +71,10 @@
         "lat": 21.294876,
         "lng": -157.835588
       },
-      "trips": [{"day": 5, "arrivalTime": 601, "departureTime": 960, "userType": "rider"},
-        {"day": 6, "arrivalTime": 601, "departureTime": 960, "userType": "driver"}],
+      "trips": [{"day": 1, "arrivalTime": 630, "departureTime": 840, "userType": "rider"},
+        {"day": 2, "arrivalTime": 540, "departureTime": 900, "userType": "driver"},
+        {"day": 3, "arrivalTime": 630, "departureTime": 840, "userType": "rider"},
+        {"day": 4, "arrivalTime": 540, "departureTime": 90, "userType": "driver"}],
       "carMake": "Mazda",
       "carModel": "CX-7",
       "carColor": "Gray",
