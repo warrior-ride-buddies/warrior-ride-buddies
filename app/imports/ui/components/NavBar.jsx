@@ -7,6 +7,7 @@ import { Menu, Dropdown, Header, Button, Form, Message, Image } from 'semantic-u
 import { Roles } from 'meteor/alanning:roles';
 import LoginDropdown from './UserAuthentication/LoginDropdown';
 import EditProfileModal from './UserProfile/EditProfileModal';
+import { Users } from '../../api/user/User';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
@@ -76,7 +77,7 @@ class NavBar extends React.Component {
                     icon={
                       <Image
                         avatar
-                        style={ { marginLeft: '10px' } } src='./images/kobey.jpeg'
+                        style={ { marginLeft: '10px' } } src={this.props.currentUserImage}
                       />
                     }
                     pointing="top right"
@@ -175,7 +176,7 @@ class NavBar extends React.Component {
                 icon={
                   <Image
                     avatar
-                    style={ { marginLeft: '10px' } } src='./images/kobey.jpeg'
+                    style={ { marginLeft: '10px' } } src={this.props.currentUserImage}
                   />
                 }
                 pointing="top right"
@@ -208,13 +209,17 @@ class NavBar extends React.Component {
 // Declare the types of all properties.
 NavBar.propTypes = {
   currentUser: PropTypes.string,
+  currentUserImage: PropTypes.string,
   location: PropTypes.object,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-const NavBarContainer = withTracker(() => ({
-  currentUser: Meteor.user() ? Meteor.user().username : '',
-}))(NavBar);
+const NavBarContainer = withTracker(() => (
+  {
+    currentUser: Meteor.user() ? Meteor.user().username : '',
+    currentUserImage: (Meteor.subscribe(Users.userPublicationName).ready() && Meteor.user()) ? Users.collection.find({ owner: Meteor.user().username }).fetch()[0].image : './images/MissingProfileImage.png',
+  }
+))(NavBar);
 
 // Enable ReactRouter for this component. https://reacttraining.com/react-router/web/api/withRouter
 export default withRouter(NavBarContainer);
