@@ -85,7 +85,7 @@ class Signup extends React.Component {
               </Segment>
             </Form>
             <Message>
-              Already have an account? Login <Link to="/signin">here</Link>
+              Already have an account? Login <Link id="login-page-button" to="/signin">here</Link>
             </Message>
             {this.state.error === '' ? (
               ''
