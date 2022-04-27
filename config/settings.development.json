@@ -28,7 +28,8 @@
       "carModel": "CR-V",
       "carColor": "Gray",
       "carPlate": "ABC 123",
-      "owner": "kobeya@hawaii.edu"
+      "owner": "kobeya@hawaii.edu",
+      "image": "./images/kobey.jpeg"
     },
     { "firstName": "Dummy",
       "lastName": "Foo",
@@ -76,7 +77,8 @@
       "carModel": "CX-7",
       "carColor": "Gray",
       "carPlate": "STR NUM",
-      "owner": "admin@foo.com" }
+      "owner": "admin@foo.com",
+      "image": "https://yongsungm.github.io/images/portrait.png"}
   ],
 
   "defaultConversations": [
