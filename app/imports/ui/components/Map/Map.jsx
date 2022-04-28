@@ -74,7 +74,7 @@ class Map extends React.Component {
               position={this.state.activePosition} onCloseClick={this.onClose}
             >
               <div>
-                <MapPin user={this.state.selectedUser} myUser={myUser}/>
+                <MapPin user={this.state.selectedUser} myUser={myUser} existConvo={this.props.existConvo}/>
                 <CreateReport/>
               </div>
             </InfoWindow>
@@ -88,6 +88,7 @@ class Map extends React.Component {
 Map.propTypes = {
   users: PropTypes.array.isRequired,
   myUser: PropTypes.object.isRequired,
+  existConvo: PropTypes.array.isRequired,
 };
 
 export default withRouter(Map);

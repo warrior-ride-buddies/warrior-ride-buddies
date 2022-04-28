@@ -11,7 +11,7 @@ class MapPin extends React.Component {
     return (
       <div>
         <UserInfo user={this.props.user}/>
-        <AddConversation sender={this.props.myUser} receiver={this.props.user}/>
+        <AddConversation sender={this.props.myUser} receiver={this.props.user} existConvo={this.props.existConvo}/>
         <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
         <Schedule trips={this.props.user.trips}/>
       </div>
@@ -22,6 +22,7 @@ class MapPin extends React.Component {
 MapPin.propTypes = {
   user: PropTypes.object.isRequired,
   myUser: PropTypes.object.isRequired,
+  existConvo: PropTypes.array.isRequired,
 };
 
 export default withRouter(MapPin);

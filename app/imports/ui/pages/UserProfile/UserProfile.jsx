@@ -9,6 +9,7 @@ import Schedule from '../../components/UserProfile/Schedule';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
+
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
@@ -24,7 +25,7 @@ class UserProfile extends React.Component {
         </Grid.Column>
         <Grid.Column width={12}>
           <div style={{ height: '750px', paddingTop: '30px' }}>
-            <UserInfo key={user._id} user={user} />
+            <UserInfo key={user._id} user={user}/>
             <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
             <Schedule trips={user.trips}/>
             <Button>Message {this.props.user.firstName}</Button>
@@ -49,6 +50,8 @@ UserProfile.propTypes = {
 
   user: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  sender: PropTypes.object.isRequired,
+  receiver: PropTypes.object.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker

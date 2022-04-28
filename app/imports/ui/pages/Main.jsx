@@ -6,6 +6,7 @@ import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 import PropTypes from 'prop-types';
 import Map from '../components/Map/Map';
 import { Users } from '../../api/user/User';
+import { Conversations } from '../../api/conversation/Conversations';
 import Parse from '../../api/parse/parse';
 
 const dotwOptions = [
@@ -182,7 +183,7 @@ class Main extends React.Component {
             </Dropdown.Menu>
           </Dropdown>
         </Form>
-        <Map users={this.filterUsers(this.props.users)} myUser={myUser[0]}/>
+        <Map users={this.filterUsers(this.props.users)} myUser={myUser[0]} existConvo={this.props.existConvo}/>
       </div>
     );
   }
@@ -191,17 +192,21 @@ class Main extends React.Component {
 Main.propTypes = {
   users: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  existConvo: PropTypes.array.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Users.userPublicationName);
+  const subscription1 = Meteor.subscribe(Users.userPublicationName);
+  const subscription2 = Meteor.subscribe(Conversations.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription1.ready() && subscription2.ready();
   // Get the Stuff documents
   const users = Users.collection.find({}).fetch();
+  const existConvo = Conversations.collection.find({}).fetch();
   return {
+    existConvo,
     users,
     ready,
   };

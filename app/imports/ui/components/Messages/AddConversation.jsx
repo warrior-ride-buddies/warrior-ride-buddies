@@ -43,18 +43,29 @@ class AddConversation extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { message, from, createdAt } = data;
-    const messages = [{ message: message, from: from, createdAt: createdAt }];
-    const users = [{ username: this.props.sender.owner, image: 'images/personIcon.png' }, { username: this.props.receiver.owner, image: 'images/kobey.jpeg' }];
-    Conversations.collection.insert({ messages, users },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'conversation added successfully', 'success');
-          formRef.reset();
-        }
-      });
+    let bool = false;
+    this.props.existConvo.forEach((convo) => {
+      const users = convo.users.map(user => user.username);
+      if (users.includes(this.props.receiver.owner)) {
+        bool = true;
+      }
+    });
+    if (bool === false) {
+      const { message, from, createdAt } = data;
+      const messages = [{ message: message, from: from, createdAt: createdAt }];
+      const users = [{ username: this.props.sender.owner, image: 'images/personIcon.png' }, { username: this.props.receiver.owner, image: 'images/kobey.jpeg' }];
+      Conversations.collection.insert({ messages, users },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            swal('Success', 'conversation added successfully', 'success');
+            formRef.reset();
+          }
+        });
+    } else if (bool === true) {
+      swal('Error', 'This conversation already exists or is an invalid user', 'error');
+    }
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
@@ -88,6 +99,7 @@ class AddConversation extends React.Component {
 AddConversation.propTypes = {
   sender: PropTypes.object.isRequired,
   receiver: PropTypes.object.isRequired,
+  existConvo: PropTypes.array.isRequired,
 };
 
 export default AddConversation;
