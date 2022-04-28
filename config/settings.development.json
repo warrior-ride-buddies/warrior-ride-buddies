@@ -84,6 +84,35 @@
       "carPlate": "STR NUM",
       "owner": "admin@foo.com",
       "image": "https://yongsungm.github.io/images/portrait.png"},
+    {
+      "firstName": "William",
+      "lastName": "Liang",
+      "userType": "Rider",
+      "homeLocation": "Honolulu, 96817",
+      "position": {
+        "lat": 21.3904,
+        "lng": -157.9495
+      },
+      "trips": [
+        {
+          "day": 5,
+          "arrivalTime": 600,
+          "departureTime": 960,
+          "userType": "rider"
+        },
+        {
+          "day": 6,
+          "arrivalTime": 600,
+          "departureTime": 960,
+          "userType": "rider"
+        }
+      ],
+      "carMake": "",
+      "carModel": "",
+      "carColor": "",
+      "carPlate": "",
+      "owner": "wliang80@hawaii.edu"
+    },
     { "firstName": "Alyssia",
       "lastName": "Chen",
       "userType": "Driver",
