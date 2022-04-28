@@ -139,6 +139,7 @@ class Main extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    const currentUser = this.props.users.filter(user => (user.owner === this.props.email))[0];
     return (
       <div style={{ height: '100%', padding: '0px', margin: '0px' }} id={'main-page'}>
         <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }} id='main-filter'>
@@ -180,7 +181,7 @@ class Main extends React.Component {
             </Dropdown.Menu>
           </Dropdown>
         </Form>
-        <Map users={this.filterUsers(this.props.users)}/>
+        <Map users={this.filterUsers(this.props.users)} currentUser={currentUser}/>
       </div>
     );
   }
@@ -189,18 +190,24 @@ class Main extends React.Component {
 Main.propTypes = {
   users: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  email: PropTypes.string,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+const MainContainer = withTracker(() => ({
+  email: Meteor.user() ? Meteor.user().username : '',
+}))(Main);
+
 export default withTracker(() => {
-  // Get access to Stuff documents.
+
   const subscription = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
   const users = Users.collection.find({}).fetch();
+  // Get the Stuff documents
   return {
     users,
     ready,
   };
-})(Main);
+})(MainContainer);

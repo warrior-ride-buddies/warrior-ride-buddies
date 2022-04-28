@@ -1,10 +1,7 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
 import { Button, Modal, Form } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Reports } from '../../../api/report/Reports';
-import { Conversations } from '../../../api/conversation/Conversations';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class CreateReport extends React.Component {

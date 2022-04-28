@@ -72,7 +72,7 @@ class Map extends React.Component {
               position={this.state.activePosition} onCloseClick={this.onClose}
             >
               <div>
-                <MapPin selectedUser={this.state.selectedUser}/>
+                <MapPin selectedUser={this.state.selectedUser} currentUser={this.props.currentUser}/>
               </div>
             </InfoWindow>
           }
@@ -84,6 +84,7 @@ class Map extends React.Component {
 
 Map.propTypes = {
   users: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default Map;

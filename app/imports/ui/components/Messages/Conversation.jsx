@@ -1,15 +1,16 @@
 import React from 'react';
-import { Feed, Image, List, Modal } from 'semantic-ui-react';
+import { Feed, Button, List, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Message from './Message';
 import AddMessage from './AddMessage';
+import { Conversations } from '../../../api/conversation/Conversations';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class Conversation extends React.Component {
   constructor() {
     super();
     this.state = {
-      isOpen: false, // Hides or shows the InfoWindow
+      isOpen: false, // Hides or shows the Conversation
     };
   }
 
@@ -27,6 +28,7 @@ class Conversation extends React.Component {
         isOpen: true,
       });
     }
+
   };
 
   render() {
@@ -38,15 +40,9 @@ class Conversation extends React.Component {
         onClose={this.onClose}
         onOpen={this.onOpen}
         open={this.isOpen}
-        trigger={<List.Item>
-          <Image src={otherUsers[0].image} avatar/>
-          <List.Content>
-            <List.Header as='a'> {otherUsers[0].username} </List.Header>
-            {/* <List.Description as='a'>Updated 10 mins ago</List.Description> */}
-          </List.Content>
-        </List.Item>}
+        trigger={<Button color='teal' content='Message' icon='send' labelPosition='right'/>}
       >
-        <Modal.Header><List.Content>{otherUsers.map((user, index) => <List.Item key={index}>{user.username}</List.Item>)}</List.Content></Modal.Header>
+        <Modal.Header><List.Content>{otherUsers.map((user, index) => <List.Item key={index}>{`${user.firstName} ${user.lastName}`}</List.Item>)}</List.Content></Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <Feed>
@@ -63,7 +59,8 @@ class Conversation extends React.Component {
 // Require a document to be passed to this component.
 Conversation.propTypes = {
   currentUser: PropTypes.string.isRequired,
-  conversation: PropTypes.object.isRequired,
+  conversation: PropTypes.object,
+  selectedUser: PropTypes.object,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
