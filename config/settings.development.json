@@ -106,10 +106,6 @@
     {"users": [{"username": "john@foo.com", "image": "images/personIcon.png" }, {"username": "kobeya@hawaii.edu", "image": "images/kobey.jpeg" }], "messages":  []}
   ],
 
-  "defaultReports": [
-    {"createdBy": "john@foo.com", "reportedUser": "kobeya@hawaii.edu", "report": "reported for...", "createdAt": "date"}
-  ],
-
   "monti": {
     "appId": "Q5cTSqJNRu8FL49gw",
     "appSecret": "8477a5d2-c06f-4946-8688-d44ae29a3ab2"
