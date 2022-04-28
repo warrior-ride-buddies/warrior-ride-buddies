@@ -18,7 +18,6 @@ class SignupPage {
     await testController.typeText('#signup-form-password', password);
     await testController.typeText('#signup-form-password2', password);
     await testController.click('#signup-form-submit');
-    await navBar.isLoggedIn(testController, username);
   }
 
   /** Add new data for new user */
