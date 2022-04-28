@@ -1,7 +1,6 @@
 import React from 'react';
 import { Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import UserInfo from '../UserProfile/UserInfo';
 import Schedule from '../UserProfile/Schedule';
 
@@ -21,4 +20,4 @@ MapPin.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default withRouter(MapPin);
+export default MapPin;

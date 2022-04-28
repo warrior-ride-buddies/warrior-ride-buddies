@@ -102,8 +102,8 @@
   ],
 
   "defaultConversations": [
-    {"users":  [{"username": "john@foo.com", "image": "images/personIcon.png" }, {"username": "admin@foo.com", "image": "images/personIcon.png" }], "messages": []},
-    {"users": [{"username": "john@foo.com", "image": "images/personIcon.png" }, {"username": "kobeya@hawaii.edu", "image": "images/kobey.jpeg" }], "messages":  []}
+    {"users":  [{"username": "john@foo.com", "firstName": "Jesse", "lastName": "James","image": "images/personIcon.png" }, {"username": "admin@foo.com", "firstName": "Yong-Sung", "lastName": "Masuda", "image": "images/personIcon.png" }], "messages": []},
+    {"users": [{"username": "john@foo.com", "firstName": "Jesse", "lastName": "James", "image": "images/personIcon.png" }, {"username": "kobeya@hawaii.edu", "firstName": "Kobey", "lastName":  "Arai", "image": "images/kobey.jpeg" }], "messages":  []}
   ],
 
   "monti": {

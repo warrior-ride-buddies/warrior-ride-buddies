@@ -1,7 +1,6 @@
 import React from 'react';
 import { Feed, Image, List, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import Message from './Message';
 import AddMessage from './AddMessage';
 
@@ -68,4 +67,4 @@ Conversation.propTypes = {
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(Conversation);
+export default Conversation;

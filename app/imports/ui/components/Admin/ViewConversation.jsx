@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Feed, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import Message from '../Messages/Message';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
@@ -58,4 +57,4 @@ ViewConversation.propTypes = {
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(ViewConversation);
+export default ViewConversation;

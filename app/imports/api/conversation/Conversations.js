@@ -16,6 +16,8 @@ class ConversationsCollection {
     });
     const userSchema = new SimpleSchema({
       username: String,
+      firstName: String,
+      lastName: String,
       image: String,
     });
     this.schema = new SimpleSchema({

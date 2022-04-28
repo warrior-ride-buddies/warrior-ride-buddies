@@ -1,7 +1,6 @@
 import React from 'react';
 import { Feed } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class Message extends React.Component {
@@ -29,4 +28,4 @@ Message.propTypes = {
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(Message);
+export default Message;

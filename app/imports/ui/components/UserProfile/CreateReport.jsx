@@ -40,7 +40,7 @@ class CreateReport extends React.Component {
         onClose={() => this.setOpen(false)}
         onOpen={() => this.setOpen(true)}
         open={this.state.open}
-        trigger={<Button circular icon='exclamation'></Button>}
+        trigger={<Button circular icon='exclamation'/>}
       >
         <Modal.Header>Submit a report</Modal.Header>
         <Modal.Content>
