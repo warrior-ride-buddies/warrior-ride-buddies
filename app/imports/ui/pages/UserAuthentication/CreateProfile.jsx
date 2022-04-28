@@ -12,6 +12,7 @@ import { Users } from '../../../api/user/User';
 const formSchema = new SimpleSchema({
   firstName: String,
   lastName: String,
+  image: String,
   userType: String,
   homeLocation: String,
   lat: Number,
@@ -49,11 +50,11 @@ class CreateProfile extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { firstName, lastName, userType, homeLocation, lat, lng, carMake, carModel, carColor, carPlate } = data;
+    const { firstName, lastName, image, userType, homeLocation, lat, lng, carMake, carModel, carColor, carPlate } = data;
     const position = { lat: lat, lng: lng };
     const trips = [{ day: 5, arrivalTime: 600, departureTime: 960, userType: 'driver' }];
     const owner = Meteor.user().username;
-    Users.collection.insert({ firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
+    Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -93,6 +94,7 @@ class CreateProfile extends React.Component {
                   <GridColumn><SelectField id="create-profile-userType" name='userType' options={userTypes}/></GridColumn>
                 </GridRow>
               </Grid>
+              <TextField id="create-profile-image" name='image'/>
               <TextField id="create-profile-carMake" name='carMake'/>
               <TextField id="create-profile-carModel" name='carModel'/>
               <TextField id="create-profile-carColor" name='carColor'/>

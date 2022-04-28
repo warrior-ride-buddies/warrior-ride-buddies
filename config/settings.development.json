@@ -90,8 +90,8 @@
       "userType": "Rider",
       "homeLocation": "Honolulu, 96817",
       "position": {
-        "lat": 21.3904,
-        "lng": -157.9495
+        "lat": 21.3215,
+        "lng": -157.8568
       },
       "trips": [
         {
@@ -111,7 +111,8 @@
       "carModel": "",
       "carColor": "",
       "carPlate": "",
-      "owner": "wliang80@hawaii.edu"
+      "owner": "wliang80@hawaii.edu",
+      "image": "https://william-liang808.github.io/images/headshot.jpg"
     },
     { "firstName": "Alyssia",
       "lastName": "Chen",
