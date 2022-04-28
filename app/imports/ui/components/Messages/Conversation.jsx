@@ -33,21 +33,21 @@ class Conversation extends React.Component {
   render() {
     const conversation = this.props.conversation;
     const currentUser = this.props.currentUser;
-    const something = conversation.users.filter(user => (user.username !== currentUser));
+    const otherUsers = conversation.users.filter(user => (user.username !== currentUser));
     return (
       <Modal
         onClose={this.onClose}
         onOpen={this.onOpen}
         open={this.isOpen}
         trigger={<List.Item>
-          <Image src={something[0].image} avatar/>
+          <Image src={otherUsers[0].image} avatar/>
           <List.Content>
-            <List.Header as='a'> {something[0].username} </List.Header>
+            <List.Header as='a'> {otherUsers[0].username} </List.Header>
             {/* <List.Description as='a'>Updated 10 mins ago</List.Description> */}
           </List.Content>
         </List.Item>}
       >
-        <Modal.Header> {something[0].username} </Modal.Header>
+        <Modal.Header><List.Content>{otherUsers.map((user, index) => <List.Item key={index}>{user.username}</List.Item>)}</List.Content></Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <Feed>
