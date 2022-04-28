@@ -217,7 +217,9 @@ NavBar.propTypes = {
 const NavBarContainer = withTracker(() => (
   {
     currentUser: Meteor.user() ? Meteor.user().username : '',
-    currentUserImage: (Meteor.subscribe(Users.userPublicationName).ready() && Meteor.user()) ? Users.collection.find({ owner: Meteor.user().username }).fetch()[0].image : './images/MissingProfileImage.png',
+    currentUserImage: (Meteor.subscribe(Users.userPublicationName).ready()
+        && Meteor.user())
+        && Users.collection.find({ owner: Meteor.user().username }).fetch().length > 1 ? Users.collection.find({ owner: Meteor.user().username }).fetch()[0].image : './images/MissingProfileImage.png',
   }
 ))(NavBar);
 
