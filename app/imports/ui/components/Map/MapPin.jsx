@@ -26,13 +26,22 @@ class MapPin extends React.Component {
     const selectedUser = this.props.selectedUser;
     const currentUser = this.props.currentUser;
     const conversations = this.props.conversations.filter((conversation) => (conversation.users.some((user) => (user === selectedUser.owner)))).filter((conversation) => (conversation.users.length === 2));
+    let messageButton;
+    let reportButton;
+    if (selectedUser.owner === currentUser.owner) {
+      messageButton = <></>;
+      reportButton = <></>;
+    } else {
+      messageButton = <Conversation currentUser={currentUser} conversations={conversations} selectedUser={selectedUser}/>;
+      reportButton = <CreateReport reportedUser={selectedUser.owner} conversations={this.props.conversations} currentUser={currentUser.owner}/>;
+    }
     return (
       <div>
         <UserInfo user={selectedUser}/>
         <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
         <Schedule trips={selectedUser.trips}/>
-        <Conversation currentUser={currentUser} conversations={conversations} selectedUser={selectedUser}/>
-        <CreateReport reportedUser={selectedUser.owner} conversations={this.props.conversations} currentUser={currentUser.owner}/>
+        {messageButton}
+        {reportButton}
       </div>
     );
   }
