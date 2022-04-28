@@ -44,6 +44,7 @@ class CreateReport extends React.Component {
       >
         <Modal.Header>Submit a report</Modal.Header>
         <Modal.Content>
+          (Your conversations with this user will automatically be submitted for review)
           <Form>
             <Form.TextArea onChange={this.changeText} value={this.state.text}/>
           </Form>
