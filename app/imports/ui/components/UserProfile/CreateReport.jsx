@@ -72,19 +72,4 @@ CreateReport.propTypes = {
   conversations: PropTypes.array.isRequired,
 };
 
-const CreateReportContainer = withTracker(() => ({
-  currentUser: Meteor.user() ? Meteor.user().username : '',
-}))(CreateReport);
-
-export default withTracker(() => {
-  // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Conversations.userPublicationName);
-  // Determine if the subscription is ready
-  const ready = subscription.ready();
-  // Get the Stuff documents
-  const conversations = Conversations.collection.find({}).fetch();
-  return {
-    conversations,
-    ready,
-  };
-})(CreateReportContainer);
+export default CreateReport;

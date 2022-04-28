@@ -72,8 +72,7 @@ class Map extends React.Component {
               position={this.state.activePosition} onCloseClick={this.onClose}
             >
               <div>
-                <MapPin user={this.state.selectedUser}/>
-                <CreateReport reportedUser={this.state.selectedUser.owner}/>
+                <MapPin selectedUser={this.state.selectedUser}/>
               </div>
             </InfoWindow>
           }
