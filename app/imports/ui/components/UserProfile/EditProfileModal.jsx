@@ -19,9 +19,6 @@ function ModalExampleModal() {
     >
       <Modal.Header>Edit Profile</Modal.Header>
       <Modal.Content>
-        <div className='edit-profile-image'>
-          <EditProfileImage/>
-        </div>
         <EditProfile/>
       </Modal.Content>
       <Modal.Actions>
