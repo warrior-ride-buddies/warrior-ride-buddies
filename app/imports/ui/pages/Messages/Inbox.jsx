@@ -17,11 +17,12 @@ class Inbox extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     const currentUser = this.props.users.filter(user => (user.owner === this.props.currentUser))[0];
+    const conversations = this.props.conversations.filter(conversation => (conversation.messages.length !== 0));
     return (
       <Container id={'inbox-page'}>
         <Header as="h2" textAlign="center" inverted>List Profiles</Header>
         <List divided relaxed>
-          {this.props.conversations.map((conversation, index) => <Conversation
+          {conversations.map((conversation, index) => <Conversation
             key={index}
             currentUser={currentUser}
             conversations={[conversation]}

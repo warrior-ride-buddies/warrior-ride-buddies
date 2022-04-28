@@ -18,6 +18,9 @@ class Conversation extends React.Component {
   }
 
   onClose = () => {
+    if (this.props.conversations[0].messages.length === 0) {
+      Conversations.collection.remove({ _id: this.props.conversations[0]._id });
+    }
     if (this.state.isOpen) {
       this.setState({
         isOpen: false,
