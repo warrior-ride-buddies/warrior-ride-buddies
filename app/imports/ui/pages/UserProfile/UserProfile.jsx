@@ -1,11 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Button, Grid, Header, Image, Loader } from 'semantic-ui-react';
+import { Grid, Header, Image, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Users } from '../../../api/user/User';
 import UserInfo from '../../components/UserProfile/UserInfo';
 import Schedule from '../../components/UserProfile/Schedule';
+import AddConversation from '../../components/Messages/AddConversation';
+import { Conversations } from '../../../api/conversation/Conversations';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
@@ -16,6 +18,8 @@ class UserProfile extends React.Component {
 
   renderPage() {
     const user = this.props.user[0];
+    const myEmail = Meteor.user().username;
+    const myUser = this.props.users.filter(u => u.owner === myEmail);
     return (
       <Grid style={{ margin: '20px' }} id={'userprofile-page'}>
         <Grid.Column width={4} textAlign='center'>
@@ -28,7 +32,7 @@ class UserProfile extends React.Component {
             <UserInfo key={user._id} user={user}/>
             <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
             <Schedule trips={user.trips}/>
-            <Button>Message {this.props.user.firstName}</Button>
+            <AddConversation sender={myUser[0]} receiver={this.props.user[0]} existConvo={this.props.existConvo}/>
           </div>
         </Grid.Column>
       </Grid>
@@ -49,9 +53,9 @@ UserProfile.propTypes = {
   // }).isRequired,
 
   user: PropTypes.array.isRequired,
+  existConvo: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
-  sender: PropTypes.object.isRequired,
-  receiver: PropTypes.object.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -60,11 +64,16 @@ export default withTracker(({ match }) => {
   const email = match.params.owner;
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Users.userPublicationName);
+  const subscription2 = Meteor.subscribe(Conversations.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && subscription2.ready();
   // Get the Stuff documents
+  const users = Users.collection.find({}).fetch();
   const user = Users.collection.find({ owner: email }).fetch();
+  const existConvo = Conversations.collection.find({}).fetch();
   return {
+    existConvo,
+    users,
     user,
     ready,
   };

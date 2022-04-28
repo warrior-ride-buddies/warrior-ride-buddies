@@ -35,15 +35,15 @@ class Conversation extends React.Component {
     const currentUser = this.props.currentUser;
     const something = conversation.users.filter(user => (user.username !== currentUser));
     return (
-      <Container style={{ paddingBottom: '10px' }} >
+      <Container style={{ paddingBottom: '10px' }}>
         <div style={{ backgroundColor: 'grey', borderRadius: '10px', paddingLeft: '10px', paddingTop: '5px', paddingBottom: '5px' }}>
-          <Modal style={{ overflow: 'auto', maxHeight: '40em' }}
+          <Modal style={{ overflow: 'auto', maxHeight: '30em' }}
             onClose={this.onClose}
             onOpen={this.onOpen}
             open={this.isOpen}
             trigger={<List.Item>
               <List.Content>
-                <Image src={something[0].image} avatar />
+                <Image src={something[0].image} avatar/>
                 <List.Header as='a' style={{ color: 'black' }}> {something[0].username} </List.Header>
                 {/* <List.Description as='a'>Updated 10 mins ago</List.Description> */}
               </List.Content>
