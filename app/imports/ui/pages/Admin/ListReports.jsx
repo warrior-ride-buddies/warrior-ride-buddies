@@ -4,37 +4,34 @@ import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Users } from '../../../api/user/User';
+import { Reports } from '../../../api/report/Reports';
+import { Conversations } from '../../../api/conversation/Conversations';
+import Report from '../../components/Admin/Report';
 
 class ListReports extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
-  renderWait() {
+  render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   // Render the page once subscriptions have been received.
-  render() {
+  renderPage() {
     return (
       <Container>
         <Header as="h2" textAlign="center" id="listreports-page">Review Reports</Header>
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>user</Table.HeaderCell>
-              <Table.HeaderCell>reported by</Table.HeaderCell>
-              <Table.HeaderCell>issue</Table.HeaderCell>
-              <Table.HeaderCell>date</Table.HeaderCell>
-              <Table.HeaderCell>reported message</Table.HeaderCell>
+              <Table.HeaderCell>User</Table.HeaderCell>
+              <Table.HeaderCell>Reported by</Table.HeaderCell>
+              <Table.HeaderCell>Issue</Table.HeaderCell>
+              <Table.HeaderCell>Date</Table.HeaderCell>
+              <Table.HeaderCell>Conversations involving both parties</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>jappleseed@hawaii.edu</Table.Cell>
-              <Table.Cell>jdeer@hawaii.edu</Table.Cell>
-              <Table.Cell>Broke TOS</Table.Cell>
-              <Table.Cell>Mar 13, 2022</Table.Cell>
-              <Table.Cell><a>message link/modal</a></Table.Cell>
-            </Table.Row>
+            {this.props.reports.map((report, index) => (<Report key={index} report={report} conversations={this.props.conversations.filter(conversation => report.conversationIds.some((id) => (id === conversation._id)))}/>))}
           </Table.Body>
         </Table>
       </Container>
@@ -45,6 +42,8 @@ class ListReports extends React.Component {
 // Require an array of Stuff documents in the props.
 ListReports.propTypes = {
   users: PropTypes.array.isRequired,
+  reports: PropTypes.array.isRequired,
+  conversations: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -52,11 +51,17 @@ ListReports.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Users.adminPublicationName);
+  const subscription2 = Meteor.subscribe(Reports.adminPublicationName);
+  const subscription3 = Meteor.subscribe(Conversations.adminPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready();
   // Get the Stuff documents
   const users = Users.collection.find({}).fetch();
+  const reports = Reports.collection.find({}).fetch();
+  const conversations = Conversations.collection.find({}).fetch();
   return {
+    conversations,
+    reports,
     users,
     ready,
   };
