@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
+import { Grid, Segment, Header, GridRow, GridColumn } from 'semantic-ui-react';
+import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -20,6 +20,21 @@ const formSchema = new SimpleSchema({
   carColor: String,
   carPlate: String,
 });
+
+const userTypes = [
+  {
+    label: 'Rider',
+    value: 'rider',
+  },
+  {
+    label: 'Driver',
+    value: 'driver',
+  },
+  {
+    label: 'Both',
+    value: 'both',
+  },
+];
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
@@ -49,15 +64,25 @@ class CreateProfile extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Add Stuff</Header>
+          <Header as="h2" textAlign="center">Create Profile</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <TextField id="create-profile-firstName" name='firstName'/>
-              <TextField id="create-profile-lastName" name='lastName'/>
-              <TextField id="create-profile-userType" name='userType'/>
-              <TextField id="create-profile-homeLocation" name='homeLocation'/>
-              <TextField id="create-profile-lat" name='lat'/>
-              <TextField id="create-profile-lng" name='lng'/>
+              <Grid>
+                <GridRow columns={2}>
+                  <GridColumn><TextField id="create-profile-firstName" name='firstName'/></GridColumn>
+                  <GridColumn><TextField id="create-profile-lastName" name='lastName'/></GridColumn>
+                </GridRow>
+                <GridRow>
+                  <GridColumn>
+                    <TextField id="create-profile-homeLocation" name='homeLocation'/>
+                  </GridColumn>
+                </GridRow>
+                <GridRow columns={3}>
+                  <GridColumn><TextField id="create-profile-lat" name='lat'/></GridColumn>
+                  <GridColumn><TextField id="create-profile-lng" name='lng'/></GridColumn>
+                  <GridColumn><SelectField id="create-profile-userType" name='userType' options={userTypes}/></GridColumn>
+                </GridRow>
+              </Grid>
               <TextField id="create-profile-carMake" name='carMake'/>
               <TextField id="create-profile-carModel" name='carModel'/>
               <TextField id="create-profile-carColor" name='carColor'/>
