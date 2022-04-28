@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Header, Button } from 'semantic-ui-react';
+import { Header, Button, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import UserInfo from '../UserProfile/UserInfo';
 import Schedule from '../UserProfile/Schedule';
@@ -19,9 +19,15 @@ class MapPin extends React.Component {
   }
 
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
     const selectedUser = this.props.selectedUser;
     const currentUser = this.props.currentUser;
-    const conversations = this.props.conversations.filter((conversation) => (conversation.users.some((user) => (user.username === selectedUser.owner && user.username))));
+    const conversations = this.props.conversations.filter((conversation) => (conversation.users.some((user) => (user.username === selectedUser.owner))));
+    console.log(conversations);
+    console.log(this.props.conversations);
     let createNew = [];
     if (conversations.length === 0) { createNew = [1]; }
     return (
@@ -29,8 +35,7 @@ class MapPin extends React.Component {
         <UserInfo user={selectedUser}/>
         <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
         <Schedule trips={selectedUser.trips}/>
-        {createNew.map((index) => <Button key={index}>Hello</Button>)}
-        {conversations.map((conversation, index) => <Conversation key={index} currentUser={currentUser.owner} conversation={conversation}/>)}
+        <Conversation currentUser={currentUser} conversations={conversations} selectedUser={selectedUser}/>
         <CreateReport reportedUser={selectedUser.owner} conversations={this.props.conversations} currentUser={currentUser.owner}/>
       </div>
     );

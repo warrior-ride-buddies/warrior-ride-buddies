@@ -5,6 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Conversation from '../../components/Messages/Conversation';
 import { Conversations } from '../../../api/conversation/Conversations';
+import { Users } from '../../../api/user/User';
 
 class Inbox extends React.Component {
 
@@ -15,14 +16,15 @@ class Inbox extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    const currentUser = this.props.users.filter(user => (user.owner === this.props.currentUser))[0];
     return (
       <Container id={'inbox-page'}>
         <Header as="h2" textAlign="center" inverted>List Profiles</Header>
         <List divided relaxed>
           {this.props.conversations.map((conversation, index) => <Conversation
             key={index}
-            currentUser={this.props.currentUser}
-            conversation={conversation}
+            currentUser={currentUser}
+            conversations={[conversation]}
           />)}
         </List>
       </Container>
@@ -34,6 +36,7 @@ class Inbox extends React.Component {
 Inbox.propTypes = {
   currentUser: PropTypes.string,
   conversations: PropTypes.array,
+  users: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -45,12 +48,15 @@ const InboxContainer = withTracker(() => ({
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Conversations.userPublicationName);
+  const subscription2 = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && subscription2.ready();
   // Get the Stuff documents
   const conversations = Conversations.collection.find({}).fetch();
+  const users = Users.collection.find({}).fetch();
   return {
     conversations,
+    users,
     ready,
   };
 })(InboxContainer);

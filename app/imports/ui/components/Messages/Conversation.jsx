@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Button, List, Modal } from 'semantic-ui-react';
+import { Feed, Button, List, Modal, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Message from './Message';
 import AddMessage from './AddMessage';
@@ -23,6 +23,14 @@ class Conversation extends React.Component {
   };
 
   onOpen = () => {
+    if (this.props.conversations.length === 0) {
+      const messages = [];
+      const currentUser = this.props.currentUser;
+      const selectedUser = this.props.selectedUser;
+      const users = [{ username: currentUser.owner, firstName: currentUser.firstName, lastName: currentUser.lastName, image: 'images/personIcon.png' },
+        { username: selectedUser.owner, firstName: selectedUser.firstName, lastName: selectedUser.lastName, image: 'images/kobey.jpeg' }];
+      Conversations.collection.insert({ messages, users });
+    }
     if (this.state.isOpen) {
       this.setState({
         isOpen: true,
@@ -32,8 +40,17 @@ class Conversation extends React.Component {
   };
 
   render() {
-    const conversation = this.props.conversation;
-    const currentUser = this.props.currentUser;
+    return (this.props.conversations.length !== 0) ? this.renderPage() : <Modal
+      onClose={this.onClose}
+      onOpen={this.onOpen}
+      open={this.isOpen}
+      trigger={<Button color='teal' content='Message' icon='send' labelPosition='right'/>}
+    />;
+  }
+
+  renderPage() {
+    const conversation = this.props.conversations[0];
+    const currentUser = this.props.currentUser.owner;
     const otherUsers = conversation.users.filter(user => (user.username !== currentUser));
     return (
       <Modal
@@ -46,7 +63,7 @@ class Conversation extends React.Component {
         <Modal.Content>
           <Modal.Description>
             <Feed>
-              {this.props.conversation.messages.map((message, index) => <Message key={index} message={message}/>)}
+              {conversation.messages.map((message, index) => <Message key={index} message={message}/>)}
             </Feed>
             <AddMessage conversation={conversation} from={currentUser}/>
           </Modal.Description>
@@ -58,8 +75,8 @@ class Conversation extends React.Component {
 
 // Require a document to be passed to this component.
 Conversation.propTypes = {
-  currentUser: PropTypes.string.isRequired,
-  conversation: PropTypes.object,
+  currentUser: PropTypes.object.isRequired,
+  conversations: PropTypes.array.isRequired,
   selectedUser: PropTypes.object,
 };
 
