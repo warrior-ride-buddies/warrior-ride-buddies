@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Dimmer, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 class EditProfileImage extends Component {
   state = {}
@@ -25,10 +26,15 @@ class EditProfileImage extends Component {
         onMouseLeave={this.handleHide}
         size='medium'
         rounded
-        src='./images/kobey.jpeg'
+        src={this.props.user.image}
       />
     );
   }
 }
+
+// Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
+EditProfileImage.propTypes = {
+  user: PropTypes.object,
+};
 
 export default EditProfileImage;

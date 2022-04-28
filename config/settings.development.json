@@ -29,7 +29,8 @@
       "carModel": "CR-V",
       "carColor": "Gray",
       "carPlate": "ABC 123",
-      "owner": "kobeya@hawaii.edu"
+      "owner": "kobeya@hawaii.edu",
+      "image": "./images/kobey.jpeg"
     },
     { "firstName": "Dummy",
       "lastName": "Foo",
@@ -79,7 +80,8 @@
       "carModel": "CX-7",
       "carColor": "Gray",
       "carPlate": "STR NUM",
-      "owner": "admin@foo.com" },
+      "owner": "admin@foo.com",
+      "image": "https://yongsungm.github.io/images/portrait.png"},
     {
       "firstName": "William",
       "lastName": "Liang",
@@ -109,7 +111,8 @@
       "carPlate": "",
       "owner": "wliang80@hawaii.edu"
     },
-    { "firstName": "Alyssia",
+    {
+      "firstName": "Alyssia",
       "lastName": "Chen",
       "userType": "Driver",
       "homeLocation": "Hawaii Kai, 96825",
@@ -117,10 +120,32 @@
         "lat": 21.2805556,
         "lng": -157.7072222
       },
-      "trips": [{"day": 2, "arrivalTime": 500, "departureTime": 880, "userType": "driver"},
-        {"day": 4, "arrivalTime": 600, "departureTime": 960, "userType": "driver"},
-        {"day": 5, "arrivalTime": 800, "departureTime": 960, "userType": "rider"},
-        {"day": 6, "arrivalTime": 600, "departureTime": 960, "userType": "driver"}],
+      "trips": [
+        {
+          "day": 2,
+          "arrivalTime": 500,
+          "departureTime": 880,
+          "userType": "driver"
+        },
+        {
+          "day": 4,
+          "arrivalTime": 600,
+          "departureTime": 960,
+          "userType": "driver"
+        },
+        {
+          "day": 5,
+          "arrivalTime": 800,
+          "departureTime": 960,
+          "userType": "rider"
+        },
+        {
+          "day": 6,
+          "arrivalTime": 600,
+          "departureTime": 960,
+          "userType": "driver"
+        }
+      ],
       "carMake": "Nissan",
       "carModel": "Leaf",
       "carColor": "Purple",
