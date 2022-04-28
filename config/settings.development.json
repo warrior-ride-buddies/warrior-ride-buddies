@@ -29,7 +29,8 @@
       "carModel": "CR-V",
       "carColor": "Gray",
       "carPlate": "ABC 123",
-      "owner": "kobeya@hawaii.edu"
+      "owner": "kobeya@hawaii.edu",
+      "image": "https://kobeyarai808.github.io/images/kobey.jpeg"
     },
     { "firstName": "Dummy",
       "lastName": "Foo",
@@ -45,7 +46,8 @@
       "carModel": "CR-V",
       "carColor": "Gray",
       "carPlate": "ABC 123",
-      "owner": "dummy@foo.com"
+      "owner": "dummy@foo.com",
+      "image": "https://kobeyarai808.github.io/images/kobey.jpeg"
     },
     { "firstName": "Jesse",
       "lastName": "James",
@@ -62,7 +64,8 @@
       "carModel": "Celica",
       "carColor": "Blue",
       "carPlate": "QRS 456",
-      "owner": "john@foo.com" },
+      "owner": "john@foo.com",
+      "image": "https://kobeyarai808.github.io/images/kobey.jpeg"},
     { "firstName": "Yong-Sung",
       "lastName": "Masuda",
       "userType": "Driver",
@@ -79,7 +82,8 @@
       "carModel": "CX-7",
       "carColor": "Gray",
       "carPlate": "STR NUM",
-      "owner": "admin@foo.com" },
+      "owner": "admin@foo.com",
+      "image": "https://yongsungm.github.io/images/portrait.png"},
     { "firstName": "Alyssia",
       "lastName": "Chen",
       "userType": "Driver",

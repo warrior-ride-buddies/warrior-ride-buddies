@@ -19,7 +19,7 @@ class UserProfile extends React.Component {
       <Grid style={{ margin: '20px' }} id={'userprofile-page'}>
         <Grid.Column width={4} textAlign='center'>
           <div style={{ height: '750px', backgroundColor: 'grey', borderRadius: '20px' }}>
-            <Image src='./images/kobey.jpeg' style={{ padding: '30px' }} circular/>
+            <Image src={user.image} style={{ padding: '30px' }} circular/>
           </div>
         </Grid.Column>
         <Grid.Column width={12}>
@@ -27,7 +27,7 @@ class UserProfile extends React.Component {
             <UserInfo key={user._id} user={user} />
             <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
             <Schedule trips={user.trips}/>
-            <Button>Message {this.props.user.firstName}</Button>
+            <Button>Message {user.firstName}</Button>
           </div>
         </Grid.Column>
       </Grid>

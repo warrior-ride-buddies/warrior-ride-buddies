@@ -13,7 +13,7 @@ class UserCard extends React.Component {
             bordered
             floated='right'
             size='mini'
-            src='./images/kobey.jpeg'
+            src={this.props.user.image}
           />
           <Card.Header>{this.props.user.firstName} {this.props.user.lastName}</Card.Header>
           <Card.Meta>{this.props.user.homeLocation}</Card.Meta>
@@ -37,6 +37,7 @@ UserCard.propTypes = {
     carColor: PropTypes.string,
     carPlate: PropTypes.string,
     owner: PropTypes.string,
+    image: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

@@ -42,11 +42,13 @@ class UsersCollection {
         optional: true,
       },
       'trips.$': { type: tripSchema },
-      carMake: String,
-      carModel: String,
-      carColor: String,
-      carPlate: String,
+      userType: String,
+      carMake: { type: String, optional: true },
+      carModel: { type: String, optional: true },
+      carColor: { type: String, optional: true },
+      carPlate: { type: String, optional: true },
       owner: String,
+      image: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

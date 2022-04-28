@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import { Redirect } from 'react-router-dom';
 import { Users } from '../../../api/user/User';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -15,24 +16,24 @@ const formSchema = new SimpleSchema({
   homeLocation: String,
   lat: Number,
   lng: Number,
-  carMake: String,
-  carModel: String,
-  carColor: String,
-  carPlate: String,
+  carMake: { type: String, optional: true },
+  carModel: { type: String, optional: true },
+  carColor: { type: String, optional: true },
+  carPlate: { type: String, optional: true },
 });
 
 const userTypes = [
   {
     label: 'Rider',
-    value: 'rider',
+    value: 'Rider',
   },
   {
     label: 'Driver',
-    value: 'driver',
+    value: 'Driver',
   },
   {
     label: 'Both',
-    value: 'both',
+    value: 'Both',
   },
 ];
 
@@ -40,6 +41,11 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 
 /** Renders the Page for adding a document. */
 class CreateProfile extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { error: '', redirectToReferer: false };
+  }
 
   // On submit, insert the data.
   submit(data, formRef) {
@@ -52,14 +58,18 @@ class CreateProfile extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
           formRef.reset();
+          this.setState({ error: '', redirectToReferer: true });
         }
       });
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   render() {
+    // if correct authentication, redirect to from: page instead of signup screen
+    if (this.state.redirectToReferer) {
+      return <Redirect to={'/main'}/>;
+    }
     let fRef = null;
     return (
       <Grid container centered>
