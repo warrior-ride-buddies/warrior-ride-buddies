@@ -14,17 +14,8 @@ class ConversationsCollection {
       from: String,
       createdAt: Date,
     });
-    const userSchema = new SimpleSchema({
-      username: String,
-      firstName: String,
-      lastName: String,
-      image: String,
-    });
     this.schema = new SimpleSchema({
-      users: {
-        type: Array,
-      },
-      'users.$': { type: userSchema },
+      users: [String],
       messages: {
         type: Array,
         optional: true,

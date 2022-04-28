@@ -25,7 +25,7 @@ class MapPin extends React.Component {
   renderPage() {
     const selectedUser = this.props.selectedUser;
     const currentUser = this.props.currentUser;
-    const conversations = this.props.conversations.filter((conversation) => (conversation.users.some((user) => (user.username === selectedUser.owner))));
+    const conversations = this.props.conversations.filter((conversation) => (conversation.users.some((user) => (user === selectedUser.owner)))).filter((conversation) => (conversation.users.length === 2));
     return (
       <div>
         <UserInfo user={selectedUser}/>

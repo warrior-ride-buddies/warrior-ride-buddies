@@ -30,8 +30,7 @@ class Conversation extends React.Component {
       const messages = [];
       const currentUser = this.props.currentUser;
       const selectedUser = this.props.selectedUser;
-      const users = [{ username: currentUser.owner, firstName: currentUser.firstName, lastName: currentUser.lastName, image: 'images/personIcon.png' },
-        { username: selectedUser.owner, firstName: selectedUser.firstName, lastName: selectedUser.lastName, image: 'images/kobey.jpeg' }];
+      const users = [currentUser.owner, selectedUser.owner];
       Conversations.collection.insert({ messages, users });
     }
     if (this.state.isOpen) {
@@ -54,9 +53,8 @@ class Conversation extends React.Component {
   renderPage() {
     const conversation = this.props.conversations[0];
     const currentUser = this.props.currentUser.owner;
-    const users = this.props.users.filter((user) => (conversation.users.some((cUser) => (cUser.username === user.owner))));
+    const users = this.props.users.filter((user) => (conversation.users.some((cUser) => (cUser === user.owner))));
     const otherUsers = users.filter(user => (user.owner !== currentUser));
-    console.log(users);
     return (
       <Modal
         onClose={this.onClose}

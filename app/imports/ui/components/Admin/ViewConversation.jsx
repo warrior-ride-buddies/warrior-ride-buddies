@@ -38,7 +38,7 @@ class ViewConversation extends React.Component {
         open={this.isOpen}
         trigger={<Button>View conversation</Button>}
       >
-        <Modal.Header>{users.map((user, index) => <Modal.Content key={index}>{user.username}</Modal.Content>)}</Modal.Header>
+        <Modal.Header>{users.map((user, index) => <Modal.Content key={index}>{user}</Modal.Content>)}</Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <Feed>

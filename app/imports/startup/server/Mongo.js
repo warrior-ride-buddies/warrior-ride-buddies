@@ -32,16 +32,3 @@ if (Users.collection.find().count() === 0) {
     Meteor.settings.defaultUsers.map(data => addUsers(data));
   }
 }
-
-function addConversations(data) {
-  console.log(`  Adding conversation between: ${data.users[0].username}, ${data.users[1].username}`);
-  Conversations.collection.insert(data);
-}
-
-// Initialize the ConversationsCollection if empty.
-if (Conversations.collection.find().count() === 0) {
-  if (Meteor.settings.defaultConversations) {
-    console.log('Creating user data.');
-    Meteor.settings.defaultConversations.map(data => addConversations(data));
-  }
-}

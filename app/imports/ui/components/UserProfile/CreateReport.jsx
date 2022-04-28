@@ -23,7 +23,7 @@ class CreateReport extends React.Component {
 
   submitReport() {
     const reportedUser = this.props.reportedUser;
-    const conversationIds = this.props.conversations.filter((conversation) => (conversation.users.some((user) => (user.username === reportedUser)))).map((conversation) => (conversation._id));
+    const conversationIds = this.props.conversations.filter((conversation) => (conversation.users.some((user) => (user === reportedUser)))).map((conversation) => (conversation._id));
     const createdBy = this.props.currentUser;
     const report = this.state.text;
     const createdAt = new Date();
