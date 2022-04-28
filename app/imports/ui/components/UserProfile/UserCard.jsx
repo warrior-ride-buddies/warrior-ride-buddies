@@ -39,6 +39,7 @@ UserCard.propTypes = {
     owner: PropTypes.string,
     image: PropTypes.string,
     _id: PropTypes.string,
+    image: PropTypes.string,
   }).isRequired,
 };
 

@@ -7,6 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Users } from '../../../api/user/User';
+import EditProfileImage from '../../components/UserProfile/EditProfileImage';
 
 const bridge = new SimpleSchema2Bridge(Users.schema);
 
@@ -15,8 +16,8 @@ class EditProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate } = data;
-    Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate } }, (error) => (error ?
+    const { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, image } = data;
+    Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   }
@@ -30,25 +31,33 @@ class EditProfile extends React.Component {
   renderPage() {
     return (
       <Grid container centered>
-        <Grid.Column>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.user}>
-            <Segment>
-              <TextField id="edit-profile-firstName" name='firstName'/>
-              <TextField id="edit-profile-lastName" name='lastName'/>
-              <TextField id="edit-profile-homeLocation" name='homeLocation'/>
-              <NumField id="edit-profile-position.lng" name='position.lng'/>
-              <NumField id="edit-profile-position.lat" name='position.lat'/>
-              <HiddenField id="edit-profile-trips" name='trips' />
-              <TextField id="edit-profile-carMake" name='carMake' />
-              <TextField id="edit-profile-carModel" name='carModel' />
-              <TextField id="edit-profile-carColor" name='carColor' />
-              <TextField id="edit-profile-carPlate" name='carPlate' />
-              <HiddenField id="edit-profile-owner" name='owner' />
-              <SubmitField id="edit-profile-submit" value='Submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
-        </Grid.Column>
+        <Grid.Row>
+          <div className='edit-profile-image'>
+            <EditProfileImage user={this.props.user}/>
+          </div>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.user}>
+              <Segment>
+                <TextField id="edit-profile-firstName" name='firstName'/>
+                <TextField name='image'/>
+                <TextField id="edit-profile-lastName" name='lastName'/>
+                <TextField id="edit-profile-homeLocation" name='homeLocation'/>
+                <NumField id="edit-profile-position.lng" name='position.lng'/>
+                <NumField id="edit-profile-position.lat" name='position.lat'/>
+                <HiddenField id="edit-profile-trips" name='trips' />
+                <TextField id="edit-profile-carMake" name='carMake' />
+                <TextField id="edit-profile-carModel" name='carModel' />
+                <TextField id="edit-profile-carColor" name='carColor' />
+                <TextField id="edit-profile-carPlate" name='carPlate' />
+                <HiddenField id="edit-profile-owner" name='owner' />
+                <SubmitField id="edit-profile-submit" value='Submit'/>
+                <ErrorsField/>
+              </Segment>
+            </AutoForm>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     );
   }

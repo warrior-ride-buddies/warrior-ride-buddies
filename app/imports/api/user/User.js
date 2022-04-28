@@ -36,6 +36,10 @@ class UsersCollection {
       firstName: String,
       lastName: String,
       homeLocation: String,
+      image: {
+        type: String,
+        defaultValue: './images/MissingProfileImage.png',
+      },
       position: positionSchema,
       trips: {
         type: Array,
