@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Button, List, Modal, Loader } from 'semantic-ui-react';
+import { Feed, Button, List, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Message from './Message';
 import AddMessage from './AddMessage';

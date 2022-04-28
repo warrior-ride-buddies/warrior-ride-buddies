@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Header, Button, Loader } from 'semantic-ui-react';
+import { Header, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import UserInfo from '../UserProfile/UserInfo';
 import Schedule from '../UserProfile/Schedule';
@@ -28,8 +28,6 @@ class MapPin extends React.Component {
     const conversations = this.props.conversations.filter((conversation) => (conversation.users.some((user) => (user.username === selectedUser.owner))));
     console.log(conversations);
     console.log(this.props.conversations);
-    let createNew = [];
-    if (conversations.length === 0) { createNew = [1]; }
     return (
       <div>
         <UserInfo user={selectedUser}/>
