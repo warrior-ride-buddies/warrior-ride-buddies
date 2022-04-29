@@ -51,20 +51,34 @@ class CreateProfile extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const image = document.getElementsByName('profilePicture')[0].value;
+    let image = document.getElementsByName('profilePicture')[0].value;
     const { firstName, lastName, userType, homeLocation, lat, lng, carMake, carModel, carColor, carPlate } = data;
     const position = { lat: lat, lng: lng };
     const trips = [{ day: 5, arrivalTime: 600, departureTime: 960, userType: 'driver' }];
     const owner = Meteor.user().username;
-    Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          formRef.reset();
-          this.setState({ error: '', redirectToReferer: true });
-        }
-      });
+    if (image !== '') {
+      Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            formRef.reset();
+            this.setState({ error: '', redirectToReferer: true });
+          }
+        });
+    } else {
+      image = './images/MissingProfileImage.png';
+      Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            formRef.reset();
+            this.setState({ error: '', redirectToReferer: true });
+          }
+        });
+    }
+
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms

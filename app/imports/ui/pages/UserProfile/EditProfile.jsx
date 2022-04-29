@@ -20,10 +20,17 @@ class EditProfile extends React.Component {
   // On successful submit, insert the data.
   submit(data) {
     const image = document.getElementsByName('profilePicture')[0].value;
-    const { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate } = data;
-    Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
+    if (image !== '') {
+      const { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate } = data;
+      Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
+        swal('Error', error.message, 'error') :
+        swal('Success', 'Item updated successfully', 'success')));
+    } else {
+      const { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate } = data;
+      Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate } }, (error) => (error ?
+        swal('Error', error.message, 'error') :
+        swal('Success', 'Item updated successfully', 'success')));
+    }
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
