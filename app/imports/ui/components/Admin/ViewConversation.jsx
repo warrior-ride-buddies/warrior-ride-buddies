@@ -1,9 +1,11 @@
 import React from 'react';
-import { Button, Feed, Image, List, Modal } from 'semantic-ui-react';
+import { Button, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import Message from '../Messages/Message';
+import ConversationContent from '../Messages/ConversationContent';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Displays ConversationContent as read only
+ *  Appears as a grey button
+ *  Meant to be used by admin on Reports */
 class ViewConversation extends React.Component {
   constructor() {
     super();
@@ -31,6 +33,7 @@ class ViewConversation extends React.Component {
   render() {
     const conversation = this.props.conversation;
     const users = this.props.users.filter((user) => (conversation.users.some(cUser => (cUser === user.owner))));
+    const currentUser = this.props.currentUser;
     return (
       <Modal
         onClose={this.onClose}
@@ -38,14 +41,7 @@ class ViewConversation extends React.Component {
         open={this.isOpen}
         trigger={<Button>View conversation</Button>}
       >
-        <Modal.Header><List.Content>{users.map((user, index) => <List.Item key={index}><Image src={user.image} avatar/>{`${user.firstName} ${user.lastName}`}</List.Item>)}</List.Content></Modal.Header>
-        <Modal.Content scrolling>
-          <Modal.Description>
-            <Feed>
-              {conversation.messages.map((message, index) => <Message key={index} message={message} users={users}/>)}
-            </Feed>
-          </Modal.Description>
-        </Modal.Content>
+        <ConversationContent currentUser={currentUser} conversation={conversation} users={users} readOnly={true}/>
       </Modal>
     );
   }
@@ -55,6 +51,7 @@ class ViewConversation extends React.Component {
 ViewConversation.propTypes = {
   conversation: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
