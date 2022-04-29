@@ -6,6 +6,9 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+// eslint-disable-next-line no-unused-vars
+import uploadcare from 'uploadcare-widget/uploadcare.lang.en.min.js';
+import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 import EditProfileImage from '../../components/UserProfile/EditProfileImage';
 
@@ -16,7 +19,8 @@ class EditProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, image } = data;
+    const image = document.getElementsByName('profilePicture')[0].value;
+    const { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate } = data;
     Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
@@ -41,7 +45,6 @@ class EditProfile extends React.Component {
             <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.user}>
               <Segment>
                 <TextField id="edit-profile-firstName" name='firstName'/>
-                <TextField name='image'/>
                 <TextField id="edit-profile-lastName" name='lastName'/>
                 <TextField id="edit-profile-homeLocation" name='homeLocation'/>
                 <NumField id="edit-profile-position.lng" name='position.lng'/>
@@ -51,6 +54,14 @@ class EditProfile extends React.Component {
                 <TextField id="edit-profile-carModel" name='carModel' />
                 <TextField id="edit-profile-carColor" name='carColor' />
                 <TextField id="edit-profile-carPlate" name='carPlate' />
+                <input
+                  type="hidden"
+                  role="uploadcare-uploader"
+                  data-public-key={ApiKeys.uploadcareKey}
+                  data-tabs="file camera url facebook gdrive gphotos"
+                  data-effects="crop, rotate"
+                  name="profilePicture"
+                />
                 <HiddenField id="edit-profile-owner" name='owner' />
                 <SubmitField id="edit-profile-submit" value='Submit'/>
                 <ErrorsField/>
