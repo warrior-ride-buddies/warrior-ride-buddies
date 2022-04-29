@@ -1,19 +1,22 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ViewConversation from './ViewConversation';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Renders a report as a Table row */
 class Report extends React.Component {
   render() {
     const report = this.props.report;
+    const users = this.props.users;
+    const currentUser = users.filter(user => (user.owner === Meteor.user().username))[0];
     return (
       <Table.Row>
         <Table.Cell>{report.reportedUser}</Table.Cell>
         <Table.Cell>{report.createdBy}</Table.Cell>
         <Table.Cell>{report.report}</Table.Cell>
         <Table.Cell>{report.createdAt}</Table.Cell>
-        <Table.Cell>{this.props.conversations.map((conversation, index) => (<ViewConversation key={index} conversation={conversation} users={this.props.users}/>))}</Table.Cell>
+        <Table.Cell>{this.props.conversations.map((conversation, index) => (<ViewConversation key={index} conversation={conversation} users={users} currentUser={currentUser}/>))}</Table.Cell>
       </Table.Row>
     );
   }
