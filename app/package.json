@@ -22,7 +22,8 @@
     "sweetalert2": "^11.4.8",
     "uniforms": "^3.8.1",
     "uniforms-bridge-simple-schema-2": "^3.8.1",
-    "uniforms-semantic": "^3.8.1"
+    "uniforms-semantic": "^3.8.1",
+    "uploadcare-widget": "^3.17.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
