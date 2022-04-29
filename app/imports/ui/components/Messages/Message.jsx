@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Feed, Segment, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/** Displays message text as well as sender's name and time created */
 class Message extends React.Component {
   render() {
     const message = this.props.message;

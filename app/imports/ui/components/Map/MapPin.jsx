@@ -9,6 +9,8 @@ import CreateReport from '../UserProfile/CreateReport';
 import { Conversations } from '../../../api/conversation/Conversations';
 import Conversation from '../Messages/Conversation';
 
+/** Displays clickable markers placed at users' locations
+ *  Shows user information when clicked */
 class MapPin extends React.Component {
   constructor() {
     super();
