@@ -51,6 +51,7 @@ class CreateProfile extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
+    // eslint-disable-next-line no-undef
     let image = document.getElementsByName('profilePicture')[0].value;
     const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = data;
     const position = { lat: lat, lng: lng };

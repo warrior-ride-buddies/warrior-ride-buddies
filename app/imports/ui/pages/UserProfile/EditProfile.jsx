@@ -19,6 +19,7 @@ class EditProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
+    // eslint-disable-next-line no-undef
     const image = document.getElementsByName('profilePicture')[0].value;
     if (image !== '') {
       const { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate } = data;

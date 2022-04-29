@@ -11,8 +11,18 @@ const containerStyle = {
   marginTop: '0px',
 };
 
+const zoom = 11;
+
 const mapOptions = {
   mapTypeControl: false,
+  minZoom: zoom,
+  maxZoom: zoom + 2,
+  restriction: {
+    latLngBounds: {
+      lat: 21.483254,
+      lng: -158.097018,
+    },
+  },
 };
 
 const center = {
