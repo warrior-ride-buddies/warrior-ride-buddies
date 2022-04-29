@@ -64,6 +64,9 @@ class InboxItem extends React.Component {
     const currentUser = this.props.currentUser.owner;
     const users = this.props.users.filter((user) => (conversation.users.some((cUser) => (cUser === user.owner))));
     const otherUsers = users.filter(user => (user.owner !== currentUser));
+    const recentMessage = conversation.messages[conversation.messages.length - 1];
+    const recentSender = users.filter(user => (user.owner === recentMessage.from))[0];
+    const nameOfSenderShown = (recentSender.owner === currentUser) ? 'Me' : recentSender.firstName;
     return (
       <Modal
         onClose={this.onClose}
@@ -77,7 +80,7 @@ class InboxItem extends React.Component {
                   {otherUsers.map((user) => (`${user.firstName} ${user.lastName}`))}
                 </Grid.Column>
                 <Grid.Column textAlign={'left'}>
-                  {`${users.filter(user => (user.owner === conversation.messages[conversation.messages.length - 1].from))[0].firstName}: ${conversation.messages[conversation.messages.length - 1].message}`}
+                  {`${nameOfSenderShown}: "${recentMessage.message}"`}
                 </Grid.Column>
                 <Grid.Column>
                   {`${this.convertTime(conversation.messages[conversation.messages.length - 1].createdAt)}`}
