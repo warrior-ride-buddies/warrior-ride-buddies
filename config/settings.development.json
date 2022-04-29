@@ -11,7 +11,7 @@
     { "firstName": "Kobey",
       "lastName": "Arai",
       "userType": "Driver",
-      "homeLocation": "Waimalu, 96701",
+      "address": "Waimalu, 96701",
       "position": {
         "lat": 21.3904,
         "lng": -157.9495
@@ -28,7 +28,7 @@
     { "firstName": "Dummy",
       "lastName": "Foo",
       "userType": "Driver",
-      "homeLocation": "Waimalu, 96701",
+      "address": "Waimalu, 96701",
       "position": {
         "lat": 21.264324,
         "lng": -157.793632
@@ -45,7 +45,7 @@
     { "firstName": "Jesse",
       "lastName": "James",
       "userType": "Driver",
-      "homeLocation": "Kailua, 96734",
+      "address": "Kailua, 96734",
       "position": {
         "lat": 21.383430,
         "lng": -157.751821
@@ -58,11 +58,11 @@
       "carColor": "Blue",
       "carPlate": "QRS 456",
       "owner": "john@foo.com",
-      "image": "https://kobeyarai808.github.io/images/kobey.jpeg"},
+      "image": "https://i.imgur.com/UUfBtWh.jpg"},
     { "firstName": "Yong-Sung",
       "lastName": "Masuda",
       "userType": "Driver",
-      "homeLocation": "Waikiki, 96815",
+      "address": "Waikiki, 96815",
       "position": {
         "lat": 21.294876,
         "lng": -157.835588
@@ -81,7 +81,7 @@
       "firstName": "William",
       "lastName": "Liang",
       "userType": "Rider",
-      "homeLocation": "Honolulu, 96817",
+      "address": "Honolulu, 96817",
       "position": {
         "lat": 21.3215,
         "lng": -157.8568
@@ -111,7 +111,7 @@
       "firstName": "Alyssia",
       "lastName": "Chen",
       "userType": "Driver",
-      "homeLocation": "Hawaii Kai, 96825",
+      "address": "Hawaii Kai, 96825",
       "position": {
         "lat": 21.2805556,
         "lng": -157.7072222

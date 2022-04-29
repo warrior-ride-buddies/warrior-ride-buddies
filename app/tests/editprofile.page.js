@@ -12,7 +12,7 @@ class EditprofilePage {
   }
 
   /** Fills out profile edit boxes and saves changes */
-  async editProfile(testController, firstName, lastName, homeLocation, carMake, carModel, carColor, carPlate) {
+  async editProfile(testController, firstName, lastName, address, carMake, carModel, carColor, carPlate) {
     await testController.click('#navbar-current-user');
     await testController.click('#edit-profile');
     await testController
@@ -24,9 +24,9 @@ class EditprofilePage {
       .pressKey('ctrl+a delete')
       .typeText('#edit-profile-lastName', lastName);
     await testController
-      .click('#edit-profile-homeLocation')
+      .click('#edit-profile-address')
       .pressKey('ctrl+a delete')
-      .typeText('#edit-profile-homeLocation', homeLocation);
+      .typeText('#edit-profile-address', address);
     await testController
       .click('#edit-profile-carMake')
       .pressKey('ctrl+a delete')

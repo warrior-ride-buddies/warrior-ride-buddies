@@ -16,7 +16,7 @@ class UserCard extends React.Component {
             src={this.props.user.image}
           />
           <Card.Header>{this.props.user.firstName} {this.props.user.lastName}</Card.Header>
-          <Card.Meta>{this.props.user.homeLocation}</Card.Meta>
+          <Card.Meta>{this.props.user.address}</Card.Meta>
         </Card.Content>
         <Card.Content extra>
           <Link to={`/profile/${this.props.user.owner}`}>View Profile</Link>
@@ -31,7 +31,7 @@ UserCard.propTypes = {
   user: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
-    homeLocation: PropTypes.string,
+    address: PropTypes.string,
     carMake: PropTypes.string,
     carModel: PropTypes.string,
     carColor: PropTypes.string,

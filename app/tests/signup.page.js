@@ -22,11 +22,11 @@ class SignupPage {
   }
 
   /** Add new data for new user */
-  async updateInfo(testController, firstName, lastName, userType, homeLocation, lat, lng, carMake, carModel, carColor, carPlate) {
+  async updateInfo(testController, firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate) {
     await testController.typeText('#create-profile-firstName', firstName);
     await testController.typeText('#create-profile-lastName', lastName);
     await testController.typeText('#create-profile-userType', userType);
-    await testController.typeText('#create-profile-homeLocation', homeLocation);
+    await testController.typeText('#create-profile-address', address);
     await testController.typeText('#create-profile-lat', lat);
     await testController.typeText('#create-profile-lng', lng);
     await testController.typeText('#create-profile-carMake', carMake);

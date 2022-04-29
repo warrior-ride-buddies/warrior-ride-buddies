@@ -14,7 +14,7 @@ const formSchema = new SimpleSchema({
   lastName: String,
   image: String,
   userType: String,
-  homeLocation: String,
+  address: String,
   lat: Number,
   lng: Number,
   carMake: { type: String, optional: true },
@@ -50,11 +50,11 @@ class CreateProfile extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { firstName, lastName, image, userType, homeLocation, lat, lng, carMake, carModel, carColor, carPlate } = data;
+    const { firstName, lastName, image, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = data;
     const position = { lat: lat, lng: lng };
     const trips = [];
     const owner = Meteor.user().username;
-    Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
+    Users.collection.insert({ firstName, lastName, image, userType, address, position, trips, carMake, carModel, carColor, carPlate, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -85,7 +85,7 @@ class CreateProfile extends React.Component {
                 </GridRow>
                 <GridRow>
                   <GridColumn>
-                    <TextField id="create-profile-homeLocation" name='homeLocation'/>
+                    <TextField id="create-profile-address" name='address'/>
                   </GridColumn>
                 </GridRow>
                 <GridRow columns={3}>

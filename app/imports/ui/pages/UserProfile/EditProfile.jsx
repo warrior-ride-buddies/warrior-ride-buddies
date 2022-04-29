@@ -16,8 +16,8 @@ class EditProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, image } = data;
-    Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
+    const { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate, image } = data;
+    Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   }
@@ -43,7 +43,7 @@ class EditProfile extends React.Component {
                 <TextField id="edit-profile-firstName" name='firstName'/>
                 <TextField name='image'/>
                 <TextField id="edit-profile-lastName" name='lastName'/>
-                <TextField id="edit-profile-homeLocation" name='homeLocation'/>
+                <TextField id="edit-profile-address" name='address'/>
                 <NumField id="edit-profile-position.lng" name='position.lng'/>
                 <NumField id="edit-profile-position.lat" name='position.lat'/>
                 <HiddenField id="edit-profile-trips" name='trips' />

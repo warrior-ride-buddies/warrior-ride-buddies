@@ -35,7 +35,7 @@ class UsersCollection {
     this.schema = new SimpleSchema({
       firstName: String,
       lastName: String,
-      homeLocation: String,
+      address: String,
       image: {
         type: String,
         defaultValue: './images/MissingProfileImage.png',
