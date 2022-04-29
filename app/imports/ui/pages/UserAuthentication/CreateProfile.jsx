@@ -52,7 +52,7 @@ class CreateProfile extends React.Component {
   submit(data, formRef) {
     const { firstName, lastName, image, userType, homeLocation, lat, lng, carMake, carModel, carColor, carPlate } = data;
     const position = { lat: lat, lng: lng };
-    const trips = [{ day: 5, arrivalTime: 600, departureTime: 960, userType: 'driver' }];
+    const trips = [];
     const owner = Meteor.user().username;
     Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
       (error) => {
