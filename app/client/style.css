@@ -36,3 +36,9 @@
   padding-top: 0.8em;
 }
 
+.uploadcare--widget__button.uploadcare--widget__button_type_open {
+  background-color: #4e7844;
+  padding: 0.5em;
+  margin-right: 1em;
+}
+

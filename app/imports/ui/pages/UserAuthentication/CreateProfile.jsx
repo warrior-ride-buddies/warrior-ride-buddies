@@ -6,13 +6,14 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Redirect } from 'react-router-dom';
+import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   firstName: String,
   lastName: String,
-  image: String,
+  image: { type: String, optional: true },
   userType: String,
   homeLocation: String,
   lat: Number,
@@ -50,19 +51,34 @@ class CreateProfile extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { firstName, lastName, image, userType, homeLocation, lat, lng, carMake, carModel, carColor, carPlate } = data;
+    let image = document.getElementsByName('profilePicture')[0].value;
+    const { firstName, lastName, userType, homeLocation, lat, lng, carMake, carModel, carColor, carPlate } = data;
     const position = { lat: lat, lng: lng };
     const trips = [];
     const owner = Meteor.user().username;
-    Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          formRef.reset();
-          this.setState({ error: '', redirectToReferer: true });
-        }
-      });
+    if (image !== '') {
+      Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            formRef.reset();
+            this.setState({ error: '', redirectToReferer: true });
+          }
+        });
+    } else {
+      image = './images/MissingProfileImage.png';
+      Users.collection.insert({ firstName, lastName, image, userType, homeLocation, position, trips, carMake, carModel, carColor, carPlate, owner },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            formRef.reset();
+            this.setState({ error: '', redirectToReferer: true });
+          }
+        });
+    }
+
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
@@ -94,12 +110,18 @@ class CreateProfile extends React.Component {
                   <GridColumn><SelectField id="create-profile-userType" name='userType' options={userTypes}/></GridColumn>
                 </GridRow>
               </Grid>
-              <TextField id="create-profile-image" name='image'/>
               <TextField id="create-profile-carMake" name='carMake'/>
               <TextField id="create-profile-carModel" name='carModel'/>
               <TextField id="create-profile-carColor" name='carColor'/>
               <TextField id="create-profile-carPlate" name='carPlate'/>
-              <SubmitField id="create-profile-submit" value='Submit'/>
+              <input
+                type="hidden"
+                id="uploadcare-uploader"
+                role="uploadcare-uploader"
+                data-public-key={ApiKeys.uploadcareKey}
+                data-tabs="file camera url facebook gdrive gphotos"
+                data-effects="crop, rotate"
+                name="profilePicture"/><SubmitField id="create-profile-submit" value='Submit'/>
               <ErrorsField/>
             </Segment>
           </AutoForm>
