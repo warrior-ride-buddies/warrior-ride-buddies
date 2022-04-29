@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Users } from '../../api/user/User';
 import { Contacts } from '../../api/contact/Contacts';
-import { Conversations } from '../../api/conversation/Conversations';
 
 /* eslint-disable no-console */
 

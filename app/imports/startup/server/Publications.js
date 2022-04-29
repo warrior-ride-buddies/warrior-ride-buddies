@@ -20,7 +20,6 @@ Meteor.publish(Users.adminPublicationName, function () {
   return this.ready();
 });
 
-
 Meteor.publish(Reports.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Reports.collection.find();

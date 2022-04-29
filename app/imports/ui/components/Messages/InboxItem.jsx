@@ -5,7 +5,6 @@ import { Feed, Button, List, Modal, Image, Grid, Container } from 'semantic-ui-r
 import PropTypes from 'prop-types';
 import Message from './Message';
 import AddMessage from './AddMessage';
-import { Conversations } from '../../../api/conversation/Conversations';
 import { Users } from '../../../api/user/User';
 import Parse from '../../../api/parse/parse';
 
@@ -19,9 +18,6 @@ class InboxItem extends React.Component {
   }
 
   onClose = () => {
-    if (this.props.conversations[0].messages.length === 0) {
-      Conversations.collection.remove({ _id: this.props.conversations[0]._id });
-    }
     if (this.state.isOpen) {
       this.setState({
         isOpen: false,
@@ -30,19 +26,11 @@ class InboxItem extends React.Component {
   };
 
   onOpen = () => {
-    if (this.props.conversations.length === 0) {
-      const messages = [];
-      const currentUser = this.props.currentUser;
-      const selectedUser = this.props.selectedUser;
-      const users = [currentUser.owner, selectedUser.owner];
-      Conversations.collection.insert({ messages, users });
-    }
     if (this.state.isOpen) {
       this.setState({
         isOpen: true,
       });
     }
-
   };
 
   convertTime(date) {

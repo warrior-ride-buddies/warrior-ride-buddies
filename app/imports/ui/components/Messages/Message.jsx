@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Feed, Container, Segment, Grid } from 'semantic-ui-react';
+import { Feed, Segment, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
@@ -11,7 +11,7 @@ class Message extends React.Component {
     const ownMessage = message.from === Meteor.user().username;
     const position = ownMessage ? 'right' : 'left';
     const color = ownMessage ? 'teal' : 'grey';
-    const nameDisplayed = ownMessage ? 'Me' : `${from[0].firstName} ${from[0].lastName}`
+    const nameDisplayed = ownMessage ? 'Me' : `${from[0].firstName} ${from[0].lastName}`;
     return (
       <Feed.Event>
         <Feed.Content>

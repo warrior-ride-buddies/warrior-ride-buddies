@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Feed, Image, List, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Message from '../Messages/Message';
-import AddMessage from '../Messages/AddMessage';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class ViewConversation extends React.Component {
