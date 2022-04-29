@@ -96,20 +96,20 @@ class Main extends React.Component {
   filterTrips = (trips, filterParams) => {
     let returnVal = trips;
     const { day, arrivalTime, departureTime, arrivalRange, departureRange, userType } = filterParams;
-    if (filterParams.day !== 7) {
+    if (day !== defaultFilterParams.day) {
       returnVal = returnVal.filter(trip => (trip.day === day));
     }
-    if (arrivalTime !== 1440) {
+    if (arrivalTime !== defaultFilterParams.arrivalTime) {
       returnVal = returnVal.filter(trip => (
         trip.arrivalTime <= arrivalTime) &&
         (trip.arrivalTime >= arrivalTime - arrivalRange));
     }
-    if (departureTime !== 1440) {
+    if (departureTime !== defaultFilterParams.departureTime) {
       returnVal = returnVal.filter(trip => (
         trip.departureTime >= departureTime) &&
         (trip.departureTime <= departureTime + departureRange));
     }
-    if (userType !== 'both') {
+    if (userType !== defaultFilterParams.userType) {
       returnVal = (returnVal.filter(trip => (trip.userType === userType)));
     }
     return returnVal;
