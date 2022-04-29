@@ -18,9 +18,15 @@ class Inbox extends React.Component {
   renderPage() {
     const currentUser = this.props.users.filter(user => (user.owner === this.props.currentUser))[0];
     const conversations = this.props.conversations.filter(conversation => (conversation.messages.length !== 0));
+    let header;
+    if (conversations.length !== 0) {
+      header = <Header as="h1" textAlign="center">Inbox</Header>;
+    } else {
+      header = <Header as="h1" textAlign="center">Your messages will appear here</Header>;
+    }
     return (
       <Container id={'inbox-page'}>
-        <Header as="h2" textAlign="center" inverted>List Profiles</Header>
+        {header}
         <List divided relaxed>
           {conversations.map((conversation, index) => <Conversation
             key={index}

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Button, Grid, Header, Image, Loader } from 'semantic-ui-react';
+import { Grid, Header, Image, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Users } from '../../../api/user/User';
+import { Conversations } from '../../../api/conversation/Conversations';
 import UserInfo from '../../components/UserProfile/UserInfo';
 import Schedule from '../../components/UserProfile/Schedule';
+import Conversation from '../../components/Messages/Conversation';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
@@ -14,20 +16,27 @@ class UserProfile extends React.Component {
   }
 
   renderPage() {
-    const user = this.props.user[0];
+    const selectedUser = this.props.selectedUser;
+    const currentUser = this.props.currentUser;
+    let messageButton;
+    if (selectedUser.owner === currentUser.owner) {
+      messageButton = <></>;
+    } else {
+      messageButton = <Conversation currentUser={currentUser} conversations={this.props.conversation} selectedUser={selectedUser}/>;
+    }
     return (
       <Grid style={{ margin: '20px' }} id={'userprofile-page'}>
         <Grid.Column width={4} textAlign='center'>
           <div style={{ height: '750px', backgroundColor: 'grey', borderRadius: '20px' }}>
-            <Image src={user.image} style={{ padding: '30px' }} circular/>
+            <Image src={selectedUser.image} style={{ padding: '30px' }} circular/>
           </div>
         </Grid.Column>
         <Grid.Column width={12}>
           <div style={{ height: '750px', paddingTop: '30px' }}>
-            <UserInfo key={user._id} user={user} />
+            <UserInfo key={selectedUser._id} user={selectedUser} />
             <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
-            <Schedule trips={user.trips}/>
-            <Button>Message {user.firstName}</Button>
+            <Schedule trips={selectedUser.trips}/>
+            {messageButton}
           </div>
         </Grid.Column>
       </Grid>
@@ -46,8 +55,9 @@ UserProfile.propTypes = {
   //   friday: PropTypes.array,
   //   _id: PropTypes.array,
   // }).isRequired,
-
-  user: PropTypes.array.isRequired,
+  conversation: PropTypes.array.isRequired,
+  selectedUser: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -57,12 +67,18 @@ export default withTracker(({ match }) => {
   const email = match.params.owner;
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Users.userPublicationName);
+  const subscription2 = Meteor.subscribe(Conversations.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && subscription2.ready();
   // Get the Stuff documents
-  const user = Users.collection.find({ owner: email }).fetch();
+  const selectedUser = Users.collection.findOne({ owner: email });
+  const currentUser = Users.collection.findOne({ owner: Meteor.user().username });
+  const conversations = Conversations.collection.find({}).fetch();
+  const conversation = conversations.filter((convo => (convo.users.some(user => (user === selectedUser.owner)))));
   return {
-    user,
+    conversation,
+    selectedUser,
+    currentUser,
     ready,
   };
 })(UserProfile);
