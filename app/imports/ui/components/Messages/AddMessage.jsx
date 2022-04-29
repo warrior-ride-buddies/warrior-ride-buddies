@@ -1,5 +1,4 @@
 import React from 'react';
-import { Segment } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
@@ -28,7 +27,6 @@ class AddMessage extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
           formRef.reset();
         }
       });
@@ -39,13 +37,11 @@ class AddMessage extends React.Component {
     let fRef = null;
     return (
       <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
-        <Segment>
-          <TextField label="Send a message." name='message' autoComplete="off"/>
-          <SubmitField value='Send'/>
-          <ErrorsField/>
-          <HiddenField name='from' value={this.props.from}/>
-          <HiddenField name='createdAt' value={new Date()}/>
-        </Segment>
+        <TextField name='message' autoComplete="off"/>
+        <SubmitField value='Send'/>
+        <ErrorsField/>
+        <HiddenField name='from' value={this.props.from}/>
+        <HiddenField name='createdAt' value={new Date()}/>
       </AutoForm>
     );
   }

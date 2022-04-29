@@ -1,15 +1,16 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Feed, Button, List, Modal, Image } from 'semantic-ui-react';
+import { Feed, Button, List, Modal, Image, Grid, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Message from './Message';
 import AddMessage from './AddMessage';
 import { Conversations } from '../../../api/conversation/Conversations';
 import { Users } from '../../../api/user/User';
+import Parse from '../../../api/parse/parse';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class Conversation extends React.Component {
+class InboxItem extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -44,6 +45,11 @@ class Conversation extends React.Component {
 
   };
 
+  convertTime(date) {
+    const min = date.getHours() * 60 + date.getMinutes();
+    return Parse.timeToString(min);
+  }
+
   render() {
     return (this.props.conversations.length !== 0 && this.props.ready) ? this.renderPage() : <Modal
       onClose={this.onClose}
@@ -63,8 +69,25 @@ class Conversation extends React.Component {
         onClose={this.onClose}
         onOpen={this.onOpen}
         open={this.isOpen}
-        trigger={<Button color='teal' content='Message' icon='send' labelPosition='right'/>}
-      >
+        trigger={
+          <Container textAlign={'center'}>
+            <Button basic className='ui fluid button'>
+              <Grid columns={3}>
+                <Grid.Column textAlign={'left'}>
+                  {otherUsers.map((user) => (`${user.firstName} ${user.lastName}`))}
+                </Grid.Column>
+                <Grid.Column textAlign={'left'}>
+                  {`${users.filter(user => (user.owner === conversation.messages[conversation.messages.length - 1].from))[0].firstName}: ${conversation.messages[conversation.messages.length - 1].message}`}
+                </Grid.Column>
+                <Grid.Column>
+                  {`${this.convertTime(conversation.messages[conversation.messages.length - 1].createdAt)}`}
+                </Grid.Column>
+              </Grid>
+              <Container>
+              </Container>
+            </Button>
+          </Container>
+        }>
         <Modal.Header><List.Content>{otherUsers.map((user, index) => <List.Item key={index}><Image src={user.image} avatar/>{`${user.firstName} ${user.lastName}`}</List.Item>)}</List.Content></Modal.Header>
         <Modal.Content scrolling>
           <Modal.Description>
@@ -80,7 +103,7 @@ class Conversation extends React.Component {
 }
 
 // Require a document to be passed to this component.
-Conversation.propTypes = {
+InboxItem.propTypes = {
   currentUser: PropTypes.object.isRequired,
   conversations: PropTypes.array.isRequired,
   selectedUser: PropTypes.object,
@@ -97,4 +120,4 @@ export default withTracker(() => {
     users,
     ready,
   };
-})(Conversation);
+})(InboxItem);

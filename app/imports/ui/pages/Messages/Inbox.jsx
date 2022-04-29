@@ -1,9 +1,9 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, List } from 'semantic-ui-react';
+import { Container, Header, Loader, Grid } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import Conversation from '../../components/Messages/Conversation';
+import InboxItem from '../../components/Messages/InboxItem';
 import { Conversations } from '../../../api/conversation/Conversations';
 import { Users } from '../../../api/user/User';
 
@@ -27,13 +27,13 @@ class Inbox extends React.Component {
     return (
       <Container id={'inbox-page'}>
         {header}
-        <List divided relaxed>
-          {conversations.map((conversation, index) => <Conversation
+        <Grid>
+          {conversations.map((conversation, index) => <InboxItem
             key={index}
             currentUser={currentUser}
             conversations={[conversation]}
           />)}
-        </List>
+        </Grid>
       </Container>
     );
   }
