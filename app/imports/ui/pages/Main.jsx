@@ -57,7 +57,6 @@ class Main extends React.Component {
   }
 
   changeUserType = (e, { value }) => {
-    this.setState({ userType: value });
     const userType = value;
     this.setState(prevState => ({
       filterParams: { ...prevState.filterParams,
