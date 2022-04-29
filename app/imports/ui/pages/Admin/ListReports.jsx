@@ -31,7 +31,7 @@ class ListReports extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {this.props.reports.map((report, index) => (<Report key={index} report={report} conversations={this.props.conversations.filter(conversation => report.conversationIds.some((id) => (id === conversation._id)))}/>))}
+            {this.props.reports.map((report, index) => (<Report key={index} users={this.props.users} report={report} conversations={this.props.conversations.filter(conversation => report.conversationIds.some((id) => (id === conversation._id)))}/>))}
           </Table.Body>
         </Table>
       </Container>

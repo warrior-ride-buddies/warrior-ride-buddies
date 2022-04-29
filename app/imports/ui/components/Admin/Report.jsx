@@ -13,7 +13,7 @@ class Report extends React.Component {
         <Table.Cell>{report.createdBy}</Table.Cell>
         <Table.Cell>{report.report}</Table.Cell>
         <Table.Cell>{report.createdAt}</Table.Cell>
-        <Table.Cell>{this.props.conversations.map((conversation, index) => (<ViewConversation key={index} conversation={conversation}/>))}</Table.Cell>
+        <Table.Cell>{this.props.conversations.map((conversation, index) => (<ViewConversation key={index} conversation={conversation} users={this.props.users}/>))}</Table.Cell>
       </Table.Row>
     );
   }
@@ -29,6 +29,7 @@ Report.propTypes = {
     conversationIds: PropTypes.array,
   }).isRequired,
   conversations: PropTypes.array.isRequired,
+  users: PropTypes.array,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
