@@ -115,7 +115,7 @@ class NavBar extends React.Component {
             <Header.Content>Warrior Ride Buddies</Header.Content>
           </Header>
         </Menu.Item>
-        {this.props.currentUser ? (
+        {this.props.currentProfile.length > 0 ? (
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home' id={'home'}>Home</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/inbox" key='list' id={'inbox'}>Inbox</Menu.Item>,
             <Menu.Item as={NavLink} activeClassName="active" exact to="/profiles" key="profiles" id={'profiles'}>View Profiles</Menu.Item>]
@@ -168,7 +168,7 @@ class NavBar extends React.Component {
                 </Dropdown.Menu>
               </Dropdown>
             </Button>
-          ) : (
+          ) : (this.props.currentProfile.length > 0 ? (
             <Menu.Item>
               <Dropdown
                 id="navbar-current-user"
@@ -188,6 +188,27 @@ class NavBar extends React.Component {
                 </Dropdown.Menu>
               </Dropdown>
             </Menu.Item>
+          ) : (
+            <Menu.Item>
+              <Dropdown
+                id="navbar-current-user"
+                text={this.props.currentUser}
+                icon={
+                  <Image
+                    avatar
+                    style={ { marginLeft: '10px' } } src={this.props.currentUserImage}
+                  />
+                }
+                pointing="top right"
+              >
+                <Dropdown.Menu>
+                  <Dropdown.Item id="navbar-createProfile" icon="user" text="Create Profile" as={NavLink} exact to={'/createProfile/'}/>
+                  <Dropdown.Item id="navbar-sign-out" icon="sign out" text='Sign Out' pointing="top right" as={NavLink} exact to={'/signout'}/>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Menu.Item>
+          )
+
           )}
         </Menu.Item>
         <Menu.Item>
@@ -209,6 +230,7 @@ class NavBar extends React.Component {
 // Declare the types of all properties.
 NavBar.propTypes = {
   currentUser: PropTypes.string,
+  currentProfile: PropTypes.array,
   currentUserImage: PropTypes.string,
   location: PropTypes.object,
 };
@@ -217,6 +239,7 @@ NavBar.propTypes = {
 const NavBarContainer = withTracker(() => (
   {
     currentUser: Meteor.user() ? Meteor.user().username : '',
+    currentProfile: (Meteor.subscribe(Users.userPublicationName).ready() && Meteor.user()) && Users.collection.find({ owner: Meteor.user().username }).fetch().length >= 1 ? Users.collection.find({ owner: Meteor.user().username }).fetch() : [],
     currentUserImage: (Meteor.subscribe(Users.userPublicationName).ready()
         && Meteor.user())
         && Users.collection.find({ owner: Meteor.user().username }).fetch().length >= 1 ? Users.collection.find({ owner: Meteor.user().username }).fetch()[0].image : './images/MissingProfileImage.png',
