@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Segment, Header, GridRow, GridColumn, Container, Select, Form } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
+import { Grid, Segment, Header, GridRow, GridColumn } from 'semantic-ui-react';
+import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -26,18 +26,15 @@ const formSchema = new SimpleSchema({
 
 const userTypes = [
   {
-    key: 'r',
-    text: 'Rider',
+    label: 'Rider',
     value: 'Rider',
   },
   {
-    key: 'd',
-    text: 'Driver',
+    label: 'Driver',
     value: 'Driver',
   },
   {
-    key: 'b',
-    text: 'Both',
+    label: 'Both',
     value: 'Both',
   },
 ];
@@ -49,28 +46,14 @@ class CreateProfile extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      error: '',
-      redirectToReferer: false,
-      userType: 'Rider',
-      showCarFields: false,
-    };
-  }
-
-  changeUserType = (e, { value }) => {
-    this.setState({ userType: value });
-    if (value === 'Rider') {
-      this.setState({ showCarFields: false });
-    } else {
-      this.setState({ showCarFields: true });
-    }
+    this.state = { error: '', redirectToReferer: false };
   }
 
   // On submit, insert the data.
   submit(data, formRef) {
+    // eslint-disable-next-line no-undef
     let image = document.getElementsByName('profilePicture')[0].value;
     const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = data;
-    console.log(userType);
     const position = { lat: lat, lng: lng };
     const trips = [];
     const owner = Meteor.user().username;
@@ -106,17 +89,6 @@ class CreateProfile extends React.Component {
       return <Redirect to={'/main'}/>;
     }
     let fRef = null;
-    let carFields;
-    if (this.state.showCarFields) {
-      carFields = <Container>
-        <TextField id="create-profile-carMake" name='carMake'/>
-        <TextField id="create-profile-carModel" name='carModel'/>
-        <TextField id="create-profile-carColor" name='carColor'/>
-        <TextField id="create-profile-carPlate" name='carPlate'/>
-      </Container>;
-    } else {
-      carFields = <></>;
-    }
     return (
       <Grid container centered>
         <Grid.Column>
@@ -136,21 +108,13 @@ class CreateProfile extends React.Component {
                 <GridRow columns={3}>
                   <GridColumn><TextField id="create-profile-lat" name='lat'/></GridColumn>
                   <GridColumn><TextField id="create-profile-lng" name='lng'/></GridColumn>
-                  <GridColumn>
-                    <Form.Field
-                      control={Select}
-                      fluid
-                      label="User Type"
-                      id="create-profile-userType"
-                      options={userTypes}
-                      name='userType'
-                      onChange={this.changeUserType}
-                      value={this.state.userType}
-                    />
-                  </GridColumn>
+                  <GridColumn><SelectField id="create-profile-userType" name='userType' options={userTypes}/></GridColumn>
                 </GridRow>
               </Grid>
-              {carFields}
+              <TextField id="create-profile-carMake" name='carMake'/>
+              <TextField id="create-profile-carModel" name='carModel'/>
+              <TextField id="create-profile-carColor" name='carColor'/>
+              <TextField id="create-profile-carPlate" name='carPlate'/>
               <input
                 type="hidden"
                 id="uploadcare-uploader"
