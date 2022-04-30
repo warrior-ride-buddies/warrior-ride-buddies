@@ -21,8 +21,8 @@ class LoggedInNavBar extends React.Component {
           </Menu.Item>
           {this.props.currentProfile.length > 0 ?
             <Container>
-              <Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home' id={'home'}>Home</Menu.Item>,
-              <Menu.Item as={NavLink} activeClassName="active" exact to="/inbox" key="messages" id={'inbox'}>Messages</Menu.Item>,
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/main" key='home' id={'home'}>Home</Menu.Item>
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/inbox" key="messages" id={'inbox'}>Messages</Menu.Item>
               <Menu.Item as={NavLink} activeClassName="active" exact to="/profiles" key="profiles" id={'profiles'}>View Profiles</Menu.Item>
             </Container> : <Container/>}
           {this.props.currentProfile.length > 0 && Roles.userIsInRole(Meteor.userId(), 'admin') ? (
