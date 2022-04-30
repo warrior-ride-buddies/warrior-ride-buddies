@@ -1,131 +1,218 @@
 import React from 'react';
-import { Grid, Segment, Header, GridRow, GridColumn } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
+import { Grid, Header, Select, Form, Button } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import SimpleSchema from 'simpl-schema';
 import { Redirect } from 'react-router-dom';
 import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 
-// Create a schema to specify the structure of the data to appear in the form.
-const formSchema = new SimpleSchema({
-  firstName: String,
-  lastName: String,
-  image: { type: String, optional: true },
-  userType: String,
-  address: String,
-  lat: Number,
-  lng: Number,
-  carMake: { type: String, optional: true },
-  carModel: { type: String, optional: true },
-  carColor: { type: String, optional: true },
-  carPlate: { type: String, optional: true },
-});
-
 const userTypes = [
   {
-    label: 'Rider',
+    key: 'r',
+    text: 'Rider',
     value: 'Rider',
   },
   {
-    label: 'Driver',
+    key: 'd',
+    text: 'Driver',
     value: 'Driver',
   },
   {
-    label: 'Both',
+    key: 'b',
+    text: 'Both',
     value: 'Both',
   },
 ];
 
-const bridge = new SimpleSchema2Bridge(formSchema);
-
-/** Renders the Page for adding a document. */
 class CreateProfile extends React.Component {
+  state = {
+    firstName: '',
+    lastName: '',
+    image: '',
+    userType: '',
+    address: '',
+    lat: '',
+    lng: '',
+    carMake: '',
+    carModel: '',
+    carColor: '',
+    carPlate: '',
+    redirectToReferer: false,
+    error: '',
+    showCarFields: false,
+  }
 
-  constructor(props) {
-    super(props);
-    this.state = { error: '', redirectToReferer: false };
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+  changeUserType = (e, { value }) => {
+    this.setState({ userType: value });
+    if (value === 'Rider') {
+      this.setState({ showCarFields: false });
+    } else {
+      this.setState({ showCarFields: true });
+    }
   }
 
   // On submit, insert the data.
-  submit(data, formRef) {
-    // eslint-disable-next-line no-undef
+  submit = () => {
     let image = document.getElementsByName('profilePicture')[0].value;
-    const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = data;
+    const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
+    console.log(userType);
     const position = { lat: lat, lng: lng };
     const trips = [];
     const owner = Meteor.user().username;
-    if (image !== '') {
-      Users.collection.insert({ firstName, lastName, image, userType, address, position, trips, carMake, carModel, carColor, carPlate, owner },
-        (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            formRef.reset();
-            this.setState({ error: '', redirectToReferer: true });
-          }
-        });
-    } else {
+    if (image === '') {
       image = './images/MissingProfileImage.png';
-      Users.collection.insert({ firstName, lastName, image, userType, address, position, trips, carMake, carModel, carColor, carPlate, owner },
-        (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            formRef.reset();
-            this.setState({ error: '', redirectToReferer: true });
-          }
-        });
     }
-
+    Users.collection.insert({ firstName, lastName, image, userType, address, position, trips, carMake, carModel, carColor, carPlate, owner },
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          this.setState({
+            firstName: '',
+            lastName: '',
+            image: '',
+            userType: '',
+            address: '',
+            lat: '',
+            lng: '',
+            carMake: '',
+            carModel: '',
+            carColor: '',
+            carPlate: '',
+            redirectToReferer: true,
+            error: '',
+          });
+        }
+      });
   }
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   render() {
+    const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
       return <Redirect to={'/main'}/>;
     }
-    let fRef = null;
+    let carFields;
+    if (this.state.showCarFields) {
+      carFields = <Form.Group widths='equal'>
+        <Form.Input
+          fluid
+          id="create-profile-carMake"
+          name='carMake'
+          label='Make'
+          placeholder='Make'
+          value={carMake}
+          onChange={this.handleChange}
+        />
+        <Form.Input
+          fluid
+          id="create-profile-carModel"
+          name='carModel'
+          label='Model'
+          placeholder='Model'
+          value={carModel}
+          onChange={this.handleChange}
+        />
+        <Form.Input
+          fluid
+          id="create-profile-carColor"
+          name='carColor'
+          label='Color'
+          placeholder='Color'
+          value={carColor}
+          onChange={this.handleChange}
+        />
+        <Form.Input
+          fluid
+          id="create-profile-carPlate"
+          name='carPlate'
+          label='License Plate'
+          placeholder='License Plate'
+          value={carPlate}
+          onChange={this.handleChange}
+        />
+      </Form.Group>;
+    } else {
+      carFields = <></>;
+    }
+
     return (
       <Grid container centered>
         <Grid.Column>
           <Header as="h2" textAlign="center">Create Profile</Header>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
-            <Segment>
-              <Grid>
-                <GridRow columns={2}>
-                  <GridColumn><TextField id="create-profile-firstName" name='firstName'/></GridColumn>
-                  <GridColumn><TextField id="create-profile-lastName" name='lastName'/></GridColumn>
-                </GridRow>
-                <GridRow>
-                  <GridColumn>
-                    <TextField id="create-profile-address" name='address'/>
-                  </GridColumn>
-                </GridRow>
-                <GridRow columns={3}>
-                  <GridColumn><TextField id="create-profile-lat" name='lat'/></GridColumn>
-                  <GridColumn><TextField id="create-profile-lng" name='lng'/></GridColumn>
-                  <GridColumn><SelectField id="create-profile-userType" name='userType' options={userTypes}/></GridColumn>
-                </GridRow>
-              </Grid>
-              <TextField id="create-profile-carMake" name='carMake'/>
-              <TextField id="create-profile-carModel" name='carModel'/>
-              <TextField id="create-profile-carColor" name='carColor'/>
-              <TextField id="create-profile-carPlate" name='carPlate'/>
-              <input
-                type="hidden"
-                id="uploadcare-uploader"
-                role="uploadcare-uploader"
-                data-public-key={ApiKeys.uploadcareKey}
-                data-tabs="file camera url facebook gdrive gphotos"
-                data-effects="crop, rotate"
-                name="profilePicture"/><SubmitField id="create-profile-submit" value='Submit'/>
-              <ErrorsField/>
-            </Segment>
-          </AutoForm>
+          <Form onSubmit={this.submit}>
+            <Form.Group widths='equal'>
+              <Form.Input
+                fluid
+                id="create-profile-firstName"
+                name='firstName'
+                label='First name'
+                placeholder='First name'
+                value={firstName}
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                fluid
+                id="create-profile-lastName"
+                name='lastName'
+                label='Last name'
+                placeholder='Last name'
+                value={lastName}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Input
+                fluid
+                id="create-profile-address"
+                name='address'
+                label='Address'
+                placeholder='Address'
+                value={address}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Input
+                id="create-profile-lat"
+                name='lat'
+                label='Latitude'
+                placeholder='Latitude'
+                value={lat}
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                id="create-profile-lng"
+                name='lng'
+                label='Longitude'
+                placeholder='Longitude'
+                value={lng}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                control={Select}
+                fluid
+                label="User Type"
+                id="create-profile-userType"
+                options={userTypes}
+                name='userType'
+                value={userType}
+                onChange={this.changeUserType}
+              />
+            </Form.Group>
+            {carFields}
+            <input
+              type="hidden"
+              id="uploadcare-uploader"
+              role="uploadcare-uploader"
+              data-public-key={ApiKeys.uploadcareKey}
+              data-tabs="file camera url facebook gdrive gphotos"
+              data-effects="crop, rotate"
+              name="profilePicture"/>
+            <Form.Field control={Button} id="create-profile-submit" value='Submit'>Submit</Form.Field>
+          </Form>
         </Grid.Column>
       </Grid>
     );
