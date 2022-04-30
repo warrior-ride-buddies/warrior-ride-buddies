@@ -11,6 +11,11 @@ class Parse {
     return `${h}:${m}`;
   }
 
+  static stringToNumDay(string) {
+    const conversion = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return conversion.indexOf(string);
+  }
+
   static dayToString(num) {
     let day = '';
     switch (num) {
