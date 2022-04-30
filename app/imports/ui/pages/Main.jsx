@@ -194,12 +194,8 @@ Main.propTypes = {
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-const MainContainer = withTracker(() => ({
-  email: Meteor.user() ? Meteor.user().username : '',
-}))(Main);
-
 export default withTracker(() => {
-
+  const email = Meteor.user() ? Meteor.user().username : '';
   const subscription = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
@@ -207,7 +203,8 @@ export default withTracker(() => {
   const users = Users.collection.find({}).fetch();
   // Get the Stuff documents
   return {
+    email,
     users,
     ready,
   };
-})(MainContainer);
+})(Main);
