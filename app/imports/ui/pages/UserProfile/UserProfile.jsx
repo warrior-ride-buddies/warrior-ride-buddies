@@ -7,6 +7,7 @@ import { Users } from '../../../api/user/User';
 import { Conversations } from '../../../api/conversation/Conversations';
 import UserInfo from '../../components/UserProfile/UserInfo';
 import Schedule from '../../components/UserProfile/Schedule';
+import ScheduleEditable from '../../components/UserProfile/ScheduleEditable';
 import Conversation from '../../components/Messages/Conversation';
 import AddTrip from '../../components/UserProfile/AddTrip';
 
@@ -39,7 +40,7 @@ class UserProfile extends React.Component {
           <div style={{ height: '750px', paddingTop: '30px' }}>
             <UserInfo key={selectedUser._id} user={selectedUser} />
             <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
-            <Schedule trips={selectedUser.trips}/>
+            {selectedUser.owner === currentUser.owner ? <ScheduleEditable trips={selectedUser.trips} user={currentUser}/> : <Schedule trips={selectedUser.trips}/>}
             {messageButton}
             {createTripButton}
           </div>
