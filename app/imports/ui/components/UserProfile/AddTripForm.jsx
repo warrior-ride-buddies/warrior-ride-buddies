@@ -35,19 +35,30 @@ class AddMessage extends React.Component {
     let departureTime = document.getElementsByName('departureTime')[0].value;
     arrivalTime = Parse.timeToNum(arrivalTime);
     departureTime = Parse.timeToNum(departureTime);
-    let day = data.day;
-    const userType = data.userType;
-    day = Parse.stringToNumDay(day);
-    const trips = this.props.user.trips;
-    trips.push({ day, arrivalTime, departureTime, userType });
-    Users.collection.update({ _id: this.props.user._id }, { $set: { trips: trips } },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          formRef.reset();
-        }
-      });
+    if (Number.isNaN(departureTime) && Number.isNaN(arrivalTime)) {
+      // Both are NaN which is not allowed
+      swal('Error', 'You need to input either an arrival time or departure time', 'error');
+    } else {
+      if (Number.isNaN(departureTime)) {
+        departureTime = '';
+      }
+      if (Number.isNaN(arrivalTime)) {
+        arrivalTime = '';
+      }
+      let day = data.day;
+      const userType = data.userType;
+      day = Parse.stringToNumDay(day);
+      const trips = this.props.user.trips;
+      trips.push({ day, arrivalTime, departureTime, userType });
+      Users.collection.update({ _id: this.props.user._id }, { $set: { trips: trips } },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            formRef.reset();
+          }
+        });
+    }
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
