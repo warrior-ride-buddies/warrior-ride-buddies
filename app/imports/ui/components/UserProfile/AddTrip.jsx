@@ -36,6 +36,7 @@ class AddTrip extends React.Component {
 
   render() {
     return (this.props.ready) ? this.renderPage() : <Modal
+      size='mini'
       onClose={this.onClose}
       onOpen={this.onOpen}
       open={this.isOpen}
@@ -48,6 +49,7 @@ class AddTrip extends React.Component {
     // const users = this.props.users.filter((user) => (conversation.users.some((cUser) => (cUser === user.owner))));
     return (
       <Modal
+        size='mini'
         onClose={this.onClose}
         onOpen={this.onOpen}
         open={this.isOpen}

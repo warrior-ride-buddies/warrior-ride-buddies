@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Grid, GridColumn, GridRow } from 'semantic-ui-react';
+import { Grid, GridRow } from 'semantic-ui-react';
 import { Users } from '../../../api/user/User';
 import Parse from '../../../api/parse/parse';
 
@@ -68,19 +68,19 @@ class AddMessage extends React.Component {
     return (
       <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
         <Grid container>
-          <SelectField style={{ paddingTop: '30px' }} allowedValues={dotwAllowed.filter(x => !(this.props.user.trips.map((trip) => trip.day)).includes(x)).map((num) => Parse.dayToString(num))} name='day' autoComplete="off"/>
-          <GridRow columns={2}>
-            <GridColumn>
+          <Grid.Row>
+            <Grid.Column>
+              <SelectField style={{ paddingTop: '15px' }} allowedValues={dotwAllowed.filter(x => !(this.props.user.trips.map((trip) => trip.day)).includes(x)).map((num) => Parse.dayToString(num))} name='day' autoComplete="off"/>
               <label style={{ fontWeight: 505 }}>Arriving to UH at:</label>
-              <input type='time' name='arrivalTime' autoComplete="off"/>
-            </GridColumn>
-            <GridColumn>
+              <input style={{ marginTop: '5px', marginBottom: '10px' }} type='time' name='arrivalTime' autoComplete="off"/>
               <label style={{ fontWeight: 505 }}>Leaving UH at:</label>
-              <input type='time' name='departureTime' autoComplete="off"/>
-            </GridColumn>
-          </GridRow>
-          <SelectField name='userType' autoComplete="off"/>
-          <GridRow centered style={{ paddingBottom: '35px' }}>
+              <input style={{ marginTop: '5px', marginBottom: '10px' }} type='time' name='departureTime' autoComplete="off"/>
+              <SelectField name='userType' autoComplete="off"/>
+            </Grid.Column>
+          </Grid.Row>
+          <div className='accent-block' style={{ height: '1px', opacity: '0.95' }}>
+          </div>
+          <GridRow centered style={{ paddingBottom: '40px' }}>
             <SubmitField value='Create trip'/>
           </GridRow>
           <ErrorsField/>
