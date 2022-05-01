@@ -16,13 +16,6 @@ const zoom = 11;
 const mapOptions = {
   mapTypeControl: false,
   minZoom: zoom,
-  maxZoom: zoom + 2,
-  restriction: {
-    latLngBounds: {
-      lat: 21.483254,
-      lng: -158.097018,
-    },
-  },
 };
 
 const center = {
@@ -78,9 +71,10 @@ class Map extends React.Component {
           }
           {this.state.isOpen &&
             <InfoWindow
-              position={this.state.activePosition} onCloseClick={this.onClose}
+              position={this.state.activePosition}
+              onCloseClick={this.onClose}
             >
-              <div>
+              <div className='scrollFix'>
                 <MapPin selectedUser={this.state.selectedUser} currentUser={this.props.currentUser}/>
               </div>
             </InfoWindow>

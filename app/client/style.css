@@ -42,3 +42,9 @@
   margin-right: 1em;
 }
 
+.scrollFix {
+  line-height: 1.35;
+  overflow: hidden;
+  white-space: nowrap;
+}
+

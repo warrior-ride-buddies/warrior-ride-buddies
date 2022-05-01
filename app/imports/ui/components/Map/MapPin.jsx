@@ -1,10 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Header, Loader } from 'semantic-ui-react';
+import { Loader, Grid, GridColumn } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import UserInfo from '../UserProfile/UserInfo';
-import Schedule from '../UserProfile/Schedule';
+import MapPinUserInfo from './MapPinUserInfo';
+import MapPinSchedule from './MapPinSchedule';
 import CreateReport from '../UserProfile/CreateReport';
 import { Conversations } from '../../../api/conversation/Conversations';
 import Conversation from '../Messages/Conversation';
@@ -38,12 +38,14 @@ class MapPin extends React.Component {
       reportButton = <CreateReport reportedUser={selectedUser.owner} conversations={this.props.conversations} currentUser={currentUser.owner}/>;
     }
     return (
-      <div>
-        <UserInfo user={selectedUser}/>
-        <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
-        <Schedule trips={selectedUser.trips}/>
-        {messageButton}
-        {reportButton}
+      <div width={9}>
+        <MapPinUserInfo user={selectedUser}/>
+        <MapPinSchedule trips={selectedUser.trips}/>
+        <Grid>
+          <GridColumn textAlign='right'>
+            {messageButton}
+          </GridColumn>
+        </Grid>
       </div>
     );
   }
