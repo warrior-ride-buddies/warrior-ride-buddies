@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Grid, Select } from 'semantic-ui-react';
+import { Form, Grid, Select, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import Parse from '../../../api/parse/parse';
@@ -45,10 +45,24 @@ class ScheduleRowEditable extends React.Component {
     this.updateTrip(userType, 'userType');
   }
 
+  removeTrip = () => {
+    const trips = this.props.user.trips;
+    const day = this.props.trip.day;
+    trips.splice(trips.findIndex(function (trip) {
+      return trip.day === day;
+    }), 1);
+    Users.collection.update({ _id: this.props.user._id }, { $set: { trips: trips } },
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        }
+      });
+  }
+
   render() {
     const trip = this.props.trip;
     return (
-      <Grid.Row columns={4}>
+      <Grid.Row columns={5}>
         <Grid.Column>{Parse.dayToString(trip.day)}</Grid.Column>
         <Grid.Column><input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime} value={Parse.timeToString(trip.arrivalTime)}/></Grid.Column>
         <Grid.Column><input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime} value={Parse.timeToString(trip.departureTime)}/></Grid.Column>
@@ -61,6 +75,9 @@ class ScheduleRowEditable extends React.Component {
             onChange={this.changeUserType}
             value={this.props.trip.userType}
           />
+        </Grid.Column>
+        <Grid.Column>
+          <Button icon='remove circle' onClick={this.removeTrip}/>
         </Grid.Column>
       </Grid.Row>
     );
