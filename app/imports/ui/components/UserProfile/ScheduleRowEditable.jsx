@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Grid, Select, Button } from 'semantic-ui-react';
+import { Form, Select, Button, Table, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import Parse from '../../../api/parse/parse';
@@ -62,24 +62,20 @@ class ScheduleRowEditable extends React.Component {
   render() {
     const trip = this.props.trip;
     return (
-      <Grid.Row columns={5}>
-        <Grid.Column>{Parse.dayToString(trip.day)}</Grid.Column>
-        <Grid.Column><input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime} value={Parse.timeToString(trip.arrivalTime)}/></Grid.Column>
-        <Grid.Column><input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime} value={Parse.timeToString(trip.departureTime)}/></Grid.Column>
-        <Grid.Column>
-          <Form.Field
-            control={Select}
-            fluid
-            options={userTypeOptions}
-            placeholder='Riders/Drivers'
-            onChange={this.changeUserType}
-            value={this.props.trip.userType}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <Button icon='remove circle' onClick={this.removeTrip}/>
-        </Grid.Column>
-      </Grid.Row>
+      <Table.Row>
+        <Table.Cell>{Parse.dayToString(trip.day)}</Table.Cell>
+        <Table.Cell><Input type="time" name="Arrival Time" className="css-17rlcm6" onChange={this.changeArrivalTime} value={Parse.timeToString(trip.arrivalTime)}/></Table.Cell>
+        <Table.Cell><Input type="time" name="Departure Time" className="css-17rlcm6" onChange={this.changeDepartureTime} value={Parse.timeToString(trip.departureTime)}/></Table.Cell>
+        <Table.Cell><Form.Field
+          control={Select}
+          fluid
+          options={userTypeOptions}
+          placeholder='Riders/Drivers'
+          onChange={this.changeUserType}
+          value={this.props.trip.userType}
+        /></Table.Cell>
+        <Table.Cell><Button icon='remove circle' onClick={this.removeTrip}/></Table.Cell>
+      </Table.Row>
     );
   }
 }

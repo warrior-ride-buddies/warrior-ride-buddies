@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Button, Modal } from 'semantic-ui-react';
+import { Button, Container, Modal, ModalHeader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Users } from '../../../api/user/User';
 import AddTripForm from './AddTripForm';
@@ -53,7 +53,10 @@ class AddTrip extends React.Component {
         open={this.isOpen}
         trigger={<Button color='green' content='Add a trip' icon='send' labelPosition='right'/>}
       >
-        <AddTripForm user={currentUser}/>
+        <ModalHeader>Add a Trip</ModalHeader>
+        <Container>
+          <AddTripForm user={currentUser}/>
+        </Container>
       </Modal>
     );
   }

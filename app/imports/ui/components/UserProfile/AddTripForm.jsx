@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import { Grid, GridColumn, GridRow } from 'semantic-ui-react';
 import { Users } from '../../../api/user/User';
 import Parse from '../../../api/parse/parse';
 
@@ -66,14 +67,24 @@ class AddMessage extends React.Component {
     let fRef = null;
     return (
       <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
-        <SelectField allowedValues={dotwAllowed.filter(x => !(this.props.user.trips.map((trip) => trip.day)).includes(x)).map((num) => Parse.dayToString(num))} name='day' autoComplete="off"/>
-        <label>Arriving to UH at:</label>
-        <input type='time' name='arrivalTime' autoComplete="off"/>
-        <label>Leaving UH at:</label>
-        <input type='time' name='departureTime' autoComplete="off"/>
-        <SelectField name='userType' autoComplete="off"/>
-        <SubmitField value='Create trip'/>
-        <ErrorsField/>
+        <Grid container>
+          <SelectField style={{ paddingTop: '30px' }} allowedValues={dotwAllowed.filter(x => !(this.props.user.trips.map((trip) => trip.day)).includes(x)).map((num) => Parse.dayToString(num))} name='day' autoComplete="off"/>
+          <GridRow columns={2}>
+            <GridColumn>
+              <label style={{ fontWeight: 505 }}>Arriving to UH at:</label>
+              <input type='time' name='arrivalTime' autoComplete="off"/>
+            </GridColumn>
+            <GridColumn>
+              <label style={{ fontWeight: 505 }}>Leaving UH at:</label>
+              <input type='time' name='departureTime' autoComplete="off"/>
+            </GridColumn>
+          </GridRow>
+          <SelectField name='userType' autoComplete="off"/>
+          <GridRow centered style={{ paddingBottom: '35px' }}>
+            <SubmitField value='Create trip'/>
+          </GridRow>
+          <ErrorsField/>
+        </Grid>
       </AutoForm>
     );
   }
