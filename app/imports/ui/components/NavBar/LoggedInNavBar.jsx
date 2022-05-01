@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Image, Container, Header } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
-import EditProfileModal from './UserProfile/EditProfileModal';
+import EditProfileModal from '../UserProfile/EditProfileModal';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class LoggedInNavBar extends React.Component {
