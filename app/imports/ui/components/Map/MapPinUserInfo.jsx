@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, GridColumn, GridRow, Header, Image } from 'semantic-ui-react';
+import { Grid, GridRow, Header, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 /** The MapPinUserInfo component is visible in every User Profile. Rendered by the User Profile component. */

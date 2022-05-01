@@ -41,7 +41,10 @@ class MapPin extends React.Component {
       <div width={9}>
         <MapPinUserInfo user={selectedUser}/>
         <MapPinSchedule trips={selectedUser.trips}/>
-        <Grid>
+        <Grid columns={2}>
+          <GridColumn textAlign='left'>
+            {reportButton}
+          </GridColumn>
           <GridColumn textAlign='right'>
             {messageButton}
           </GridColumn>

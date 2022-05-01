@@ -29,7 +29,7 @@ class CreateProfile extends React.Component {
     firstName: '',
     lastName: '',
     image: '',
-    userType: '',
+    userType: 'Driver',
     address: '',
     lat: '',
     lng: '',
@@ -39,7 +39,7 @@ class CreateProfile extends React.Component {
     carPlate: '',
     redirectToReferer: false,
     error: '',
-    showCarFields: false,
+    showCarFields: true,
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
