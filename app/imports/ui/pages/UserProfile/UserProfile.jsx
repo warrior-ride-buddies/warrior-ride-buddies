@@ -7,7 +7,9 @@ import { Users } from '../../../api/user/User';
 import { Conversations } from '../../../api/conversation/Conversations';
 import UserInfo from '../../components/UserProfile/UserInfo';
 import Schedule from '../../components/UserProfile/Schedule';
+import ScheduleEditable from '../../components/UserProfile/ScheduleEditable';
 import Conversation from '../../components/Messages/Conversation';
+import AddTrip from '../../components/UserProfile/AddTrip';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class UserProfile extends React.Component {
@@ -19,10 +21,13 @@ class UserProfile extends React.Component {
     const selectedUser = this.props.selectedUser;
     const currentUser = this.props.currentUser;
     let messageButton;
+    let createTripButton;
     if (selectedUser.owner === currentUser.owner) {
       messageButton = <></>;
+      createTripButton = <AddTrip currentUser={currentUser}></AddTrip>;
     } else {
       messageButton = <Conversation currentUser={currentUser} conversations={this.props.conversation} selectedUser={selectedUser}/>;
+      createTripButton = <></>;
     }
     return (
       <Grid style={{ margin: '20px' }} id={'userprofile-page'}>
@@ -35,8 +40,9 @@ class UserProfile extends React.Component {
           <div style={{ height: '750px', paddingTop: '30px' }}>
             <UserInfo key={selectedUser._id} user={selectedUser} />
             <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
-            <Schedule trips={selectedUser.trips}/>
+            {selectedUser.owner === currentUser.owner ? <ScheduleEditable trips={selectedUser.trips} user={currentUser}/> : <Schedule trips={selectedUser.trips}/>}
             {messageButton}
+            {createTripButton}
           </div>
         </Grid.Column>
       </Grid>

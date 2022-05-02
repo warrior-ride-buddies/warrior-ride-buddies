@@ -23,8 +23,14 @@ class UsersCollection {
         type: Number,
         allowedValues: [0, 1, 2, 3, 4, 5, 6], //  0 is Sunday, 1 is Monday...
       },
-      arrivalTime: Number, // minutes
-      departureTime: Number,
+      arrivalTime: {
+        type: Number,
+        optional: true,
+      }, // minutes
+      departureTime: {
+        type: Number,
+        optional: true,
+      },
       userType: {
         type: String,
         allowedValues: ['driver', 'rider', 'both'],

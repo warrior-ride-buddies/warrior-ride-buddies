@@ -29,7 +29,7 @@ class CreateProfile extends React.Component {
     firstName: '',
     lastName: '',
     image: '',
-    userType: '',
+    userType: 'Driver',
     address: '',
     lat: '',
     lng: '',
@@ -39,7 +39,7 @@ class CreateProfile extends React.Component {
     carPlate: '',
     redirectToReferer: false,
     error: '',
-    showCarFields: false,
+    showCarFields: true,
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -55,6 +55,7 @@ class CreateProfile extends React.Component {
 
   // On submit, insert the data.
   submit = () => {
+    // eslint-disable-next-line no-undef
     let image = document.getElementsByName('profilePicture')[0].value;
     const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
     console.log(userType);

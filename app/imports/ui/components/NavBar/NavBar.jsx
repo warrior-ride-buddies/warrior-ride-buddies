@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import { Loader } from 'semantic-ui-react';
-import { Users } from '../../api/user/User';
+import { Users } from '../../../api/user/User';
 import LoggedOutNavBar from './LoggedOutNavBar';
 import LoggedInNavBar from './LoggedInNavBar';
 
