@@ -3,6 +3,7 @@ import { Grid, Header, Select, Form, Button } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { Redirect } from 'react-router-dom';
+import { Autocomplete } from '@react-google-maps/api';
 import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 
@@ -164,17 +165,20 @@ class CreateProfile extends React.Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Form.Group widths='equal'>
-              <Form.Input
-                fluid
-                id="create-profile-address"
-                name='address'
-                label='Address'
-                placeholder='Address'
-                value={address}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
+            <Autocomplete>
+              <Form.Group widths='equal'>
+                <Form.Input
+                  fluid
+                  id="create-profile-address"
+                  name='address'
+                  label='Address'
+                  placeholder='Address'
+                  value={address}
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+            </Autocomplete>
+
             <Form.Group widths='equal'>
               <Form.Input
                 id="create-profile-lat"

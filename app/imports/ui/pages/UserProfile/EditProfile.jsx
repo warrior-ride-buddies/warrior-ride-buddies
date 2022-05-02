@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 // eslint-disable-next-line no-unused-vars
 import uploadcare from 'uploadcare-widget/uploadcare.lang.en.min.js';
+import { Autocomplete } from '@react-google-maps/api';
 import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 import EditProfileImage from '../../components/UserProfile/EditProfileImage';
-import { Autocomplete } from '@react-google-maps/api';
 
 const bridge = new SimpleSchema2Bridge(Users.schema);
 
