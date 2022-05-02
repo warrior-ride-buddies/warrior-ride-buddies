@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dropdown, Icon, Modal } from 'semantic-ui-react';
+import { Dropdown, Icon, Modal } from 'semantic-ui-react';
 import EditProfile from '../../pages/UserProfile/EditProfile';
 
 function ModalExampleModal() {
@@ -20,11 +20,6 @@ function ModalExampleModal() {
       <Modal.Content>
         <EditProfile/>
       </Modal.Content>
-      <Modal.Actions>
-        <Button if="done-editing-button" color='black' onClick={() => setOpen(false)}>
-          Done Editing
-        </Button>
-      </Modal.Actions>
     </Modal>
   );
 }
