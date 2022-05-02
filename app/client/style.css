@@ -40,8 +40,12 @@
   background-color: #4e7844;
   padding: 0.5em;
   margin-right: 1em;
+  content: 'Upload a picture'
 }
 
+.uploadcare--widget__button.uploadcare--widget__button_type_open:before {
+  content: 'Profile Image: '
+}
 .scrollFix {
   line-height: 1.35;
   overflow: hidden;

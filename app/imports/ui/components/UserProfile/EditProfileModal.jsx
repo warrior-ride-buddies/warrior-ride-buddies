@@ -20,11 +20,6 @@ function ModalExampleModal() {
       <Modal.Content>
         <EditProfile/>
       </Modal.Content>
-      <Modal.Actions>
-        <Button if="done-editing-button" color='black' onClick={() => setOpen(false)}>
-          Done Editing
-        </Button>
-      </Modal.Actions>
     </Modal>
   );
 }

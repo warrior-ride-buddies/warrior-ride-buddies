@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Dimmer, Image } from 'semantic-ui-react';
+import { Dimmer, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 class EditProfileImage extends Component {
@@ -13,7 +13,6 @@ class EditProfileImage extends Component {
     const { active } = this.state;
     const content = (
       <div>
-        <Button primary onClick={() => (console.log('do something'))}>Add Photo</Button>
       </div>
     );
 
@@ -22,8 +21,6 @@ class EditProfileImage extends Component {
         as={Image}
         dimmed={active}
         dimmer={{ active, content }}
-        onMouseEnter={this.handleShow}
-        onMouseLeave={this.handleHide}
         size='medium'
         rounded
         src={this.props.user.image}
