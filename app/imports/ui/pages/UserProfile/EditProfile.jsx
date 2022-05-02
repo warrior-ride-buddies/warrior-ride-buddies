@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 // eslint-disable-next-line no-unused-vars
 import uploadcare from 'uploadcare-widget/uploadcare.lang.en.min.js';
 import { Autocomplete } from '@react-google-maps/api';
@@ -17,22 +18,30 @@ const bridge = new SimpleSchema2Bridge(Users.schema);
 
 /** Renders the Page for editing a single document. */
 class EditProfile extends React.Component {
-  state = { address: this.props.user.address }
+  state = { address: this.props.user.address, position: this.props.user.position }
 
   handleChange = (e, { name, value }) => { this.setState({ [name]: value }); }
   // On successful submit, insert the data.
 
+  handleAddress = () => {
+    const address = document.getElementsByName('address')[0].value;
+    this.setState({ address: address });
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) => this.setState({ position: { lat: lat, lng: lng } }));
+  };
+
   submit(data) {
     // eslint-disable-next-line no-undef
     const image = document.getElementsByName('profilePicture')[0].value;
-    const address = document.getElementsByName('address')[0].value;
+    const address = this.state.address;
+    const position = this.state.position;
+    const { firstName, lastName, userType, trips, carMake, carModel, carColor, carPlate } = data;
     if (image !== '') {
-      const { firstName, lastName, userType, position, trips, carMake, carModel, carColor, carPlate } = data;
       Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
         swal('Error', error.message, 'error') :
         swal('Success', 'Item updated successfully', 'success')));
     } else {
-      const { firstName, lastName, userType, position, trips, carMake, carModel, carColor, carPlate } = data;
       Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate } }, (error) => (error ?
         swal('Error', error.message, 'error') :
         swal('Success', 'Item updated successfully', 'success')));
@@ -59,14 +68,14 @@ class EditProfile extends React.Component {
               <Segment>
                 <TextField id="edit-profile-firstName" name='firstName'/>
                 <TextField id="edit-profile-lastName" name='lastName'/>
-                <Autocomplete>
+                <Autocomplete onPlaceChanged={this.handleAddress}>
                   <Form.Input
                     label="Address"
                     type="textField"
                     id="edit-profile-address"
                     name='address'
                     value={this.state.address}
-                    onChange={this.handleChange}/>
+                    onChange={this.handleAddress}/>
                 </Autocomplete>
                 <NumField id="edit-profile-position.lng" name='position.lng'/>
                 <NumField id="edit-profile-position.lat" name='position.lat'/>

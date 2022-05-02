@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { Redirect } from 'react-router-dom';
 import { Autocomplete } from '@react-google-maps/api';
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 
@@ -44,6 +45,14 @@ class CreateProfile extends React.Component {
   }
 
   handleChange = (e, { name, value }) => { this.setState({ [name]: value }); }
+
+  handleAddress = () => {
+    const address = document.getElementsByName('address')[0].value;
+    this.setState({ address: address });
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) => this.setState({ lat: lat, lng: lng }));
+  };
 
   changeUserType = (e, { value }) => {
     this.setState({ userType: value });
@@ -92,7 +101,7 @@ class CreateProfile extends React.Component {
   }
 
   render() {
-    const { firstName, lastName, userType, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
+    const { firstName, lastName, userType, address, carMake, carModel, carColor, carPlate } = this.state;
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
       return <Redirect to={'/main'}/>;
@@ -165,36 +174,6 @@ class CreateProfile extends React.Component {
                 value={lastName}
                 onChange={this.handleChange}
               />
-            </Form.Group>
-            <Autocomplete onPlaceChanged={this.handleAddress}>
-              <Form.Group widths='equal'>
-                <Form.Input
-                  fluid
-                  id="create-profile-address"
-                  name='address'
-                  label='Address'
-                  placeholder='Address'
-                  onChange={this.handleChange}
-                />
-              </Form.Group>
-            </Autocomplete>
-            <Form.Group widths='equal'>
-              <Form.Input
-                id="create-profile-lat"
-                name='lat'
-                label='Latitude'
-                placeholder='Latitude'
-                value={lat}
-                onChange={this.handleChange}
-              />
-              <Form.Input
-                id="create-profile-lng"
-                name='lng'
-                label='Longitude'
-                placeholder='Longitude'
-                value={lng}
-                onChange={this.handleChange}
-              />
               <Form.Field
                 control={Select}
                 fluid
@@ -206,6 +185,19 @@ class CreateProfile extends React.Component {
                 onChange={this.changeUserType}
               />
             </Form.Group>
+            <Autocomplete onPlaceChanged={this.handleAddress}>
+              <Form.Group widths='equal'>
+                <Form.Input
+                  fluid
+                  id="create-profile-address"
+                  name='address'
+                  label='Address'
+                  placeholder='Address'
+                  value={address}
+                  onChange={this.handleAddress}
+                />
+              </Form.Group>
+            </Autocomplete>
             {carFields}
             <input
               type="hidden"
