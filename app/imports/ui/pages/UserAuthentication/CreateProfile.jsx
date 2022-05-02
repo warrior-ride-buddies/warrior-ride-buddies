@@ -33,8 +33,7 @@ class CreateProfile extends React.Component {
     image: '',
     userType: 'Driver',
     address: '',
-    lat: '',
-    lng: '',
+    position: { lat: '', lng: '' },
     carMake: '',
     carModel: '',
     carColor: '',
@@ -53,7 +52,7 @@ class CreateProfile extends React.Component {
     this.setState({ address: address });
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) => this.setState({ lat: lat + latDif, lng: lng + lngDif }));
+      .then(({ lat, lng }) => this.setState({ position: { lat: lat + latDif, lng: lng + lngDif } }));
   };
 
   changeUserType = (e, { value }) => {
@@ -68,10 +67,9 @@ class CreateProfile extends React.Component {
   // On submit, insert the data.
   submit = () => {
     // eslint-disable-next-line no-undef
-    const address = document.getElementsByName('address')[0].value;
+    const address = this.state.address;
     let image = document.getElementsByName('profilePicture')[0].value;
-    const { firstName, lastName, userType, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
-    const position = { lat: lat, lng: lng };
+    const { firstName, lastName, userType, position, carMake, carModel, carColor, carPlate } = this.state;
     const trips = [];
     const owner = Meteor.user().username;
     if (image === '') {
