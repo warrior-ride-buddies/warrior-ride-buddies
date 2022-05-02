@@ -39,7 +39,8 @@ class UserProfile extends React.Component {
         <Grid.Column width={12}>
           <div style={{ height: '750px', paddingTop: '30px' }}>
             <UserInfo key={selectedUser._id} user={selectedUser} />
-            <Header as='h2' textAlign='center' style={{ paddingTop: '30px' }}>Schedule</Header>
+            <div className='accent-block' style={{ borderRadius: '2px', marginBottom: '10px', marginTop: '20px', opacity: '0.95', height: '1px', padding: '4px' }}></div>
+            <Header as='h2' textAlign='center' style={{ paddingTop: '20px' }}>Schedule</Header>
             {selectedUser.owner === currentUser.owner ? <ScheduleEditable trips={selectedUser.trips} user={currentUser}/> : <Schedule trips={selectedUser.trips}/>}
             {messageButton}
             {createTripButton}
