@@ -50,22 +50,22 @@ class Map extends React.Component {
   render() {
     const users = this.props.users;
     return (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={11}
-          options={mapOptions}
-        >
-          {
-            users.map((user, index) => <Marker
-              key={index}
-              position={user.position}
-              icon='./images/personIcon.png'
-              clickable = {true}
-              onClick={ () => this.onMarkerClick(user) }
-            />)
-          }
-          {this.state.isOpen &&
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={11}
+        options={mapOptions}
+      >
+        {
+          users.map((user, index) => <Marker
+            key={index}
+            position={user.position}
+            icon='./images/personIcon.png'
+            clickable = {true}
+            onClick={ () => this.onMarkerClick(user) }
+          />)
+        }
+        {this.state.isOpen &&
             <InfoWindow
               position={this.state.activePosition}
               onCloseClick={this.onClose}
@@ -74,8 +74,8 @@ class Map extends React.Component {
                 <MapPin selectedUser={this.state.selectedUser} currentUser={this.props.currentUser}/>
               </div>
             </InfoWindow>
-          }
-        </GoogleMap>
+        }
+      </GoogleMap>
     );
   }
 }

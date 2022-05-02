@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Segment } from 'semantic-ui-react';
+import { Grid, Loader, Segment, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, HiddenField, NumField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -17,18 +17,22 @@ const bridge = new SimpleSchema2Bridge(Users.schema);
 
 /** Renders the Page for editing a single document. */
 class EditProfile extends React.Component {
+  state = { address: this.props.user.address }
 
+  handleChange = (e, { name, value }) => { this.setState({ [name]: value }); }
   // On successful submit, insert the data.
+
   submit(data) {
     // eslint-disable-next-line no-undef
     const image = document.getElementsByName('profilePicture')[0].value;
+    const address = document.getElementsByName('address')[0].value;
     if (image !== '') {
-      const { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate } = data;
+      const { firstName, lastName, userType, position, trips, carMake, carModel, carColor, carPlate } = data;
       Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
         swal('Error', error.message, 'error') :
         swal('Success', 'Item updated successfully', 'success')));
     } else {
-      const { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate } = data;
+      const { firstName, lastName, userType, position, trips, carMake, carModel, carColor, carPlate } = data;
       Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate } }, (error) => (error ?
         swal('Error', error.message, 'error') :
         swal('Success', 'Item updated successfully', 'success')));
@@ -56,7 +60,13 @@ class EditProfile extends React.Component {
                 <TextField id="edit-profile-firstName" name='firstName'/>
                 <TextField id="edit-profile-lastName" name='lastName'/>
                 <Autocomplete>
-                  <TextField id="edit-profile-address" name='address'/>
+                  <Form.Input
+                    label="Address"
+                    type="textField"
+                    id="edit-profile-address"
+                    name='address'
+                    value={this.state.address}
+                    onChange={this.handleChange}/>
                 </Autocomplete>
                 <NumField id="edit-profile-position.lng" name='position.lng'/>
                 <NumField id="edit-profile-position.lat" name='position.lat'/>

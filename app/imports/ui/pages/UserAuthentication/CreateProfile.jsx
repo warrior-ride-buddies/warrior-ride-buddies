@@ -43,7 +43,7 @@ class CreateProfile extends React.Component {
     showCarFields: true,
   }
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  handleChange = (e, { name, value }) => { this.setState({ [name]: value }); }
 
   changeUserType = (e, { value }) => {
     this.setState({ userType: value });
@@ -57,8 +57,9 @@ class CreateProfile extends React.Component {
   // On submit, insert the data.
   submit = () => {
     // eslint-disable-next-line no-undef
+    const address = document.getElementsByName('address')[0].value;
     let image = document.getElementsByName('profilePicture')[0].value;
-    const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
+    const { firstName, lastName, userType, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
     console.log(userType);
     const position = { lat: lat, lng: lng };
     const trips = [];
@@ -91,7 +92,7 @@ class CreateProfile extends React.Component {
   }
 
   render() {
-    const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
+    const { firstName, lastName, userType, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
       return <Redirect to={'/main'}/>;
@@ -165,7 +166,7 @@ class CreateProfile extends React.Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Autocomplete>
+            <Autocomplete onPlaceChanged={this.handleAddress}>
               <Form.Group widths='equal'>
                 <Form.Input
                   fluid
@@ -173,12 +174,10 @@ class CreateProfile extends React.Component {
                   name='address'
                   label='Address'
                   placeholder='Address'
-                  value={address}
                   onChange={this.handleChange}
                 />
               </Form.Group>
             </Autocomplete>
-
             <Form.Group widths='equal'>
               <Form.Input
                 id="create-profile-lat"
