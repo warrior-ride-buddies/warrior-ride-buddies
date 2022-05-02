@@ -71,7 +71,6 @@ class CreateProfile extends React.Component {
     const address = document.getElementsByName('address')[0].value;
     let image = document.getElementsByName('profilePicture')[0].value;
     const { firstName, lastName, userType, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
-    console.log(userType);
     const position = { lat: lat, lng: lng };
     const trips = [];
     const owner = Meteor.user().username;
