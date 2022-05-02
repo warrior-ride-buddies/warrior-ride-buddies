@@ -1,7 +1,6 @@
 import React from 'react';
-import { InfoWindow, Marker, GoogleMap, LoadScript } from '@react-google-maps/api';
+import { InfoWindow, Marker, GoogleMap } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
-import ApiKeys from '../../../../ApiKeys.json';
 import MapPin from './MapPin';
 
 const containerStyle = {
@@ -58,9 +57,6 @@ class Map extends React.Component {
   render() {
     const users = this.props.users;
     return (
-      <LoadScript
-        googleMapsApiKey={ApiKeys.mapsApiKey}
-      >
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
@@ -86,7 +82,6 @@ class Map extends React.Component {
             </InfoWindow>
           }
         </GoogleMap>
-      </LoadScript>
     );
   }
 }

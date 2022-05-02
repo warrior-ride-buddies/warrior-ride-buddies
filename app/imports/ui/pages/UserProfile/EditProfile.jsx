@@ -11,6 +11,7 @@ import uploadcare from 'uploadcare-widget/uploadcare.lang.en.min.js';
 import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 import EditProfileImage from '../../components/UserProfile/EditProfileImage';
+import { Autocomplete } from '@react-google-maps/api';
 
 const bridge = new SimpleSchema2Bridge(Users.schema);
 
@@ -54,7 +55,9 @@ class EditProfile extends React.Component {
               <Segment>
                 <TextField id="edit-profile-firstName" name='firstName'/>
                 <TextField id="edit-profile-lastName" name='lastName'/>
-                <TextField id="edit-profile-address" name='address'/>
+                <Autocomplete>
+                  <TextField id="edit-profile-address" name='address'/>
+                </Autocomplete>
                 <NumField id="edit-profile-position.lng" name='position.lng'/>
                 <NumField id="edit-profile-position.lat" name='position.lat'/>
                 <HiddenField id="edit-profile-trips" name='trips' />

@@ -14,11 +14,13 @@ import Signup from '../pages/UserAuthentication/Signup';
 import Signout from '../pages/UserAuthentication/Signout';
 import Main from '../pages/Main';
 import Messages from '../pages/Messages/Messages';
-// import ChatInbox from '../pages/ChatInbox';
 import UserProfiles from '../pages/UserProfile/UserProfiles';
 import UserProfile from '../pages/UserProfile/UserProfile';
 import EditProfile from '../pages/UserProfile/EditProfile';
 import CreateProfile from '../pages/UserAuthentication/CreateProfile';
+import ApiKeys from '../../../ApiKeys.json';
+import { LoadScript, Libraries } from '@react-google-maps/api';
+
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -26,6 +28,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
+          <LoadScript googleMapsApiKey={ApiKeys.mapsApiKey} id="script-loader" libraries={["places"]}/>
           <NavBar/>
           <Switch>
             <Route exact path="/" component={Landing}/>
