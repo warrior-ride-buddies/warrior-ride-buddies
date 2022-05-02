@@ -25,10 +25,12 @@ class EditProfile extends React.Component {
 
   handleAddress = () => {
     const address = document.getElementsByName('address')[0].value;
+    const latDif = 0.002 - 0.004 * Math.random();
+    const lngDif = 0.002 - 0.004 * Math.random();
     this.setState({ address: address });
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) => this.setState({ position: { lat: lat, lng: lng } }));
+      .then(({ lat, lng }) => this.setState({ position: { lat: lat + latDif, lng: lng + lngDif } }));
   };
 
   submit(data) {
