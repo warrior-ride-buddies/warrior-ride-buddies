@@ -4,7 +4,8 @@
     { "email": "john@foo.com", "password": "changeme" },
     { "email": "kobeya@hawaii.edu", "password": "changeme", "role": "admin"},
     { "email": "dummy@foo.com", "password": "changeme"},
-    { "email": "abc8@hawaii.edu", "password": "changeme"}
+    { "email": "abc8@hawaii.edu", "password": "changeme"},
+    { "email": "scoot@hawaii.edu", "password":  "changeme"}
   ],
 
   "defaultUsers": [
@@ -148,6 +149,48 @@
       "carPlate": "ABC 888",
       "owner": "abc8@hawaii.edu",
       "image": "https://alyssia-chen.github.io/images/ProfilePic_square2.jpg"
+    },
+    {
+      "firstName": "Scott",
+      "lastName": "Yuk",
+      "userType": "Rider",
+      "address": "Ala Moana, 96814",
+      "position": {
+        "lat": 21.2805556,
+        "lng": -157.7072222
+      },
+      "trips": [
+        {
+          "day": 2,
+          "arrivalTime": 500,
+          "departureTime": 880,
+          "userType": "rider"
+        },
+        {
+          "day": 4,
+          "arrivalTime": 600,
+          "departureTime": 960,
+          "userType": "rider"
+        },
+        {
+          "day": 5,
+          "arrivalTime": 800,
+          "departureTime": 960,
+          "userType": "rider"
+        },
+        {
+          "day": 6,
+          "arrivalTime": 600,
+          "departureTime": 960,
+          "userType": "rider"
+        }
+      ],
+      "carMake": "",
+      "carModel": "",
+      "carColor": "",
+      "carPlate": "",
+      "owner": "scoot@hawaii.edu",
+      "image": "/images/wwbscott.jpg"
     }
   ],
 

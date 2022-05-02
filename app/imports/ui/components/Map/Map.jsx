@@ -16,7 +16,6 @@ const zoom = 11;
 const mapOptions = {
   mapTypeControl: false,
   minZoom: zoom,
-  maxZoom: zoom + 2,
   restriction: {
     latLngBounds: {
       lat: 21.483254,
