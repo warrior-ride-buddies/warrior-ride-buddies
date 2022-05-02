@@ -25,8 +25,10 @@ class Inbox extends React.Component {
       header = <Header as="h1" textAlign="center">Your messages will appear here</Header>;
     }
     return (
-      <Container id={'inbox-page'}>
+      <Container id={'inbox-page'} style={{ paddingTop: '20px' }}>
         {header}
+        <div className='accent-block' style={{ borderRadius: '2px', marginBottom: '20px', opacity: '0.95', height: '1px', padding: '4px' }}>
+        </div>
         <Grid>
           {conversations.map((conversation, index) => <InboxItem
             key={index}

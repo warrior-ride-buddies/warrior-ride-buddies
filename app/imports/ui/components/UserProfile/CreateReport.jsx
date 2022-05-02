@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, Form } from 'semantic-ui-react';
+import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Reports } from '../../../api/report/Reports';
 
@@ -27,7 +28,14 @@ class CreateReport extends React.Component {
     const createdBy = this.props.currentUser;
     const report = this.state.text;
     const createdAt = new Date();
-    Reports.collection.insert({ createdBy, reportedUser, report, createdAt, conversationIds });
+    Reports.collection.insert({ createdBy, reportedUser, report, createdAt, conversationIds },
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Report submitted for review', 'success');
+        }
+      });
     this.setOpen(false);
   }
 

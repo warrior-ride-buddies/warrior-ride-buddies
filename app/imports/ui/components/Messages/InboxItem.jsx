@@ -57,7 +57,7 @@ class InboxItem extends React.Component {
         onOpen={this.onOpen}
         open={this.isOpen}
         trigger={
-          <Container textAlign={'center'}>
+          <Container textAlign={'center'} style={{ marginBottom: '10px' }}>
             <Button basic className='ui fluid button'>
               <Grid columns={3}>
                 <Grid.Column textAlign={'left'}>

@@ -57,7 +57,6 @@ class Main extends React.Component {
   }
 
   changeUserType = (e, { value }) => {
-    this.setState({ userType: value });
     const userType = value;
     this.setState(prevState => ({
       filterParams: { ...prevState.filterParams,
@@ -96,20 +95,20 @@ class Main extends React.Component {
   filterTrips = (trips, filterParams) => {
     let returnVal = trips;
     const { day, arrivalTime, departureTime, arrivalRange, departureRange, userType } = filterParams;
-    if (filterParams.day !== 7) {
+    if (day !== defaultFilterParams.day) {
       returnVal = returnVal.filter(trip => (trip.day === day));
     }
-    if (arrivalTime !== 1440) {
+    if (arrivalTime !== defaultFilterParams.arrivalTime) {
       returnVal = returnVal.filter(trip => (
         trip.arrivalTime <= arrivalTime) &&
         (trip.arrivalTime >= arrivalTime - arrivalRange));
     }
-    if (departureTime !== 1440) {
+    if (departureTime !== defaultFilterParams.departureTime) {
       returnVal = returnVal.filter(trip => (
         trip.departureTime >= departureTime) &&
         (trip.departureTime <= departureTime + departureRange));
     }
-    if (userType !== 'both') {
+    if (userType !== defaultFilterParams.userType) {
       returnVal = (returnVal.filter(trip => (trip.userType === userType)));
     }
     return returnVal;
@@ -143,8 +142,8 @@ class Main extends React.Component {
     return (
       <div style={{ height: '100%', padding: '0px', margin: '0px' }} id={'main-page'}>
         <Form style={{ backgroundColor: 'gray', width: '25%', height: '70%', padding: '20px', position: 'absolute', zIndex: '1', margin: '50px 30px', borderRadius: '20px' }} id='main-filter'>
-          <div className='accent-block' style={{ borderRadius: '5px', marginBottom: '20px', opacity: '0.95' }}>
-            <Header as='h2'>Find your buddy</Header>
+          <Header as='h2' textAlign='center' style={{ width: '100%' }}>Find your buddy</Header>
+          <div className='accent-block' style={{ borderRadius: '5px', marginBottom: '20px', height: '2px', padding: '2px' }}>
           </div>
           <Form.Field>
             <label>Arriving to UH at:</label>
@@ -194,12 +193,8 @@ Main.propTypes = {
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-const MainContainer = withTracker(() => ({
-  email: Meteor.user() ? Meteor.user().username : '',
-}))(Main);
-
 export default withTracker(() => {
-
+  const email = Meteor.user() ? Meteor.user().username : '';
   const subscription = Meteor.subscribe(Users.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
@@ -207,7 +202,8 @@ export default withTracker(() => {
   const users = Users.collection.find({}).fetch();
   // Get the Stuff documents
   return {
+    email,
     users,
     ready,
   };
-})(MainContainer);
+})(Main);

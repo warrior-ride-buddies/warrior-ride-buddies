@@ -77,9 +77,10 @@ class Map extends React.Component {
           }
           {this.state.isOpen &&
             <InfoWindow
-              position={this.state.activePosition} onCloseClick={this.onClose}
+              position={this.state.activePosition}
+              onCloseClick={this.onClose}
             >
-              <div>
+              <div className='scrollFix'>
                 <MapPin selectedUser={this.state.selectedUser} currentUser={this.props.currentUser}/>
               </div>
             </InfoWindow>
