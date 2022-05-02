@@ -62,7 +62,7 @@ class Map extends React.Component {
           users.map((user, index) => <Marker
             key={index}
             position={user.position}
-            icon={ { url: user.image, scaledSize: { height: 30, width: 30 }, style: 'avatar'}}
+            icon={ { url: user.image, scaledSize: { height: 30, width: 30 } }}
             clickable = {true}
             onClick={ () => this.onMarkerClick(user) }
           />)
@@ -71,6 +71,7 @@ class Map extends React.Component {
             <InfoWindow
               position={this.state.activePosition}
               onCloseClick={this.onClose}
+              options={{ pixelOffset: { height: -30, width: 0 } }}
             >
               <div className='scrollFix'>
                 <MapPin selectedUser={this.state.selectedUser} currentUser={this.props.currentUser}/>

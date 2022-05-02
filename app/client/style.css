@@ -46,6 +46,7 @@
 .uploadcare--widget__button.uploadcare--widget__button_type_open:before {
   content: 'Profile Image: '
 }
+
 .scrollFix {
   line-height: 1.35;
   overflow: hidden;
