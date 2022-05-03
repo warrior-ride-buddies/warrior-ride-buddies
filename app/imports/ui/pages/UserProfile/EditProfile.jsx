@@ -62,14 +62,6 @@ class EditProfile extends React.Component {
                 <TextField id="edit-profile-carModel" name='carModel' />
                 <TextField id="edit-profile-carColor" name='carColor' />
                 <TextField id="edit-profile-carPlate" name='carPlate' />
-                <input
-                  type="hidden"
-                  role="uploadcare-uploader"
-                  data-public-key={ApiKeys.uploadcareKey}
-                  data-tabs="file camera url facebook gdrive gphotos"
-                  data-effects="crop, rotate"
-                  name="profilePicture"
-                />
                 <HiddenField id="edit-profile-owner" name='owner' />
                 <SubmitField id="edit-profile-submit" value='Submit'/>
                 <ErrorsField/>
