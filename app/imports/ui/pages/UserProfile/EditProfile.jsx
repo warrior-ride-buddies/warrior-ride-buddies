@@ -10,7 +10,6 @@ import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 // eslint-disable-next-line no-unused-vars
 import uploadcare from 'uploadcare-widget/uploadcare.lang.en.min.js';
 import { Autocomplete } from '@react-google-maps/api';
-import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 import EditProfileImage from '../../components/UserProfile/EditProfileImage';
 
