@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader, Grid } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { MultiSelect } from 'react-multi-select-component';
 import InboxItem from '../../components/Messages/InboxItem';
 import { Conversations } from '../../../api/conversation/Conversations';
 import { Users } from '../../../api/user/User';
@@ -16,8 +17,14 @@ class Inbox extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    const options = [
+      { label: 'Grapes 🍇', value: 'grapes' },
+      { label: 'Mango 🥭', value: 'mango' },
+      { label: 'Strawberry 🍓', value: 'strawberry', disabled: true },
+    ];
     const currentUser = this.props.users.filter(user => (user.owner === this.props.currentUser))[0];
     const conversations = this.props.conversations.filter(conversation => (conversation.messages.length !== 0));
+    const users = this.props.users.map((user) => ({ firstName: user.firstName, lastName: user.lastName }));
     let header;
     if (conversations.length !== 0) {
       header = <Header as="h1" textAlign="center">Inbox</Header>;
@@ -28,6 +35,13 @@ class Inbox extends React.Component {
       <Container id={'inbox-page'} style={{ paddingTop: '20px' }}>
         {header}
         <div className='accent-block' style={{ borderRadius: '2px', marginBottom: '20px', opacity: '0.95', height: '1px', padding: '4px' }}>
+        </div>
+        <div>
+          <h1>Select Fruits</h1>
+          <MultiSelect
+              options={options}
+              labelledBy="Select"
+          />
         </div>
         <Grid>
           {conversations.map((conversation, index) => <InboxItem
