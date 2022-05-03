@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Dimmer, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import ApiKeys from '../../../../ApiKeys.json';
 
 class EditProfileImage extends Component {
   state = {}
@@ -13,6 +14,14 @@ class EditProfileImage extends Component {
     const { active } = this.state;
     const content = (
       <div>
+        <input
+          type="hidden"
+          role="uploadcare-uploader"
+          data-public-key={ApiKeys.uploadcareKey}
+          data-tabs="file camera url facebook gdrive gphotos"
+          data-effects="crop, rotate"
+          name="profilePicture"
+        />
       </div>
     );
 
@@ -22,6 +31,8 @@ class EditProfileImage extends Component {
         dimmed={active}
         dimmer={{ active, content }}
         size='medium'
+        onMouseEnter={this.handleShow}
+        onMouseLeave={this.handleHide}
         rounded
         src={this.props.user.image}
       />
