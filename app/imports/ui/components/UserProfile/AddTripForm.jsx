@@ -56,6 +56,7 @@ class AddMessage extends React.Component {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
+            swal('Success', `A trip for ${Parse.dayToString(day)} has been successfully added.`, 'success');
             formRef.reset();
           }
         });
