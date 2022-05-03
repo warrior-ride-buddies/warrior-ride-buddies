@@ -10,7 +10,7 @@ class Message extends React.Component {
     const from = this.props.users.filter(user => (user.owner === message.from));
     const ownMessage = message.from === Meteor.user().username;
     const position = ownMessage ? 'right' : 'left';
-    const color = ownMessage ? 'teal' : 'grey';
+    const color = ownMessage ? 'green' : 'teal';
     const nameDisplayed = ownMessage ? 'Me' : `${from[0].firstName} ${from[0].lastName}`;
     return (
       <Feed.Event>
@@ -18,7 +18,7 @@ class Message extends React.Component {
           <Segment basic floated={position}>
             <Grid>
               <Grid.Row columns={2}>
-                <Grid.Column textAlign='left'>
+                <Grid.Column textAlign='right'>
                   {nameDisplayed}
                 </Grid.Column>
                 <Grid.Column textAlign='right'>

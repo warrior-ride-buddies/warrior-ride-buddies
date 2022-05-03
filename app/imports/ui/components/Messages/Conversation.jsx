@@ -50,7 +50,7 @@ class Conversation extends React.Component {
       onClose={this.onClose}
       onOpen={this.onOpen}
       open={this.isOpen}
-      trigger={<Button color='teal' content='Message' icon='send' labelPosition='right'/>}
+      trigger={<Button style={{ backgroundColor: '#024731', color: 'white' }} content='Message' icon='send' labelPosition='right'/>}
     />;
   }
 
@@ -63,7 +63,7 @@ class Conversation extends React.Component {
         onClose={this.onClose}
         onOpen={this.onOpen}
         open={this.isOpen}
-        trigger={<Button color='teal' content='Message' icon='send' labelPosition='right'/>}
+        trigger={<Button style={{ backgroundColor: '#024731', color: 'white' }} content='Message' icon='send' labelPosition='right'/>}
       >
         <ConversationContent currentUser={currentUser} conversation={conversation} users={users}/>
       </Modal>

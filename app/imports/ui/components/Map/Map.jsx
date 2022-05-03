@@ -18,8 +18,10 @@ const mapOptions = {
   minZoom: zoom,
   restriction: {
     latLngBounds: {
-      lat: 21.483254,
-      lng: -158.097018,
+      north: 30,
+      south: 10,
+      east: -100,
+      west: 200,
     },
   },
 };
