@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 // eslint-disable-next-line no-unused-vars
 import uploadcare from 'uploadcare-widget/uploadcare.lang.en.min.js';
-import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 import EditProfileImage from '../../components/UserProfile/EditProfileImage';
 
