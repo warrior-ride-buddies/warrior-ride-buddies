@@ -18,15 +18,16 @@ class UserProfile extends React.Component {
   }
 
   renderPage() {
-    const selectedUser = this.props.selectedUser;
-    const currentUser = this.props.currentUser;
+    const selectedUser = this.props.users.filter((user) => (user.owner === this.props.email))[0];
+    const currentUser = this.props.users.filter((user) => (user.owner === Meteor.user().username))[0];
+    const conversations = this.props.conversations.filter((convo => (convo.users.some(user => (user === selectedUser.owner)))));
     let messageButton;
     let createTripButton;
     if (selectedUser.owner === currentUser.owner) {
       messageButton = <></>;
       createTripButton = <AddTrip currentUser={currentUser}></AddTrip>;
     } else {
-      messageButton = <Conversation currentUser={currentUser} conversations={this.props.conversation} selectedUser={selectedUser}/>;
+      messageButton = <Conversation currentUser={currentUser} conversations={conversations} selectedUser={selectedUser}/>;
       createTripButton = <></>;
     }
     return (
@@ -62,9 +63,9 @@ UserProfile.propTypes = {
   //   friday: PropTypes.array,
   //   _id: PropTypes.array,
   // }).isRequired,
-  conversation: PropTypes.array.isRequired,
-  selectedUser: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
+  email: PropTypes.string.isRequired,
+  conversations: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -78,14 +79,12 @@ export default withTracker(({ match }) => {
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready();
   // Get the Stuff documents
-  const selectedUser = Users.collection.findOne({ owner: email });
-  const currentUser = Meteor.user() !== undefined ? Users.collection.findOne({ owner: Meteor.user().username }) : '';
+  const users = Users.collection.find({}).fetch();
   const conversations = Conversations.collection.find({}).fetch();
-  const conversation = conversations.filter((convo => (convo.users.some(user => (user === selectedUser.owner)))));
   return {
-    conversation,
-    selectedUser,
-    currentUser,
+    users,
+    email,
+    conversations,
     ready,
   };
 })(UserProfile);

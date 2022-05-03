@@ -100,7 +100,7 @@ test('Test that edit profile works', async (testController) => {
   await navBar.openSignInDropdown(testController);
   await signinPage.signinDropdown(testController, dummy.username, dummy.password);
   await mainPage.isDisplayed(testController);
-  await editprofilePage.editProfile(testController, 'testFirstName', 'testLastName', 'Honolulu 96817', 'Honda', 'Civic', 'Blue', 's3xy');
+  await editprofilePage.editProfile(testController, 'testFirstName', 'testLastName', 'Sherwood  Beach, Kalanianaʻole Highway, Waimanalo, HI, USA', 'Honda', 'Civic', 'Blue', 's3xy');
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
 });
