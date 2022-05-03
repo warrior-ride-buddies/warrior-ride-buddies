@@ -79,7 +79,7 @@ export default withTracker(({ match }) => {
   const ready = subscription.ready() && subscription2.ready();
   // Get the Stuff documents
   const selectedUser = Users.collection.findOne({ owner: email });
-  const currentUser = Users.collection.findOne({ owner: Meteor.user().username });
+  const currentUser = Meteor.user() !== undefined ? Users.collection.findOne({ owner: Meteor.user().username }) : '';
   const conversations = Conversations.collection.find({}).fetch();
   const conversation = conversations.filter((convo => (convo.users.some(user => (user === selectedUser.owner)))));
   return {
