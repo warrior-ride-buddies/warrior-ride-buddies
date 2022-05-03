@@ -17,14 +17,9 @@ class Inbox extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const options = [
-      { label: 'Grapes 🍇', value: 'grapes' },
-      { label: 'Mango 🥭', value: 'mango' },
-      { label: 'Strawberry 🍓', value: 'strawberry', disabled: true },
-    ];
     const currentUser = this.props.users.filter(user => (user.owner === this.props.currentUser))[0];
     const conversations = this.props.conversations.filter(conversation => (conversation.messages.length !== 0));
-    const users = this.props.users.map((user) => ({ firstName: user.firstName, lastName: user.lastName }));
+    const users = this.props.users.map((user) => ({ label: `${user.firstName} ${user.lastName}`, value: user.owner }));
     let header;
     if (conversations.length !== 0) {
       header = <Header as="h1" textAlign="center">Inbox</Header>;
@@ -39,7 +34,7 @@ class Inbox extends React.Component {
         <div>
           <h1>Select Fruits</h1>
           <MultiSelect
-              options={options}
+              options={users}
               labelledBy="Select"
           />
         </div>
