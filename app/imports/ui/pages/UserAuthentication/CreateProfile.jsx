@@ -47,12 +47,7 @@ class CreateProfile extends React.Component {
 
   handleAddress = () => {
     const address = document.getElementsByName('address')[0].value;
-    const latDif = 0.002 - 0.004 * Math.random();
-    const lngDif = 0.002 - 0.004 * Math.random();
     this.setState({ address: address });
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) => this.setState({ position: { lat: lat + latDif, lng: lng + lngDif } }));
   };
 
   changeUserType = (e, { value }) => {
@@ -69,34 +64,46 @@ class CreateProfile extends React.Component {
     // eslint-disable-next-line no-undef
     const address = this.state.address;
     let image = document.getElementsByName('profilePicture')[0].value;
-    const { firstName, lastName, userType, position, carMake, carModel, carColor, carPlate } = this.state;
+    const { firstName, lastName, userType, carMake, carModel, carColor, carPlate } = this.state;
+    const { position } = this.state;
     const trips = [];
     const owner = Meteor.user().username;
     if (image === '') {
       image = './images/MissingProfileImage.png';
     }
-    Users.collection.insert({ firstName, lastName, image, userType, address, position, trips, carMake, carModel, carColor, carPlate, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          this.setState({
-            firstName: '',
-            lastName: '',
-            image: '',
-            userType: '',
-            address: '',
-            lat: '',
-            lng: '',
-            carMake: '',
-            carModel: '',
-            carColor: '',
-            carPlate: '',
-            redirectToReferer: true,
-            error: '',
-          });
-        }
-      });
+
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(
+        ({ lat, lng }) => {
+          const latDif = 0.002 - 0.004 * Math.random();
+          const lngDif = 0.002 - 0.004 * Math.random();
+          position.lat = lat + latDif;
+          position.lng = lng + lngDif;
+          Users.collection.insert({ firstName, lastName, image, userType, address, position, trips, carMake, carModel, carColor, carPlate, owner },
+            (error) => {
+              if (error) {
+                swal('Error', error.message, 'error');
+              } else {
+                this.setState({
+                  firstName: '',
+                  lastName: '',
+                  image: '',
+                  userType: '',
+                  address: '',
+                  lat: '',
+                  lng: '',
+                  carMake: '',
+                  carModel: '',
+                  carColor: '',
+                  carPlate: '',
+                  redirectToReferer: true,
+                  error: '',
+                });
+              }
+            });
+        },
+      );
   }
 
   render() {
