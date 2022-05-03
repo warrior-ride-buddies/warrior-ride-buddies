@@ -46,6 +46,7 @@ class CreateProfile extends React.Component {
   handleChange = (e, { name, value }) => { this.setState({ [name]: value }); }
 
   handleAddress = () => {
+    // eslint-disable-next-line no-undef
     const address = document.getElementsByName('address')[0].value;
     this.setState({ address: address });
   };
@@ -63,6 +64,7 @@ class CreateProfile extends React.Component {
   submit = () => {
     // eslint-disable-next-line no-undef
     const address = this.state.address;
+    // eslint-disable-next-line no-undef
     let image = document.getElementsByName('profilePicture')[0].value;
     const { firstName, lastName, userType, carMake, carModel, carColor, carPlate } = this.state;
     const { position } = this.state;

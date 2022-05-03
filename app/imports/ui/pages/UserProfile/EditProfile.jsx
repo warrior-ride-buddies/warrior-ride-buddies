@@ -23,6 +23,7 @@ class EditProfile extends React.Component {
   // On successful submit, insert the data.
 
   handleAddress = () => {
+    // eslint-disable-next-line no-undef
     const address = document.getElementsByName('address')[0].value;
     this.setState({ address: address });
   };
