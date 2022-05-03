@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Loader, Segment, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, NumField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, HiddenField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -25,12 +25,7 @@ class EditProfile extends React.Component {
 
   handleAddress = () => {
     const address = document.getElementsByName('address')[0].value;
-    const latDif = 0.002 - 0.004 * Math.random();
-    const lngDif = 0.002 - 0.004 * Math.random();
     this.setState({ address: address });
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) => this.setState({ position: { lat: lat + latDif, lng: lng + lngDif } }));
   };
 
   submit(data) {
@@ -39,15 +34,25 @@ class EditProfile extends React.Component {
     const address = this.state.address;
     const position = this.state.position;
     const { firstName, lastName, userType, trips, carMake, carModel, carColor, carPlate } = data;
-    if (image !== '') {
-      Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
-        swal('Error', error.message, 'error') :
-        swal('Success', 'Item updated successfully', 'success')));
-    } else {
-      Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate } }, (error) => (error ?
-        swal('Error', error.message, 'error') :
-        swal('Success', 'Item updated successfully', 'success')));
-    }
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(
+        ({ lat, lng }) => {
+          const latDif = 0.002 - 0.004 * Math.random();
+          const lngDif = 0.002 - 0.004 * Math.random();
+          position.lat = lat + latDif;
+          position.lng = lng + lngDif;
+          if (image !== '') {
+            Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate, image } }, (error) => (error ?
+              swal('Error', error.message, 'error') :
+              swal('Success', 'Item updated successfully', 'success')));
+          } else {
+            Users.collection.update(this.props.user._id, { $set: { firstName, lastName, userType, address, position, trips, carMake, carModel, carColor, carPlate } }, (error) => (error ?
+              swal('Error', error.message, 'error') :
+              swal('Success', 'Item updated successfully', 'success')));
+          }
+        },
+      ).catch(() => swal('Error', 'Please enter a valid address', 'error'));
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -79,8 +84,6 @@ class EditProfile extends React.Component {
                     value={this.state.address}
                     onChange={this.handleAddress}/>
                 </Autocomplete>
-                <NumField id="edit-profile-position.lng" name='position.lng'/>
-                <NumField id="edit-profile-position.lat" name='position.lat'/>
                 <HiddenField id="edit-profile-trips" name='trips' />
                 <TextField id="edit-profile-carMake" name='carMake' />
                 <TextField id="edit-profile-carModel" name='carModel' />

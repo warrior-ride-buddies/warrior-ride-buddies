@@ -1,6 +1,5 @@
 import React from 'react';
 import { InfoWindow, Marker, GoogleMap } from '@react-google-maps/api';
-import { Button, Icon } from 'semantic-ui-react';
 
 import PropTypes from 'prop-types';
 import MapPin from './MapPin';
@@ -62,7 +61,7 @@ class Map extends React.Component {
           users.map((user, index) => <Marker
             key={index}
             position={user.position}
-            icon={ { url: user.image, scaledSize: { height: 30, width: 30 } }}
+            icon='./images/personIcon.png'
             clickable = {true}
             onClick={ () => this.onMarkerClick(user) }
           />)

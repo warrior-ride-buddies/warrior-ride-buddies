@@ -71,7 +71,6 @@ class CreateProfile extends React.Component {
     if (image === '') {
       image = './images/MissingProfileImage.png';
     }
-
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(
@@ -103,7 +102,7 @@ class CreateProfile extends React.Component {
               }
             });
         },
-      );
+      ).catch(() => swal('Error', 'Please enter a valid address', 'error'));
   }
 
   render() {
