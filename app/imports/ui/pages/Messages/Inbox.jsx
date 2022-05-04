@@ -1,14 +1,31 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Grid } from 'semantic-ui-react';
+import { Container, Header, Loader, Grid, Dropdown, Button, Icon } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { MultiSelect } from 'react-multi-select-component';
 import InboxItem from '../../components/Messages/InboxItem';
 import { Conversations } from '../../../api/conversation/Conversations';
 import { Users } from '../../../api/user/User';
 
 class Inbox extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      selectedUsers: [],
+    };
+  }
+
+  handleSelect = (e, { value }) => {
+    this.setState({ selectedUsers: value });
+  }
+
+  handleClick = () => {
+    if (this.props.conversations.some((conversation) => (this.state.selectedUsers.every((user) => (conversation.users.some((cUser) => (cUser === user)))) && conversation.users.length === this.state.selectedUsers.length + 1))) {
+      console.log('dont create convo');
+    } else {
+      console.log('create convo');
+    }
+  }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
@@ -17,9 +34,11 @@ class Inbox extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    console.log(this.state.selectedUsers);
     const currentUser = this.props.users.filter(user => (user.owner === this.props.currentUser))[0];
-    const conversations = this.props.conversations.filter(conversation => (conversation.messages.length !== 0));
-    const users = this.props.users.map((user) => ({ label: `${user.firstName} ${user.lastName}`, value: user.owner }));
+    const otherUsers = this.props.users.filter((user) => (user.owner !== currentUser.owner));
+    const conversations = this.props.conversations.filter(conversation => (conversation.messages.length !== 0)); // Prevents an inboxItem from showing up before a message is sent when another user clicks their message button.
+    const users = otherUsers.map((user) => ({ text: `${user.firstName} ${user.lastName}`, value: user.owner })); // Array to pass to the multiple select dropdown.
     let header;
     if (conversations.length !== 0) {
       header = <Header as="h1" textAlign="center">Inbox</Header>;
@@ -31,13 +50,30 @@ class Inbox extends React.Component {
         {header}
         <div className='accent-block' style={{ borderRadius: '2px', marginBottom: '20px', opacity: '0.95', height: '1px', padding: '4px' }}>
         </div>
-        <div>
-          <h1>Select Fruits</h1>
-          <MultiSelect
+        <Grid columns={2}>
+          <Grid.Column>
+            <Dropdown
+              placeholder='Add people'
+              fluid
+              multiple
+              search
+              selection
               options={users}
-              labelledBy="Select"
-          />
-        </div>
+              onChange={this.handleSelect}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <Button
+              color='green'
+              icon
+              labelPosition='right'
+              onClick={this.handleClick}
+            >
+              Create Pool!
+              <Icon name='users'/>
+            </Button>
+          </Grid.Column>
+        </Grid>
         <Grid>
           {conversations.map((conversation, index) => <InboxItem
             key={index}
