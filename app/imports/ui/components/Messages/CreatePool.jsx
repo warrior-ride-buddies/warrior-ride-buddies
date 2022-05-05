@@ -57,7 +57,7 @@ class CreatePool extends React.Component {
         open={this.isOpen}
         trigger={<Button color='green' content='Create Pool!' icon='users' labelPosition='right'/>}
       >
-        <Header>No users selected</Header>
+        <Header>Select users from the drop down menu to get started</Header>
       </Modal>;
   }
 
