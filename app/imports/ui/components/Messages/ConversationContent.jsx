@@ -1,9 +1,9 @@
 import React from 'react';
 import { Feed, Segment, List, Image, Header, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Message from './Message';
 import AddMessage from './AddMessage';
-import { Link } from 'react-router-dom';
 
 /** Displays messages and an addMessage field if readOnly = false */
 class ConversationContent extends React.Component {

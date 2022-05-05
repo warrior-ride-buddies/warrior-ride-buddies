@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, GridRow, Header, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 /** The MapPinUserInfo component is visible in every User Profile. Rendered by the User Profile component. */
 class MapPinUserInfo extends React.Component {
@@ -8,7 +9,9 @@ class MapPinUserInfo extends React.Component {
     return (
       <Grid textAlign='center' columns={1}>
         <GridRow>
-          <Header as='h1'>{this.props.user.firstName} {this.props.user.lastName}</Header>
+          <Link to={`/profile/${this.props.user.owner}`}>
+            <Header as='h1'>{this.props.user.firstName} {this.props.user.lastName}</Header>
+          </Link>
         </GridRow>
         <GridRow>
           <Image src={this.props.user.image} avatar size='small'/>
@@ -20,18 +23,7 @@ class MapPinUserInfo extends React.Component {
 
 // Require a document to be passed to this component.
 MapPinUserInfo.propTypes = {
-  user: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    userType: PropTypes.string,
-    address: PropTypes.string,
-    carMake: PropTypes.string,
-    carModel: PropTypes.string,
-    carColor: PropTypes.string,
-    carPlate: PropTypes.string,
-    image: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default MapPinUserInfo;
