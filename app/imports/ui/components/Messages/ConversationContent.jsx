@@ -3,6 +3,7 @@ import { Feed, Segment, List, Image, Header, Container } from 'semantic-ui-react
 import PropTypes from 'prop-types';
 import Message from './Message';
 import AddMessage from './AddMessage';
+import { Link } from 'react-router-dom';
 
 /** Displays messages and an addMessage field if readOnly = false */
 class ConversationContent extends React.Component {
@@ -21,7 +22,12 @@ class ConversationContent extends React.Component {
     return (
       <Container>
         <Segment inverted secondary>
-          <Header><List.Content>{otherUsers.map((user, index) => <List.Item key={index}><Image src={user.image} avatar/>{`${user.firstName} ${user.lastName}`}</List.Item>)}</List.Content></Header>
+          <Header><List.Content>{otherUsers.map((user, index) =>
+            <List.Item key={index}>
+              <Link to={`/profile/${user.owner}`}>
+                <Image src={user.image} avatar/>{`${user.firstName} ${user.lastName}`}
+              </Link>
+            </List.Item>)}</List.Content></Header>
         </Segment>
         <Feed>
           {conversation.messages.map((message, index) => <Message key={index} message={message} users={users}/>)}
