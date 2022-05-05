@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Modal } from 'semantic-ui-react';
+import { Button, Modal, Header } from 'semantic-ui-react';
+import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Conversations } from '../../../api/conversation/Conversations';
 import ConversationContent from './ConversationContent';
@@ -19,6 +20,7 @@ class CreatePool extends React.Component {
     const conversations = this.props.conversations;
     if (conversations[conversations.length - 1].messages.length === 0) {
       Conversations.collection.remove({ _id: conversations[conversations.length - 1]._id });
+      console.log('remove convo');
     }
     if (this.state.isOpen) {
       this.setState({
@@ -28,6 +30,11 @@ class CreatePool extends React.Component {
   };
 
   onOpen = () => {
+    if (this.state.isOpen) {
+      this.setState({
+        isOpen: true,
+      });
+    }
     if (this.props.conversations.some((conversation) => (this.props.selectedUsers.every((user) => (conversation.users.some((cUser) => (cUser === user)))) && conversation.users.length === this.props.selectedUsers.length + 1))) {
       console.log('convo alread exists');
     } else if (this.props.selectedUsers.length === 0) {
@@ -40,11 +47,6 @@ class CreatePool extends React.Component {
       const users = selectedUsers.concat(currentUser);
       Conversations.collection.insert({ messages, users });
     }
-    if (this.state.isOpen) {
-      this.setState({
-        isOpen: true,
-      });
-    }
   };
 
   render() {
@@ -55,7 +57,9 @@ class CreatePool extends React.Component {
         onOpen={this.onOpen}
         open={this.isOpen}
         trigger={<Button color='green' content='Create Pool!' icon='users' labelPosition='right'/>}
-      />;
+      >
+        <Header>No users selected</Header>
+      </Modal>;
   }
 
   renderPage() {

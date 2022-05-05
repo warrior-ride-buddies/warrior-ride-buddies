@@ -20,14 +20,14 @@ class UserProfile extends React.Component {
   renderPage() {
     const selectedUser = this.props.users.filter((user) => (user.owner === this.props.email))[0];
     const currentUser = this.props.users.filter((user) => (user.owner === Meteor.user().username))[0];
-    const conversations = this.props.conversations.filter((convo => (convo.users.some(user => (user === selectedUser.owner)))));
+    const conversation = this.props.conversations.filter((convo => (convo.users.some(user => (user === selectedUser.owner)) && convo.users.length === 2)));
     let messageButton;
     let createTripButton;
     if (selectedUser.owner === currentUser.owner) {
       messageButton = <></>;
       createTripButton = <AddTrip currentUser={currentUser}></AddTrip>;
     } else {
-      messageButton = <Conversation currentUser={currentUser} conversations={conversations} selectedUser={selectedUser}/>;
+      messageButton = <Conversation currentUser={currentUser} conversations={conversation} selectedUser={selectedUser}/>;
       createTripButton = <></>;
     }
     return (
