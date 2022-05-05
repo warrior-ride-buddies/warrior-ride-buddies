@@ -4,6 +4,7 @@ import { Container, Header, Loader, Grid, Dropdown, Button, Icon } from 'semanti
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import InboxItem from '../../components/Messages/InboxItem';
+import CreatePool from '../../components/Messages/CreatePool';
 import { Conversations } from '../../../api/conversation/Conversations';
 import { Users } from '../../../api/user/User';
 
@@ -19,14 +20,6 @@ class Inbox extends React.Component {
     this.setState({ selectedUsers: value });
   }
 
-  handleClick = () => {
-    if (this.props.conversations.some((conversation) => (this.state.selectedUsers.every((user) => (conversation.users.some((cUser) => (cUser === user)))) && conversation.users.length === this.state.selectedUsers.length + 1))) {
-      console.log('dont create convo');
-    } else {
-      console.log('create convo');
-    }
-  }
-
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
@@ -38,7 +31,7 @@ class Inbox extends React.Component {
     const currentUser = this.props.users.filter(user => (user.owner === this.props.currentUser))[0];
     const otherUsers = this.props.users.filter((user) => (user.owner !== currentUser.owner));
     const conversations = this.props.conversations.filter(conversation => (conversation.messages.length !== 0)); // Prevents an inboxItem from showing up before a message is sent when another user clicks their message button.
-    const users = otherUsers.map((user) => ({ text: `${user.firstName} ${user.lastName}`, value: user.owner })); // Array to pass to the multiple select dropdown.
+    const listUsers = otherUsers.map((user) => ({ text: `${user.firstName} ${user.lastName}`, value: user.owner })); // Array to pass to the multiple select dropdown.
     let header;
     if (conversations.length !== 0) {
       header = <Header as="h1" textAlign="center">Inbox</Header>;
@@ -58,20 +51,12 @@ class Inbox extends React.Component {
               multiple
               search
               selection
-              options={users}
+              options={listUsers}
               onChange={this.handleSelect}
             />
           </Grid.Column>
           <Grid.Column>
-            <Button
-              color='green'
-              icon
-              labelPosition='right'
-              onClick={this.handleClick}
-            >
-              Create Pool!
-              <Icon name='users'/>
-            </Button>
+            <CreatePool selectedUsers={this.state.selectedUsers} currentUser={currentUser} users={this.props.users} conversations={this.props.conversations} />
           </Grid.Column>
         </Grid>
         <Grid>
