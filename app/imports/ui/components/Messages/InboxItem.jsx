@@ -61,7 +61,7 @@ class InboxItem extends React.Component {
             <Button basic className='ui fluid button'>
               <Grid columns={3}>
                 <Grid.Column textAlign={'left'}>
-                  {otherUsers.map((user) => (`${user.firstName} ${user.lastName}`))}
+                  {otherUsers.map((user, index) => (<Grid.Row key={index}>{user.firstName} {user.lastName}</Grid.Row>))}
                 </Grid.Column>
                 <Grid.Column textAlign={'left'}>
                   {`${nameOfSenderShown}: "${recentMessage.message}"`}

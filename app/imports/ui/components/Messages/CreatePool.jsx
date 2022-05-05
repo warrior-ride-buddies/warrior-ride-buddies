@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Modal, Header } from 'semantic-ui-react';
-import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { Conversations } from '../../../api/conversation/Conversations';
 import ConversationContent from './ConversationContent';
