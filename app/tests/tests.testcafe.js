@@ -9,6 +9,7 @@ import { userProfilesPage } from './userprofiles.page';
 import { userProfilePage } from './userprofile.page';
 import { signupPage } from './signup.page';
 import { editprofilePage } from './editprofile.page';
+import { addTripPage } from './addTrip.page';
 
 /* global fixture:false, test:false */
 
@@ -114,4 +115,11 @@ test('Test that login page loads and works', async (testController) => {
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
+});
+
+test('Test that add a trip takes correct input', async (testController) => {
+  await navBar.openSignInDropdown(testController);
+  await signinPage.signinDropdown(testController, credentials.username, credentials.password);
+  await navBar.openUserProfilePage(testController);
+  await addTripPage.tripInput(testController);
 });

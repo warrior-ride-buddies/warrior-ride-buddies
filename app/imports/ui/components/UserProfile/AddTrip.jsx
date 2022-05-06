@@ -53,7 +53,7 @@ class AddTrip extends React.Component {
         onClose={this.onClose}
         onOpen={this.onOpen}
         open={this.isOpen}
-        trigger={<Button color='green' content='Add a trip' icon='send' labelPosition='right'/>}
+        trigger={<Button id="add-trip" color='green' content='Add a trip' icon='send' labelPosition='right'/>}
       >
         <ModalHeader>Add a Trip</ModalHeader>
         <Container>
