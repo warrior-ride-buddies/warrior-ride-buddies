@@ -22,12 +22,11 @@ class ConversationContent extends React.Component {
     return (
       <Container>
         <Segment inverted secondary>
-          <Header><List.Content>{otherUsers.map((user, index) =>
-            <List.Item key={index}>
-              <Link to={`/profile/${user.owner}`}>
-                <Image src={user.image} avatar/>{`${user.firstName} ${user.lastName}`}
-              </Link>
-            </List.Item>)}</List.Content></Header>
+          <Header><List.Content>{otherUsers.map((user, index) => <List.Item key={index}>
+            <Link to={`/profile/${user.owner}`}>
+              <Image src={user.image} avatar/>{`${user.firstName} ${user.lastName}`}
+            </Link>
+          </List.Item>)}</List.Content></Header>
         </Segment>
         <Feed>
           {conversation.messages.map((message, index) => <Message key={index} message={message} users={users}/>)}

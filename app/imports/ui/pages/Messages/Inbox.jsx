@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Grid, Dropdown, Button, Icon } from 'semantic-ui-react';
+import { Container, Header, Loader, Grid, Dropdown, } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import InboxItem from '../../components/Messages/InboxItem';

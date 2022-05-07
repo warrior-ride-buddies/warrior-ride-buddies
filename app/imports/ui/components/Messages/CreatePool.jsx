@@ -19,7 +19,6 @@ class CreatePool extends React.Component {
     const conversations = this.props.conversations;
     if (conversations[conversations.length - 1].messages.length === 0) {
       Conversations.collection.remove({ _id: conversations[conversations.length - 1]._id });
-      console.log('remove convo');
     }
     if (this.state.isOpen) {
       this.setState({
@@ -35,11 +34,9 @@ class CreatePool extends React.Component {
       });
     }
     if (this.props.conversations.some((conversation) => (this.props.selectedUsers.every((user) => (conversation.users.some((cUser) => (cUser === user)))) && conversation.users.length === this.props.selectedUsers.length + 1))) {
-      console.log('convo alread exists');
     } else if (this.props.selectedUsers.length === 0) {
-      console.log('no users selected');
+      // Do nothing
     } else {
-      console.log('try to create convo');
       const messages = [];
       const currentUser = this.props.currentUser.owner;
       const selectedUsers = this.props.selectedUsers;
@@ -49,7 +46,6 @@ class CreatePool extends React.Component {
   };
 
   render() {
-    console.log('render function');
     return (this.props.conversations.some((conversation) => (this.props.selectedUsers.every((user) => (conversation.users.some((cUser) => (cUser === user)))) && conversation.users.length === this.props.selectedUsers.length + 1)))
       ? this.renderPage() : <Modal
         onClose={this.onClose}
@@ -62,11 +58,9 @@ class CreatePool extends React.Component {
   }
 
   renderPage() {
-    console.log('render page function');
     const conversation = this.props.conversations.filter((convo) => (this.props.selectedUsers.every((user) => (convo.users.some((cUser) => (cUser === user)))) && convo.users.length === this.props.selectedUsers.length + 1))[0];
     const currentUser = this.props.currentUser;
     const users = this.props.users.filter((user) => (conversation.users.some((cUser) => (cUser === user.owner))));
-    console.log(conversation);
     return (
       <Modal
         onClose={this.onClose}
