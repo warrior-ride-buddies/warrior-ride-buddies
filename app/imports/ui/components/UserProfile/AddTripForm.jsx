@@ -56,6 +56,7 @@ class AddMessage extends React.Component {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
+            swal('Success', `A trip for ${Parse.dayToString(day)} has been successfully added.`, 'success');
             formRef.reset();
           }
         });
@@ -70,18 +71,18 @@ class AddMessage extends React.Component {
         <Grid container>
           <Grid.Row>
             <Grid.Column>
-              <SelectField style={{ paddingTop: '15px' }} allowedValues={dotwAllowed.filter(x => !(this.props.user.trips.map((trip) => trip.day)).includes(x)).map((num) => Parse.dayToString(num))} name='day' autoComplete="off"/>
+              <SelectField id="trip-day" style={{ paddingTop: '15px' }} allowedValues={dotwAllowed.filter(x => !(this.props.user.trips.map((trip) => trip.day)).includes(x)).map((num) => Parse.dayToString(num))} name='day' autoComplete="off"/>
               <label style={{ fontWeight: 505 }}>Arriving to UH at:</label>
-              <input style={{ marginTop: '5px', marginBottom: '10px' }} type='time' name='arrivalTime' autoComplete="off"/>
+              <input id="trip-arrival-time" style={{ marginTop: '5px', marginBottom: '10px' }} type='time' name='arrivalTime' autoComplete="off"/>
               <label style={{ fontWeight: 505 }}>Leaving UH at:</label>
-              <input style={{ marginTop: '5px', marginBottom: '10px' }} type='time' name='departureTime' autoComplete="off"/>
-              <SelectField name='userType' autoComplete="off"/>
+              <input id="trip-departure-time" style={{ marginTop: '5px', marginBottom: '10px' }} type='time' name='departureTime' autoComplete="off"/>
+              <SelectField id="trip-user-type" name='userType' autoComplete="off"/>
             </Grid.Column>
           </Grid.Row>
           <div className='accent-block' style={{ height: '1px', opacity: '0.95' }}>
           </div>
           <GridRow centered style={{ paddingBottom: '40px' }}>
-            <SubmitField value='Create trip'/>
+            <SubmitField id="trip-submit" value='Create trip'/>
           </GridRow>
           <ErrorsField/>
         </Grid>

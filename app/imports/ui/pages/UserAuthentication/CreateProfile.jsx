@@ -3,6 +3,8 @@ import { Grid, Header, Select, Form, Button } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { Redirect } from 'react-router-dom';
+import { Autocomplete } from '@react-google-maps/api';
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import ApiKeys from '../../../../ApiKeys.json';
 import { Users } from '../../../api/user/User';
 
@@ -31,8 +33,7 @@ class CreateProfile extends React.Component {
     image: '',
     userType: 'Driver',
     address: '',
-    lat: '',
-    lng: '',
+    position: { lat: '', lng: '' },
     carMake: '',
     carModel: '',
     carColor: '',
@@ -42,7 +43,13 @@ class CreateProfile extends React.Component {
     showCarFields: true,
   }
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  handleChange = (e, { name, value }) => { this.setState({ [name]: value }); }
+
+  handleAddress = () => {
+    // eslint-disable-next-line no-undef
+    const address = document.getElementsByName('address')[0].value;
+    this.setState({ address: address });
+  };
 
   changeUserType = (e, { value }) => {
     this.setState({ userType: value });
@@ -56,41 +63,52 @@ class CreateProfile extends React.Component {
   // On submit, insert the data.
   submit = () => {
     // eslint-disable-next-line no-undef
+    const address = this.state.address;
+    // eslint-disable-next-line no-undef
     let image = document.getElementsByName('profilePicture')[0].value;
-    const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
-    console.log(userType);
-    const position = { lat: lat, lng: lng };
+    const { firstName, lastName, userType, carMake, carModel, carColor, carPlate } = this.state;
+    const { position } = this.state;
     const trips = [];
     const owner = Meteor.user().username;
     if (image === '') {
       image = './images/MissingProfileImage.png';
     }
-    Users.collection.insert({ firstName, lastName, image, userType, address, position, trips, carMake, carModel, carColor, carPlate, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          this.setState({
-            firstName: '',
-            lastName: '',
-            image: '',
-            userType: '',
-            address: '',
-            lat: '',
-            lng: '',
-            carMake: '',
-            carModel: '',
-            carColor: '',
-            carPlate: '',
-            redirectToReferer: true,
-            error: '',
-          });
-        }
-      });
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(
+        ({ lat, lng }) => {
+          const latDif = 0.002 - 0.004 * Math.random();
+          const lngDif = 0.002 - 0.004 * Math.random();
+          position.lat = lat + latDif;
+          position.lng = lng + lngDif;
+          Users.collection.insert({ firstName, lastName, image, userType, address, position, trips, carMake, carModel, carColor, carPlate, owner },
+            (error) => {
+              if (error) {
+                swal('Error', error.message, 'error');
+              } else {
+                this.setState({
+                  firstName: '',
+                  lastName: '',
+                  image: '',
+                  userType: '',
+                  address: '',
+                  lat: '',
+                  lng: '',
+                  carMake: '',
+                  carModel: '',
+                  carColor: '',
+                  carPlate: '',
+                  redirectToReferer: true,
+                  error: '',
+                });
+              }
+            });
+        },
+      ).catch(() => swal('Error', 'Please enter a valid address', 'error'));
   }
 
   render() {
-    const { firstName, lastName, userType, address, lat, lng, carMake, carModel, carColor, carPlate } = this.state;
+    const { firstName, lastName, userType, address, carMake, carModel, carColor, carPlate } = this.state;
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
       return <Redirect to={'/main'}/>;
@@ -163,35 +181,6 @@ class CreateProfile extends React.Component {
                 value={lastName}
                 onChange={this.handleChange}
               />
-            </Form.Group>
-            <Form.Group widths='equal'>
-              <Form.Input
-                fluid
-                id="create-profile-address"
-                name='address'
-                label='Address'
-                placeholder='Address'
-                value={address}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group widths='equal'>
-              <Form.Input
-                id="create-profile-lat"
-                name='lat'
-                label='Latitude'
-                placeholder='Latitude'
-                value={lat}
-                onChange={this.handleChange}
-              />
-              <Form.Input
-                id="create-profile-lng"
-                name='lng'
-                label='Longitude'
-                placeholder='Longitude'
-                value={lng}
-                onChange={this.handleChange}
-              />
               <Form.Field
                 control={Select}
                 fluid
@@ -203,6 +192,19 @@ class CreateProfile extends React.Component {
                 onChange={this.changeUserType}
               />
             </Form.Group>
+            <Autocomplete onPlaceChanged={this.handleAddress}>
+              <Form.Group widths='equal'>
+                <Form.Input
+                  fluid
+                  id="create-profile-address"
+                  name='address'
+                  label='Address'
+                  placeholder='Address'
+                  value={address}
+                  onChange={this.handleAddress}
+                />
+              </Form.Group>
+            </Autocomplete>
             {carFields}
             <input
               type="hidden"

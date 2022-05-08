@@ -5,7 +5,7 @@ class Parse {
 
   static timeToString(mins) {
     let returnVal = 'N/A';
-    if (mins !== '') {
+    if (mins !== undefined) {
       let h = Math.floor(mins / 60);
       let m = mins % 60;
       h = h < 10 ? `0${h}` : h; // (or alternatively) h = String(h).padStart(2, '0')

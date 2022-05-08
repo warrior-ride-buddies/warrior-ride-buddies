@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
@@ -36,13 +37,14 @@ class AddMessage extends React.Component {
   render() {
     let fRef = null;
     return (
-      <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
+      <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} style={{ margin: '1em' }}>
         <TextField name='message' autoComplete="off"/>
         <SubmitField value='Send'/>
         <ErrorsField/>
         <HiddenField name='from' value={this.props.from}/>
         <HiddenField name='createdAt' value={new Date()}/>
       </AutoForm>
+
     );
   }
 }

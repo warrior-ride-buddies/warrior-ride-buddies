@@ -9,6 +9,7 @@ import { userProfilesPage } from './userprofiles.page';
 import { userProfilePage } from './userprofile.page';
 import { signupPage } from './signup.page';
 import { editprofilePage } from './editprofile.page';
+import { addTripPage } from './addTrip.page';
 
 /* global fixture:false, test:false */
 
@@ -41,9 +42,7 @@ test('Test that signup works', async (testController) => {
     `${new Date().getTime()}-firstName`,
     `${new Date().getTime()}-lastName`,
     `${new Date().getTime()}-firstName`,
-    `${new Date().getTime()}-homeLocal`,
-    `${Math.random()}`,
-    `${Math.random()}`,
+    `${'Sherwood Beach, Kalanianaʻole Highway, Waimanalo, HI, USA'}-homeLocal`,
     `${new Date().getTime()}-carMake`,
     `${new Date().getTime()}-carModel`,
     `${new Date().getTime()}-carColor`,
@@ -102,7 +101,7 @@ test('Test that edit profile works', async (testController) => {
   await navBar.openSignInDropdown(testController);
   await signinPage.signinDropdown(testController, dummy.username, dummy.password);
   await mainPage.isDisplayed(testController);
-  await editprofilePage.editProfile(testController, 'testFirstName', 'testLastName', 'Honolulu 96817', 'Honda', 'Civic', 'Blue', 's3xy');
+  await editprofilePage.editProfile(testController, 'testFirstName', 'testLastName', 'Sherwood  Beach, Kalanianaʻole Highway, Waimanalo, HI, USA', 'Honda', 'Civic', 'Blue', 's3xy');
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
 });
@@ -114,4 +113,11 @@ test('Test that login page loads and works', async (testController) => {
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
+});
+
+test('Test that add a trip takes correct input', async (testController) => {
+  await navBar.openSignInDropdown(testController);
+  await signinPage.signinDropdown(testController, credentials.username, credentials.password);
+  await navBar.openUserProfilePage(testController);
+  await addTripPage.tripInput(testController);
 });
