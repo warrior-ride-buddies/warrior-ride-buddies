@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Feed, Segment, Grid } from 'semantic-ui-react';
+import { Feed, Grid, Segment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 /** Displays message text as well as sender's name and time created */
@@ -23,7 +23,7 @@ class Message extends React.Component {
                 </Grid.Column>
                 <Grid.Column textAlign='right'>
                   <Feed.Summary>
-                    <Feed.Date content={message.createdAt.toLocaleDateString('en-US')} />
+                    <Feed.Date content={message.createdAt.toLocaleDateString('en-US')}/>
                   </Feed.Summary>
                 </Grid.Column>
               </Grid.Row>
