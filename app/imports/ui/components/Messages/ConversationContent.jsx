@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed, Segment, List, Image, Header, Container } from 'semantic-ui-react';
+import { Feed, Segment, Grid, Image, Header, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Message from './Message';
@@ -22,11 +22,11 @@ class ConversationContent extends React.Component {
     return (
       <Container>
         <Segment inverted secondary>
-          <Header><List.Content>{otherUsers.map((user, index) => <List.Item key={index}>
-            <Link to={`/profile/${user.owner}`}>
+          <Header><Grid columns='equal'>{otherUsers.map((user, index) => <Grid.Column key={index}>
+            <Link to={`/profile/${user.owner}`} style={{ color: 'white' }}>
               <Image src={user.image} avatar/>{`${user.firstName} ${user.lastName}`}
             </Link>
-          </List.Item>)}</List.Content></Header>
+          </Grid.Column>)}</Grid></Header>
         </Segment>
         <Feed>
           {conversation.messages.map((message, index) => <Message key={index} message={message} users={users}/>)}
